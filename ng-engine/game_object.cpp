@@ -5,7 +5,7 @@
 #include <vector>
 
 GameObject::GameObject() {
-	this->engine = nullptr;
+	this->scene = nullptr;
 
 	this->_transform = new Transform();
 	this->addComponent(this->_transform);
@@ -37,4 +37,10 @@ void GameObject::removeComponent(Component* component) {
 	assert(index != this->components.end());
 	this->components.erase(index);
 	component->gameObject = nullptr;
+}
+
+void GameObject::update() {
+	for (Component* component : this->components) {
+		component->update();
+	}
 }

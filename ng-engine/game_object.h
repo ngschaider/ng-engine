@@ -13,9 +13,10 @@ private:
 	Transform* _transform;
 public:
 	Transform* transform() const { return this->_transform; }
-	Engine* engine; // this should only be written to by the engine
+	Scene* scene; // this should only be written to by the scene
 	GameObject();
 	~GameObject();
 	void addComponent(Component*);
 	void removeComponent(Component*);
+	void update();
 };

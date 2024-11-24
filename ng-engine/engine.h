@@ -2,14 +2,15 @@
 
 #include "game_object.h"
 #include "graphics.h"
+#include "scene.h"
 
 class Engine {
 private:
-	std::vector<GameObject*> gameObjects;
+	Scene* scene;
 public:
 	Engine();
 	~Engine();
 
-	void addGameObject(GameObject*);
-	void removeGameObject(GameObject*);
+	void setScene(Scene* scene);
+	void update();
 };
