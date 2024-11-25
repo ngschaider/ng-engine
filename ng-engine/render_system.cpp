@@ -2,6 +2,7 @@
 #include "opengl.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 RenderSystem::RenderSystem() {
 	this->graphics = new OpenGL();
@@ -14,15 +15,14 @@ RenderSystem::~RenderSystem() {
 }
 
 void RenderSystem::update() {
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f, 0.5f, 0.0f
-	};
+	std::cout << "\x1B[2J\x1B[H"; // this clears the console
 
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
+	this->graphics->startOfFrame();
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	this->graphics->fillColor = Color::white();
+	this->graphics->strokeColor = Color::white();
+	this->graphics->setTransformationMatrix(Matrix4x4::identity());
+	this->graphics->rectangle();
+
+	this->graphics->endOfFrame();
 }

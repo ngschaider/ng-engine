@@ -1,10 +1,12 @@
 #include "transform.h"
 #include "matrix4x4.h"
+#include "quaternion.h"
+#include "vector3.h"
 
 Transform::Transform() {
 	this->position = Vector3(0, 0, 0);
-	this->scale = Vector3(1, 1, 1);
 	this->rotation = Quaternion::identity();
+	this->scale = Vector3(1, 1, 1);
 	this->parent = nullptr;
 }
 

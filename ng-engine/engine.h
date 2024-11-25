@@ -10,7 +10,6 @@ private:
 public:
 	Engine();
 	~Engine();
-
-	void setScene(Scene* scene);
+	void setScene(Scene*);
 	void update();
 };

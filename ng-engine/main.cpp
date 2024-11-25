@@ -2,15 +2,28 @@
 #include <iostream>
 
 #include "engine.h"
-#include "opengl.h"
+#include "render_system.h"
 
 int main() {
-	Engine engine = Engine();
+	Engine* engine = new Engine();
+
+	Scene* scene = new Scene();
+	engine->setScene(scene);
 
 	GameObject* go = new GameObject();
-	engine.addGameObject(go);
+	scene->addGameObject(go);
 
-	Graphics graphics = OpenGL();
+	RenderSystem* renderSystem = new RenderSystem();
+	go->addComponent(renderSystem);
+
+	while (true) {
+		engine->update();
+	}
+	
+	// To clean everything up:
+	delete engine;
+	// We do not need to clean up the engine's scene, gameobjects and component.
+	// The engine takes care of that for us.
 
 	return EXIT_SUCCESS;
 }

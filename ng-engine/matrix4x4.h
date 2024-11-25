@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vector3.h"
+#include "quaternion.h"
 
 class Matrix4x4 {
 private:
@@ -28,8 +29,8 @@ public:
 	}
 
 	static Matrix4x4 rotateX(float rotation) {
-		float c = cos(rotation);
-		float s = sin(rotation);
+		float c = cosf(rotation);
+		float s = sinf(rotation);
 		return Matrix4x4(
 			1, 0, 0, 0,
 			0, c, -s, 0,
@@ -39,8 +40,8 @@ public:
 	}
 
 	static Matrix4x4 rotateY(float rotation) {
-		const c = cos(rotation);
-		const s = sin(rotation);
+		float c = cosf(rotation);
+		float s = sinf(rotation);
 		return Matrix4x4(
 			c, 0, s, 0,
 			0, 1, 0, 0,
@@ -50,8 +51,8 @@ public:
 	}
 
 	static Matrix4x4 rotateZ(float rotation) {
-		float c = cos(rotation);
-		float s = sin(rotation);
+		float c = cosf(rotation);
+		float s = sinf(rotation);
 		return Matrix4x4(
 			c, -s, 0, 0,
 			s, c, 0, 0,

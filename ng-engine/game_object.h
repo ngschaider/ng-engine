@@ -7,6 +7,9 @@
 // forward declare Engine to avoid circular references (Engine is importing GameObject)
 class Engine;
 
+// forward declare Scene to avoid circular references (Scene is importing GameObject)
+class Scene;
+
 class GameObject {
 private:
 	std::vector<Component*> components;

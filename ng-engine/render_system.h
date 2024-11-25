@@ -7,5 +7,6 @@ class RenderSystem : public Component {
 public:
 	Graphics* graphics;
 	RenderSystem();
+	~RenderSystem();
 	void update();
 };

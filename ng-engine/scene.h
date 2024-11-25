@@ -3,6 +3,9 @@
 #include <vector>
 #include "game_object.h"
 
+// forward declare Engine to avoid circular references (Engine is importing Scene)
+class Engine;
+
 
 class Scene {
 private:

@@ -3,8 +3,7 @@
 #include "math.h"
 #include "vector3.h"
 
-#define _USE_MATH_DEFINES
-#include <cmath>
+#define PI 3.141592653f
 
 class Quaternion {
 private:
@@ -18,12 +17,12 @@ public:
 	}
 
 	static Quaternion fromAngleAxis(Vector3 ax) {
-		float cx = cos(ax.x() / 2);
-		float sx = sin(ax.x() / 2);
-		float cy = cos(ax.y() / 2);
-		float sy = sin(ax.y() / 2);
-		float cz = cos(ax.z() / 2);
-		float sz = sin(ax.z() / 2);
+		float cx = cosf(ax.x() / 2);
+		float sx = sinf(ax.x() / 2);
+		float cy = cosf(ax.y() / 2);
+		float sy = sinf(ax.y() / 2);
+		float cz = cosf(ax.z() / 2);
+		float sz = sinf(ax.z() / 2);
 
 		return Quaternion(
 			cx * cy * cz + sx * sy * sz,
@@ -33,8 +32,8 @@ public:
 		);
 	}
 
-	static Quaternion Lerp(Quaternion a, Quaternion b, float) {
-		Vector3 vector = a * (1 - t) + b * t;
+	static Quaternion Lerp(Quaternion a, Quaternion b, float t) {
+		Vector3 vector = a.vector() * (1 - t) + b.vector() * t;
 		float scalar = a.w() * (1 - t) + b.w() * t;
 
 		float factor = sqrtf(vector.magnitudeSquared() + scalar * scalar);
@@ -57,18 +56,18 @@ public:
 	float z() const { return this->_z; }
 	float w() const { return this->_w; }
 
-	Vector3 getEulerAngles() {
+	Vector3 eulerAngles() {
 		float sx_cy = 2 * (this->w() * this->x() + this->y() * this->z());
 		float cx_cy = 1 - 2 * (this->x() * this->x() + this->y() * this->y());
-		float sy = sqrt(1 + 2 * (this->w() * this->y() - this->x() * this->z()));
-		float cy = sqrt(1 - 2 * (this->w()* this->y() - this->x() * this->z()));
+		float sy = sqrtf(1 + 2 * (this->w() * this->y() - this->x() * this->z()));
+		float cy = sqrtf(1 - 2 * (this->w()* this->y() - this->x() * this->z()));
 		float sz_cy = 2 * (this->w() * this->z() + this->x() * this->y());
 		float cz_cy = 1 - 2 * (this->y() * this->y() + this->z() * this->z());
 
 		return Vector3(
-			atan2(sx_cy, cx_cy) * 180 / M_PI,
-			(2 * atan2(sy, cy) - M_PI / 2) * 180 / M_PI,
-			atan2(sz_cy, cz_cy) * 180 / M_PI
+			atan2f(sx_cy, cx_cy) * 180 / PI,
+			(2 * atan2f(sy, cy) - PI / 2) * 180 / PI,
+			atan2f(sz_cy, cz_cy) * 180 / PI
 		);
 	}
 
@@ -78,6 +77,8 @@ public:
 
 	Quaternion operator*(Quaternion q) {
 		Vector3 vector = q.vector() * this->w() + this->vector() * q.w();
-		float scalar = this->w() * q->w() - this->vector().dot(q.vector());
+		float scalar = this->w() * q.w() - this->vector().dot(q.vector());
+
+		return Quaternion(vector.x(), vector.y(), vector.z(), scalar);
 	}
 };

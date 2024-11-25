@@ -1,5 +1,5 @@
 #include "renderer.h"
 
-void Renderer::update(Graphics* graphics) {
+void Renderer::render(Graphics* graphics) {
 
 }

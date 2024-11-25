@@ -1,3 +1,5 @@
+#pragma once
+
 class Color {
 private:
 	unsigned int _r;
@@ -10,13 +12,9 @@ public:
 	static Color green() { return Color(0, 255, 0); }
 	static Color blue() { return Color(0, 0, 255); }
 
-	Color(int r, int g, int b) {
-		this->_r = r;
-		this->_g = g;
-		this->_b = b;
-	}
+	Color(unsigned int, unsigned int, unsigned int);
 
-	float r() const { return this->_r; }
-	float g() const { return this->_g; }
-	float b() const { return this->_b; }
+	unsigned int r() const { return this->_r; }
+	unsigned int g() const { return this->_g; }
+	unsigned int b() const { return this->_b; }
 };

@@ -39,13 +39,31 @@
     <ClCompile Include="rigid_body.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="glad.c">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="graphics.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="opengl.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="render_system.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="color.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix4x4.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="vector3.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,6 +93,27 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="opengl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="render_system.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="quaternion.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix4x4.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="vector3.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
