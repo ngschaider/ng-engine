@@ -9,6 +9,14 @@ void Component::update() {
 
 }
 
+Scene* Component::scene() const {
+	if (this->gameObject == nullptr) {
+		return nullptr;
+	}
+
+	return this->gameObject->scene;
+}
+
 Transform* Component::transform() const {
 	if (this->gameObject == nullptr) {
 		return nullptr;

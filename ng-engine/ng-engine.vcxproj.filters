@@ -13,30 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Quelldateien\components">
+      <UniqueIdentifier>{4e383310-44a1-4232-914f-61de0dae5ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\components">
+      <UniqueIdentifier>{cb59d553-ce2d-45bf-a6bb-59a335f8670e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\utils">
+      <UniqueIdentifier>{c1239aa2-563e-4c3d-ba35-6d51e7aa5e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\utils">
+      <UniqueIdentifier>{1c6e5633-5d62-417e-9478-2ca31e65dec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\core">
+      <UniqueIdentifier>{a74c67de-70ce-4203-870d-84da12705a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\core">
+      <UniqueIdentifier>{590a103c-ac25-4d02-9ab0-258cf86b4e4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="component.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="game_object.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="transform.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="vector2.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="matrix3x3.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="rigid_body.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="graphics.cpp">
@@ -46,49 +43,67 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="render_system.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="color.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="rectangle_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="scene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="glad.c">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="matrix4x4.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="rigid_body.cpp">
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="renderer.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="transform.cpp">
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="vector3.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="vector2.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix4x4.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix3x3.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="color.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="game_object.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="input_system.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="text_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\glad\glad.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="game_object.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="component.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="transform.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="vector2.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="matrix3x3.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="rigid_body.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="graphics.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -96,25 +111,78 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="render_system.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="quaternion.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="rectangle_renderer.h">
+      <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="color.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="rigid_body.h">
+      <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="matrix4x4.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="transform.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_renderer.h">
+      <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="scene.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="vector3.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix4x4.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix3x3.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="quaternion.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="input_system.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="text_renderer.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="text.vs">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="text.fs">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="solid.fs">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="solid.vs">
+      <Filter>Ressourcendateien</Filter>
+    </None>
   </ItemGroup>
 </Project>

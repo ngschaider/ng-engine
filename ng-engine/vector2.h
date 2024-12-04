@@ -18,9 +18,8 @@ public:
 		this->_y = y;
 	}
 
-	Vector2() {
-		this->_x = 0;
-		this->_y = 0;
+	Vector2(int x, int y) : Vector2(x * 1.0f, y * 1.0f) {
+
 	}
 	
 	Vector2 operator+(Vector2 v) {

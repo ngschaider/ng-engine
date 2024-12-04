@@ -7,6 +7,6 @@ class RenderSystem : public Component {
 public:
 	Graphics* graphics;
 	RenderSystem();
-	~RenderSystem();
+	virtual ~RenderSystem(); // always define destructors as virtual
 	void update();
 };

@@ -7,39 +7,13 @@
 #include <string>
 #include <vector>
 #include "vector3.h"
+#include <map>
 #include "color.h"
 #include "matrix4x4.h"
-
-/*const char* vertexShaderSource = "attribute vec4 a_position;\n"
-"uniform mat4 u_matrix;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = u_matrix * a_position;\n"
-"}\0";*/
-
-const char* vertexShaderSource = "attribute vec4 a_position;\n"
-"void main()\n"
-"{\n"
-"    gl_Position.xyz = a_position.xyz;\n"
-"    gl_Position.w = 1.0;\n"
-"}\0";
-
-//const char* fragmentShaderSource = "#version 330 core\n"
-//"uniform vec4 u_color;\n"
-//"out vec4 FragColor;"
-//"\n"
-//"void main()\n"
-//"{\n"
-//"	FragColor = u_color;"
-//"}\n";
-
-const char* fragmentShaderSource = "#version 430 core\n"
-"out vec3 color;"
-"\n"
-"void main()\n"
-"{\n"
-"	color = vec3(1,0,0);\n"
-"}\n";
+#include <string>
+#include "shader.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 void errorCallback(int error, const char* msg) {
 	std::string s;
@@ -60,20 +34,15 @@ void debugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum se
 
 	if (source == GL_DEBUG_SOURCE_API) {
 		std::cout << "Source: API" << std::endl;
-	}
-	else if (source == GL_DEBUG_SOURCE_WINDOW_SYSTEM) {
+	} else if (source == GL_DEBUG_SOURCE_WINDOW_SYSTEM) {
 		std::cout << "Source: Window System" << std::endl;
-	}
-	else if (source == GL_DEBUG_SOURCE_SHADER_COMPILER) {
+	} else if (source == GL_DEBUG_SOURCE_SHADER_COMPILER) {
 		std::cout << "Source: Shader Compiler" << std::endl;
-	}
-	else if (source == GL_DEBUG_SOURCE_THIRD_PARTY) {
+	} else if (source == GL_DEBUG_SOURCE_THIRD_PARTY) {
 		std::cout << "Source: Third Party" << std::endl;
-	}
-	else if (source == GL_DEBUG_SOURCE_APPLICATION) {
+	} else if (source == GL_DEBUG_SOURCE_APPLICATION) {
 		std::cout << "Source: Application" << std::endl;
-	}
-	else if (source == GL_DEBUG_SOURCE_OTHER) {
+	} else if (source == GL_DEBUG_SOURCE_OTHER) {
 		std::cout << "Source: Other" << std::endl;
 	} else {
 		std::cout << "Source: Unknown" << std::endl;
@@ -81,104 +50,91 @@ void debugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum se
 
 	if (type == GL_DEBUG_TYPE_ERROR) {
 		std::cout << "Type: Error" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR) {
+	} else if (type == GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR) {
 		std::cout << "Type: Deprecated Behavior" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR) {
+	} else if (type == GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR) {
 		std::cout << "Type: Undefined Behavior" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_PORTABILITY) {
+	} else if (type == GL_DEBUG_TYPE_PORTABILITY) {
 		std::cout << "Type: Portability" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_PERFORMANCE) {
+	} else if (type == GL_DEBUG_TYPE_PERFORMANCE) {
 		std::cout << "Type: Performance" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_MARKER) {
+	} else if (type == GL_DEBUG_TYPE_MARKER) {
 		std::cout << "Type: Marker" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_PUSH_GROUP) {
+	} else if (type == GL_DEBUG_TYPE_PUSH_GROUP) {
 		std::cout << "Type: Push Group" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_POP_GROUP) {
+	} else if (type == GL_DEBUG_TYPE_POP_GROUP) {
 		std::cout << "Type: Pop Group" << std::endl;
-	}
-	else if (type == GL_DEBUG_TYPE_OTHER) {
+	} else if (type == GL_DEBUG_TYPE_OTHER) {
 		std::cout << "Type: Other" << std::endl;
-	}
-	else {
+	} else {
 		std::cout << "Type: Unknown" << std::endl;
 	}
 
 	if (severity == GL_DEBUG_SEVERITY_HIGH) {
 		std::cout << "Severity: High" << std::endl;
-	}
-	else if (severity == GL_DEBUG_SEVERITY_MEDIUM) {
+	} else if (severity == GL_DEBUG_SEVERITY_MEDIUM) {
 		std::cout << "Severity: Medium" << std::endl;
-	}
-	else if (severity == GL_DEBUG_SEVERITY_LOW) {
+	} else if (severity == GL_DEBUG_SEVERITY_LOW) {
 		std::cout << "Severity: Low" << std::endl;
-	}
-	else if (severity == GL_DEBUG_SEVERITY_NOTIFICATION) {
+	} else if (severity == GL_DEBUG_SEVERITY_NOTIFICATION) {
 		std::cout << "Severity: Notification" << std::endl;
-	}
-	else {
+	} else {
 		std::cout << "Severity: Unknown" << std::endl;
 	}
+
+	return;
 }
 
-unsigned int createShader(GLenum type, const char* source) {
-	unsigned int shader = glCreateShader(type);
-	if (shader == 0) {
-		throw std::exception("Failed to create shader.");
-	}
-	glShaderSource(shader, 1, &source, NULL);
-	glCompileShader(shader);
 
-	int success;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-	if (success == GL_FALSE) {
-		char msg[512];
-		glGetShaderInfoLog(shader, 512, NULL, msg);
-		std::cout << msg << std::endl;
-		glDeleteShader(shader);
-		throw std::exception("Failed to compile shader");
+std::map<char, Character> loadCharacters() {
+	FT_Library ft;
+	if (FT_Init_FreeType(&ft)) {
+		throw new std::exception("Could not init FreeType Library");
 	}
 
-	return shader;
+	std::map<char, Character> characters;
+
+	FT_Face face;
+	if (FT_New_Face(ft, "C:/Windows/Fonts/arial.ttf", 0, &face)) {
+		throw new std::exception("Failed to load font");
+	}
+
+	FT_Set_Pixel_Sizes(face, 0, 48);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	for (unsigned char c = 0; c < 128; c++) {
+		if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
+			throw new std::exception("Failed to load glyph");
+		}
+
+		unsigned int texture;
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		Character character = {
+			texture,
+			Vector2(face->glyph->bitmap.width * 1.0f, face->glyph->bitmap.rows * 1.0f),
+			Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+			(int)face->glyph->advance.x
+		};
+		characters.insert(std::pair<char, Character>(c, character));
+	}
+
+	FT_Done_Face(face);
+	FT_Done_FreeType(ft);
+
+	return characters;
 }
 
-unsigned int createProgram() {
-	unsigned int program = glCreateProgram();
-
-	unsigned int vertexShader = createShader(GL_VERTEX_SHADER, vertexShaderSource);
-	glAttachShader(program, vertexShader);
-
-	unsigned int fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
-	glAttachShader(program, fragmentShader);
-
-	glLinkProgram(program);
-
-	int success;
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-	if (success == GL_FALSE) {
-		char msg[512];
-		glGetProgramInfoLog(program, 512, NULL, msg);
-		std::cout << msg << std::endl;
-		glDeleteProgram(program);
-		throw std::exception("Failed to link program");
-	}
-
-	//glDetachShader(program, vertexShader);
-	//glDetachShader(program, fragmentShader);
-
-	//glDeleteShader(vertexShader);
-	//glDeleteShader(fragmentShader);
-
-	return program;
-}
 
 void OpenGL::draw(std::vector<Vector3> vertices, GLenum primitive) {
+	this->solidShader->use();
+
 	std::vector<float> bytes;
 
 	for (Vector3 vertex : vertices) {
@@ -187,27 +143,29 @@ void OpenGL::draw(std::vector<Vector3> vertices, GLenum primitive) {
 		bytes.push_back(vertex.z());
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, this->positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, bytes.size(), &bytes[0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(this->positionLoc);
-	glVertexAttribPointer(this->positionLoc, 3, GL_FLOAT, false, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, bytes.size() * sizeof(float), &bytes[0], GL_STATIC_DRAW);
 
-	//if (primitive == GL_LINES || primitive == GL_LINE_STRIP || primitive == GL_LINE_LOOP) {
-	//	float c[] = { 
-	//		static_cast<float>(this->strokeColor.r()) / 255.0f, 
-	//		static_cast<float>(this->strokeColor.g()) / 255.0f, 
-	//		static_cast<float>(this->strokeColor.b()) / 255.0f, 
-	//		1
-	//	};
-	//	glUniform4fv(this->colorLoc, 4, c);
-	//} else {
-	//	float c[] = { this->fillColor.r() / 255.0f, this->fillColor.g() / 255.0f, this->fillColor.b() / 255.0f, 1 };
-	//	glUniform4fv(this->colorLoc, 4, c);
-	//}
+	int vertexAttribLoc = glGetAttribLocation(this->solidShader->id, "vertex");
+	glEnableVertexAttribArray(vertexAttribLoc);
+	glVertexAttribPointer(vertexAttribLoc, 3, GL_FLOAT, false, 0, 0);
+
+	if (primitive == GL_LINES || primitive == GL_LINE_STRIP || primitive == GL_LINE_LOOP) {
+		float c[] = {
+			static_cast<float>(this->strokeColor.r()) / 255.0f,
+			static_cast<float>(this->strokeColor.g()) / 255.0f,
+			static_cast<float>(this->strokeColor.b()) / 255.0f,
+			1
+		};
+		glUniform4fv(glGetUniformLocation(this->solidShader->id, "color"), 1, c);
+	} else {
+		float c[] = { this->fillColor.r() / 255.0f, this->fillColor.g() / 255.0f, this->fillColor.b() / 255.0f, 1 };
+		glUniform4fv(glGetUniformLocation(this->solidShader->id, "color"), 1, c);
+	}
 
 	glDrawArrays(primitive, 0, (GLsizei)vertices.size());
 
-	glDisableVertexAttribArray(this->positionLoc);
+	glDisableVertexAttribArray(vertexAttribLoc);
 }
 
 
@@ -234,6 +192,12 @@ OpenGL::OpenGL() {
 		throw std::exception();
 	}
 
+	this->textShader = new Shader("text.vs", "text.fs");
+	this->solidShader = new Shader("solid.vs", "solid.fs");
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	int flags = 0;
 	glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
 	if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
@@ -250,16 +214,10 @@ OpenGL::OpenGL() {
 	glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(this->window, framebufferSizeCallback);
 
-	unsigned int program = createProgram();
-	glGenBuffers(1, &this->positionBuffer);
-
-	this->positionLoc = glGetAttribLocation(program, "a_position");
-
-	this->colorLoc = glGetUniformLocation(program, "u_color");
-	this->matrixLoc = glGetUniformLocation(program, "u_matrix");
-
-	glUseProgram(program);
 	this->setTransformationMatrix(Matrix4x4::identity());
+
+	this->textShader->use();
+	this->characters = loadCharacters();
 }
 
 OpenGL::~OpenGL() {
@@ -276,6 +234,13 @@ void OpenGL::endOfFrame() {
 	glfwPollEvents();
 }
 
+Vector2 OpenGL::size() {
+	int width;
+	int height;
+	glfwGetWindowSize(this->window, &width, &height);
+	return Vector2(width, height);
+}
+
 void OpenGL::clear() {
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -288,14 +253,19 @@ void OpenGL::setTransformationMatrix(Matrix4x4 m) {
 		m.i(), m.j(), m.k(), m.l(),
 		m.m(), m.n(), m.o(), m.p(),
 	};
-	glUniformMatrix4fv(this->matrixLoc, 16, true, values);
+	glUniformMatrix4fv(glGetUniformLocation(this->solidShader->id, "projection"), 1, true, values);
+	glUniformMatrix4fv(glGetUniformLocation(this->textShader->id, "projection"), 1, true, values);
+}
+
+void OpenGL::text(std::string text) {
+	this->textShader->use();
 }
 
 void OpenGL::triangle() {
 	Vector3 vertices[] = {
-		Vector3(-0.5, -0.5, 0),
-		Vector3(0.5, -0.5, 0),
-		Vector3(0, 0.5, 0),
+		Vector3(-0.5f, -0.5f, 0.0f),
+		Vector3(0.5f, -0.5f, 0.0f),
+		Vector3(0.0f, 0.5f, 0.0f),
 	};
 
 	std::vector<Vector3> verticesAsVector = std::vector<Vector3>(vertices, vertices + sizeof(vertices) / sizeof(vertices[0]));
@@ -304,12 +274,23 @@ void OpenGL::triangle() {
 
 void OpenGL::rectangle() {
 	Vector3 vertices[] = {
-		Vector3(-0.5, -0.5, 0),
-		Vector3(0.5, -0.5, 0),
-		Vector3(-0.5, 0.5, 0),
-		Vector3(0.5, 0.5, 0),
+		Vector3(-0.5f, -0.5f, 0.0f),
+		Vector3(0.5f, -0.5f, 0.0f),
+		Vector3(-0.5f, 0.5f, 0.0f),
+		Vector3(0.5f, 0.5f, 0.0f),
 	};
 
 	std::vector<Vector3> verticesAsVector = std::vector<Vector3>(vertices, vertices + sizeof(vertices) / sizeof(vertices[0]));
 	this->draw(verticesAsVector, GL_TRIANGLE_STRIP);
+}
+
+Matrix4x4 OpenGL::getScreenToClipMatrix() {
+	return this->getClipToScreenMatrix().invert();
+}
+
+Matrix4x4 OpenGL::getClipToScreenMatrix() {
+	int width;
+	int height;
+	glfwGetWindowSize(this->window, &width, &height);
+	return Matrix4x4::scale(Vector3(width, height, 1));
 }

@@ -17,6 +17,7 @@ GameObject::~GameObject() {
 	}
 }
 
+
 /**
 * Adds the specified Component to the GameEngine.
 * The GameObject takes ownership of the Component.

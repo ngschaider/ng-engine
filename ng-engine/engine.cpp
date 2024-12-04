@@ -5,6 +5,7 @@
 #include <string>
 
 Engine::Engine() {
+	this->scene = nullptr;
 }
 
 Engine::~Engine() {

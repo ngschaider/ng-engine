@@ -1,10 +1,12 @@
 #include "scene.h"
 #include "game_object.h"
 #include <vector>
+#include "component.h"
 #include <cassert>
+#include <exception>
 
 Scene::Scene() {
-
+	this->engine = nullptr;
 }
 
 Scene::~Scene() {
@@ -12,6 +14,7 @@ Scene::~Scene() {
 		delete gameObject;
 	}
 }
+
 
 /**
 * Adds the specified GameObject to the scene.
@@ -33,6 +36,16 @@ void Scene::removeGameObject(GameObject* gameObject) {
 	assert(index != this->gameObjects.end());
 	this->gameObjects.erase(index);
 	gameObject->scene = nullptr;
+}
+
+Camera* Scene::getActiveCamera() {
+	std::vector<Camera*> cameras = this->getComponents<Camera>();
+	for (Camera* camera : cameras) {
+		if (camera->isActive) {
+			return camera;
+		}
+	}
+	return nullptr;
 }
 
 void Scene::update() {

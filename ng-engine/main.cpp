@@ -3,6 +3,8 @@
 
 #include "engine.h"
 #include "render_system.h"
+#include "triangle_renderer.h"
+#include "rectangle_renderer.h"
 
 int main() {
 	Engine* engine = new Engine();
@@ -10,11 +12,18 @@ int main() {
 	Scene* scene = new Scene();
 	engine->setScene(scene);
 
-	GameObject* go = new GameObject();
-	scene->addGameObject(go);
-
+	GameObject* systems = new GameObject();
+	systems->transform()->position = Vector3(0, 0, 10);
+	scene->addGameObject(systems);
 	RenderSystem* renderSystem = new RenderSystem();
-	go->addComponent(renderSystem);
+	systems->addComponent(renderSystem);
+	Camera* camera = new Camera();
+	systems->addComponent(camera);
+
+	GameObject* rectangle = new GameObject();
+	scene->addGameObject(rectangle);
+	RectangleRenderer* rectangleRenderer = new RectangleRenderer();
+	rectangle->addComponent(rectangleRenderer);
 
 	while (true) {
 		engine->update();

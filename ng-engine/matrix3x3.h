@@ -1,21 +1,16 @@
 #pragma once
 
 #include "vector2.h"
+#include <array>
+#include <vector>
+#include <exception>
 
 /**
 * Represents a 3x3 matrix
 */
 class Matrix3x3 {
 private:
-	float _a;
-	float _b;
-	float _c;
-	float _d;
-	float _e;
-	float _f;
-	float _g;
-	float _h;
-	float _i;
+	std::array<float, 9> values;
 
 public:
 	/**
@@ -58,53 +53,105 @@ public:
 			* Matrix3x3::scale(scale);
 	}
 
-	float a() const { return this->_a; }
-	float b() const { return this->_b; }
-	float c() const { return this->_c; }
-	float d() const { return this->_d; }
-	float e() const { return this->_e; }
-	float f() const { return this->_f; }
-	float g() const { return this->_g; }
-	float h() const { return this->_h; }
-	float i() const { return this->_i; }
+	float a() { return this->getValue(0, 0); }
+	float b() { return this->getValue(0, 1); }
+	float c() { return this->getValue(0, 2); }
+	float d() { return this->getValue(1, 0); }
+	float e() { return this->getValue(1, 1); }
+	float f() { return this->getValue(1, 2); }
+	float g() { return this->getValue(2, 0); }
+	float h() { return this->getValue(2, 1); }
+	float i() { return this->getValue(2, 2); }
 
 	Matrix3x3(float a, float b, float c, float d, float e, float f, float g, float h, float i) {
-		this->_a = a;
-		this->_b = b;
-		this->_c = c;
-		this->_d = d;
-		this->_e = e;
-		this->_f = f;
-		this->_g = g;
-		this->_h = h;
-		this->_i = i;
+		this->values = {
+			a, b, c,
+			d, e, f,
+			g, h, i
+		};
+	}
+
+	Matrix3x3(std::array<float, 9> values) {
+		this->values = values;
+	}
+
+	Matrix3x3(std::vector<float> values) {
+		if (values.size() != 9) throw std::exception("Invalid size.");
+		std::copy_n(values.begin(), 9, this->values.begin());
+	}
+
+	std::array<float, 9> getValues() {
+		return this->values;
+	}
+
+	float getValue(unsigned int x, unsigned int y) {
+		if (x > 2 || y > 2) throw new std::exception();
+
+		unsigned int index = y * 3 + x;
+		float value = this->values[index];
+
+		return value;
 	}
 
 	Matrix3x3 transpose() {
-		return Matrix3x3(this->a(), this->d(), this->g(), this->b(), this->e(), this->h(), this->c(), this->f(), this->i());
+		std::vector<float> retValues;
+
+		for (unsigned int row = 0; row < 3; row++) {
+			for (unsigned int column = 0; column < 3; column++) {
+				float value = this->getValue(row, column);
+				retValues.push_back(value);
+			}
+		}
+
+		return Matrix3x3(retValues);
 	}
 
-	Matrix3x3 operator*(Matrix3x3* m) {
-		// column 1: a, d, g
-		// column 2: b, e, h
-		// column 3: c, f, i
-		// row 1: a, b, c
-		// row 2: d, e, f
-		// row 3: g, h, i
-		return Matrix3x3(
-			this->a() * m->a() + this->b() * m->d() + this->c() * m->g(), // row 1, column 1
-			this->a() * m->b() + this->b() * m->e() + this->c() * m->h(), // row 1, column 2
-			this->a() * m->c() + this->b() * m->f() + this->c() * m->i(), // row 1, column 3
-			this->d() * m->a() + this->e() * m->d() + this->f() * m->g(), // row 2, column 1
-			this->d() * m->b() + this->e() * m->e() + this->f() * m->h(), // row 2, column 2
-			this->d() * m->c() + this->e() * m->f() + this->f() * m->i(), // row 2, column 3
-			this->g() * m->a() + this->h() * m->d() + this->i() * m->d(), // row 3, column 1
-			this->g() * m->b() + this->h() * m->e() + this->i() * m->h(), // row 3, column 2
-			this->g() * m->c() + this->h() * m->f() + this->i() * m->i()  // row 3, column 3
-		);
+	float det() {
+		// this is probably more efficient when not generalized,
+		// but this can be reused for other matrix sizes as well
+		float ret = 0;
+		for (unsigned int i = 0; i < 3; i++) {
+			float product = 1;
+			for (unsigned int j = 0; j < 3; j++) {
+				product *= this->getValue(j, (i + j) % 3);
+			}
+			ret += product;
+		}
+
+		return ret;
 	}
+
 	Matrix3x3 operator*(Matrix3x3 m) {
-		return (*this) * &m;
+		std::array<float, 9> retValues;
+
+		for (unsigned int row = 0; row < 3; row++) {
+			for (unsigned int column = 0; column < 3; column++) {
+				float sum = 0;
+				for (int i = 0; i < 3; i++) {
+					sum += this->getValue(i, row) * m.getValue(column, i);
+				}
+
+				retValues[column + row * 3] = sum;
+			}
+		}
+
+		return Matrix3x3(retValues);
+	}
+
+	Matrix3x3 operator*(float f) {
+		std::array<float, 9> retValues;
+
+		for (unsigned int column = 0; column < 3; column++) {
+			for (unsigned int row = 0; row < 3; row++) {
+				retValues[column + row * 3] = this->getValue(column, row) * f;
+			}
+		}
+
+		return Matrix3x3(retValues);
+	}
+
+	Matrix3x3 operator/(float f) {
+		return (*this) * (1 / f);
 	}
 
 	Vector2 operator*(Vector2* v) {

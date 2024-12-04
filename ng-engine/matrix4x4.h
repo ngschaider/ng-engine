@@ -2,13 +2,23 @@
 
 #include "vector3.h"
 #include "quaternion.h"
+#include "matrix3x3.h"
+#include <array>
+#include <vector>
+#include <exception>
 
 class Matrix4x4 {
 private:
-	float _a; float _b; float _c; float _d;
-	float _e; float _f; float _g; float _h;
-	float _i; float _j; float _k; float _l;
-	float _m; float _n; float _o; float _p;
+	std::array<float, 16> values;
+
+	// keep this private as we do not want to modify the matrix after instantiation and
+	// this is the only way we can make sure nobody modifies it from the outside!
+	void setValue(unsigned int x, unsigned int y, float value) {
+		if (x > 3 || y > 3) throw new std::exception();
+
+		unsigned int index = y * 4 + x;
+		values[index] = value;
+	}
 public:
 	static Matrix4x4 identity() {
 		return Matrix4x4(
@@ -89,51 +99,135 @@ public:
 			* Matrix4x4::scale(scaling);
 	}
 
-	Matrix4x4(float a, float b, float c, float d,
-		float e, float f, float g, float h,
-		float i, float j, float k, float l,
+	Matrix4x4(float a, float b, float c, float d, 
+		float e, float f, float g, float h, 
+		float i, float j, float k, float l, 
 		float m, float n, float o, float p) {
-		this->_a = a; this->_b = b; this->_c = c; this->_d = d;
-		this->_e = e; this->_f = f; this->_g = g; this->_h = h;
-		this->_i = i; this->_j = j; this->_k = k; this->_l = l;
-		this->_m = m; this->_n = n; this->_o = o; this->_p = p;
+		this->values = {
+			a, b, c, d,
+			e, f, g, h,
+			i, j, k, l,
+			m, n, o, p
+		};
 	}
 
-	float a() const { return this->_a; }
-	float b() const { return this->_b; }
-	float c() const { return this->_c; }
-	float d() const { return this->_d; }
-	float e() const { return this->_e; }
-	float f() const { return this->_f; }
-	float g() const { return this->_g; }
-	float h() const { return this->_h; }
-	float i() const { return this->_i; }
-	float j() const { return this->_j; }
-	float k() const { return this->_k; }
-	float l() const { return this->_l; }
-	float m() const { return this->_m; }
-	float n() const { return this->_n; }
-	float o() const { return this->_o; }
-	float p() const { return this->_p; }
+	Matrix4x4(std::array<float, 16> values) {
+		this->values = values;
+	}
+
+	Matrix4x4(std::vector<float> values) {
+		if (values.size() != 16) throw new std::exception("Invalid size.");
+		std::copy_n(values.begin(), 16, this->values.begin());
+	}
+
+	std::array<float, 16> getValues() {
+		return this->values;
+	}
+
+	float getValue(unsigned int x, unsigned int y) {
+		if (x > 3 || y > 3) throw new std::exception();
+
+		unsigned int index = y * 4 + x;
+		float value = this->values[index];
+
+		return value;
+	}
+
+	float a() { return this->getValue(0, 0); }
+	float b() { return this->getValue(0, 1); }
+	float c() { return this->getValue(0, 2); }
+	float d() { return this->getValue(0, 3); }
+	float e() { return this->getValue(1, 0); }
+	float f() { return this->getValue(1, 1); }
+	float g() { return this->getValue(1, 2); }
+	float h() { return this->getValue(1, 3); }
+	float i() { return this->getValue(2, 0); }
+	float j() { return this->getValue(2, 1); }
+	float k() { return this->getValue(2, 2); }
+	float l() { return this->getValue(2, 3); }
+	float m() { return this->getValue(3, 0); }
+	float n() { return this->getValue(3, 1); }
+	float o() { return this->getValue(3, 2); }
+	float p() { return this->getValue(3, 3); }
+
+	Matrix4x4 operator*(float f) {
+		std::array<float, 16> retValues;
+
+		for (unsigned int row = 0; row < 4; row++) {
+			for (unsigned int column = 0; column < 4; column++) {
+				retValues[column + row * 4] = this->getValue(column, row) * f;
+			}
+		}
+
+		return Matrix4x4(retValues);
+	}
+
+	Matrix4x4 operator/(float f) {
+		return (*this) * (1 / f);
+	}
 
 	Matrix4x4 operator*(Matrix4x4 m) {
-		return Matrix4x4(
-			this->a() * m.a() + this->b() * m.e() + this->c() * m.i() + this->d() * m.m(), // row 1, column 1
-			this->a() * m.b() + this->b() * m.f() + this->c() * m.j() + this->d() * m.n(), // row 1, column 2
-			this->a() * m.c() + this->b() * m.g() + this->c() * m.k() + this->d() * m.o(), // row 1, column 3
-			this->a() * m.d() + this->b() * m.h() + this->c() * m.l() + this->d() * m.p(), // row 1, column 4
-			this->e() * m.a() + this->f() * m.e() + this->g() * m.i() + this->h() * m.m(), // row 2, column 1
-			this->e() * m.b() + this->f() * m.f() + this->g() * m.j() + this->h() * m.n(), // row 2, column 2
-			this->e() * m.c() + this->f() * m.g() + this->g() * m.k() + this->h() * m.o(), // row 2, column 3
-			this->e() * m.d() + this->f() * m.h() + this->g() * m.l() + this->h() * m.p(), // row 2, column 4
-			this->i() * m.a() + this->j() * m.e() + this->k() * m.i() + this->k() * m.m(), // row 3, column 1
-			this->i() * m.b() + this->j() * m.f() + this->k() * m.j() + this->k() * m.n(), // row 3, column 2
-			this->i() * m.c() + this->j() * m.g() + this->k() * m.k() + this->k() * m.o(), // row 3, column 3
-			this->i() * m.d() + this->j() * m.h() + this->k() * m.l() + this->k() * m.p(), // row 3, column 4
-			this->m() * m.a() + this->n() * m.e() + this->o() * m.i() + this->p() * m.m(), // row 4, column 1
-			this->m() * m.b() + this->n() * m.f() + this->o() * m.j() + this->p() * m.n(), // row 4, column 2
-			this->m() * m.c() + this->n() * m.g() + this->o() * m.k() + this->p() * m.o(), // row 4, column 3
-			this->m() * m.d() + this->n() * m.h() + this->o() * m.l() + this->p() * m.p() // row 4, column 4
-		);
+		std::array<float, 16> retValues;
+
+		for (unsigned int row = 0; row < 4; row++) {
+			for (unsigned int column = 0; column < 4; column++) {
+				float sum = 0;
+				for (int i = 0; i < 4; i++) {					
+					sum += this->getValue(i, row) * m.getValue(column, i);
+				}
+
+				retValues[column + row * 4] = sum;
+			}
+		}
+
+		return Matrix4x4(retValues);
+	}
+
+	float det() {
+		// this is probably more efficient when not generalized,
+		// but this can be reused for other matrix sizes as well
+		float ret = 0;
+		for (unsigned int i = 0; i < 4; i++) {
+			float product = 1;
+			for (unsigned int j = 0; j < 4; j++) {
+				product *= this->getValue(j, (i + j) % 4);
+			}
+			ret += product;
+		}
+
+		return ret;
+	}
+
+	Matrix4x4 adj() {
+		std::array<float, 16> retValues;
+		int retIndex = 0;
+		for (unsigned int row = 0; row < 4; row++) {
+			for (unsigned int column = 0; column < 4; column++) {
+				// get the minor for the given (column, row) of the "this" matrix
+				std::array<float, 9> minorValues = {};
+				int minorIndex = 0;
+				for (unsigned int y = 0; y < 4; y++) {
+					for (unsigned int x = 0; x < 4; x++) {
+						if (x == row || y == column) continue;
+						minorValues[minorIndex] = this->getValue(x, y);
+						minorIndex++;
+					}
+				}
+				Matrix3x3 minor = Matrix3x3(minorValues);
+
+				// calculate the cofactor
+				float exponent = (row + column) * 1.0f;
+				float cofactor = powf(-1, exponent) * minor.det();
+
+				retValues[retIndex] = cofactor;
+				retIndex++;
+			}
+		}
+
+		return Matrix4x4(retValues);
+	}
+
+	Matrix4x4 invert() {
+		return this->adj() / this->det();
 	}
 };

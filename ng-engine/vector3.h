@@ -15,6 +15,12 @@ public:
 		this->_z = z;
 	}
 
+	Vector3(int x, int y, int z) {
+		this->_x = x * 1.0f;
+		this->_y = y * 1.0f;
+		this->_z = z * 1.0f;
+	}
+
 	float x() const { return this->_x; }
 	float y() const { return this->_y; }
 	float z() const { return this->_z; }

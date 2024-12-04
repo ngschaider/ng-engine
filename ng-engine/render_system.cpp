@@ -3,6 +3,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "game_object.h"
+#include "scene.h"
+#include "renderer.h"
 
 RenderSystem::RenderSystem() {
 	this->graphics = new OpenGL();
@@ -15,14 +18,12 @@ RenderSystem::~RenderSystem() {
 }
 
 void RenderSystem::update() {
-	std::cout << "\x1B[2J\x1B[H"; // this clears the console
-
 	this->graphics->startOfFrame();
 
-	this->graphics->fillColor = Color::white();
-	this->graphics->strokeColor = Color::white();
-	this->graphics->setTransformationMatrix(Matrix4x4::identity());
-	this->graphics->rectangle();
+	std::vector<Renderer*> renderers = this->gameObject->scene->getComponents<Renderer>();
+	for (Renderer* renderer : renderers) {
+		renderer->render(this->graphics);
+	}
 
 	this->graphics->endOfFrame();
 }

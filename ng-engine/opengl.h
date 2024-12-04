@@ -2,27 +2,41 @@
 
 #include "graphics.h"
 #include "color.h"
+#include "shader.h"
 #include <vector>
 #include "vector3.h"
 #include "matrix4x4.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <string>
+#include <map>
+
+struct Character {
+	unsigned int textureId; // id handle of the glyph texture
+	Vector2 size; // size of glyph
+	Vector2 bearing; // offset from baseline to left/top of glyph
+	unsigned int advance; // offset to advance to next glyph
+};
 
 class OpenGL : public Graphics {
 private:
-	GLuint positionBuffer;
-	unsigned int positionLoc;
-	unsigned int colorLoc;
-	unsigned int matrixLoc;
+	GLuint vertexBuffer;
+	Shader* textShader;
+	Shader* solidShader;
+	std::map<char, Character> characters;
 	void draw(std::vector<Vector3>, GLenum);
-	GLFWwindow* window;
 public:
+	GLFWwindow* window;
 	OpenGL();
-	~OpenGL();
+	virtual ~OpenGL(); // always define destructors as virtual
+	Vector2 size();
 	void clear();
 	void setTransformationMatrix(Matrix4x4);
 	void startOfFrame();
 	void endOfFrame();
 	void triangle();
 	void rectangle();
+	void text(std::string);
+	Matrix4x4 getScreenToClipMatrix();
+	Matrix4x4 getClipToScreenMatrix();
 };

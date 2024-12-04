@@ -9,7 +9,7 @@ private:
 	Scene* scene;
 public:
 	Engine();
-	~Engine();
+	virtual ~Engine(); // always define destructors as virtual
 	void setScene(Scene*);
 	void update();
 };
