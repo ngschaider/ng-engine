@@ -133,9 +133,9 @@ std::map<char, Character> loadCharacters() {
 
 
 void OpenGL::draw(std::vector<Vector3> vertices, GLenum primitive) {
-	this->solidShader->use();
-
 	std::vector<float> bytes;
+
+	this->solidShader->use();
 
 	for (Vector3 vertex : vertices) {
 		bytes.push_back(vertex.x());
@@ -146,7 +146,9 @@ void OpenGL::draw(std::vector<Vector3> vertices, GLenum primitive) {
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, bytes.size() * sizeof(float), &bytes[0], GL_STATIC_DRAW);
 
-	int vertexAttribLoc = glGetAttribLocation(this->solidShader->id, "vertex");
+	this->solidShader->setMatrix4x4("projection", this->transformationMatrix);
+
+	GLint vertexAttribLoc = glGetAttribLocation(this->solidShader->id, "vertex");
 	glEnableVertexAttribArray(vertexAttribLoc);
 	glVertexAttribPointer(vertexAttribLoc, 3, GL_FLOAT, false, 0, 0);
 
@@ -173,7 +175,7 @@ OpenGL::OpenGL() {
 	glfwSetErrorCallback(errorCallback);
 
 	if (!glfwInit()) {
-		throw std::exception();
+		throw std::exception("Could not initialize GLFW");
 	}
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -182,14 +184,12 @@ OpenGL::OpenGL() {
 
 	this->window = glfwCreateWindow(800, 600, "NG-ENGINE", nullptr, nullptr);
 	if (this->window == nullptr) {
-		std::cout << "Failed to create GLFW window" << std::endl;
-		throw std::exception();
+		throw std::exception("Failed to create GLFW window");
 	}
 	glfwMakeContextCurrent(this->window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		throw std::exception();
+		throw std::exception("Failed to initialize GLAD");
 	}
 
 	this->textShader = new Shader("text.vs", "text.fs");
@@ -211,20 +211,27 @@ OpenGL::OpenGL() {
 	glGenVertexArrays(1, &vertexArrayObj);
 	glBindVertexArray(vertexArrayObj);
 
+	glGenBuffers(1, &this->vertexBuffer);
+
 	glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(this->window, framebufferSizeCallback);
 
 	this->setTransformationMatrix(Matrix4x4::identity());
 
-	this->textShader->use();
+	this->solidShader->use();
 	this->characters = loadCharacters();
 }
 
 OpenGL::~OpenGL() {
 	glfwTerminate();
+
+	delete this->textShader;
+	delete this->solidShader;
 }
 
 void OpenGL::startOfFrame() {
+	this->backgroundColor = Color::green();
+
 	glClearColor(this->backgroundColor.r() / 255.0f, this->backgroundColor.g() / 255.0f, this->backgroundColor.b() / 255.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
@@ -242,23 +249,66 @@ Vector2 OpenGL::size() {
 }
 
 void OpenGL::clear() {
-	glClearColor(0, 0, 0, 0);
+	glClearColor(0, 0 ,0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void OpenGL::setTransformationMatrix(Matrix4x4 m) {
-	float values[] = {
-		m.a(), m.b(), m.c(), m.d(),
-		m.e(), m.f(), m.g(), m.h(),
-		m.i(), m.j(), m.k(), m.l(),
-		m.m(), m.n(), m.o(), m.p(),
-	};
-	glUniformMatrix4fv(glGetUniformLocation(this->solidShader->id, "projection"), 1, true, values);
-	glUniformMatrix4fv(glGetUniformLocation(this->textShader->id, "projection"), 1, true, values);
+	this->transformationMatrix = m;
 }
 
 void OpenGL::text(std::string text) {
 	this->textShader->use();
+
+	this->textShader->setMatrix4x4("projection", this->transformationMatrix);
+	
+	GLint vertexAttribLoc = glGetAttribLocation(this->textShader->id, "vertex");
+
+	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * 6, nullptr, GL_DYNAMIC_DRAW);
+
+	glEnableVertexAttribArray(vertexAttribLoc);
+	glVertexAttribPointer(vertexAttribLoc, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	this->textShader->setVector3("textColor", Vector3(255, 0, 0));
+
+	glActiveTexture(GL_TEXTURE0);
+
+	float x = 0;
+
+	for (std::string::const_iterator c = text.begin(); c != text.end(); c++) {
+		Character ch = this->characters[*c];
+
+		float xPos = ch.bearing.x() + x;
+		float yPos = -ch.size.y() + ch.bearing.y();
+
+		float w = ch.size.x();
+		float h = ch.size.y();
+
+		float vertices[6][4] = {
+			{ xPos, yPos + h, 0.0f, 0.0f },
+			{ xPos, yPos, 0.0f, 1.0f },
+			{ xPos + w, yPos, 1.0f, 1.0f },
+
+			{ xPos, yPos + h, 0.0f, 0.0f },
+			{ xPos + w, yPos, 1.0f, 1.0f },
+			{ xPos + w, yPos + h, 1.0f, 0.0f },
+		};
+
+		glBindTexture(GL_TEXTURE_2D, ch.textureId);
+
+		glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		x += ch.advance >> 6;
+	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void OpenGL::triangle() {

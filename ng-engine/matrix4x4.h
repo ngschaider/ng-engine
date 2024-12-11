@@ -134,20 +134,20 @@ public:
 	}
 
 	float a() { return this->getValue(0, 0); }
-	float b() { return this->getValue(0, 1); }
-	float c() { return this->getValue(0, 2); }
-	float d() { return this->getValue(0, 3); }
-	float e() { return this->getValue(1, 0); }
+	float b() { return this->getValue(1, 0); }
+	float c() { return this->getValue(2, 0); }
+	float d() { return this->getValue(3, 0); }
+	float e() { return this->getValue(0, 1); }
 	float f() { return this->getValue(1, 1); }
-	float g() { return this->getValue(1, 2); }
-	float h() { return this->getValue(1, 3); }
-	float i() { return this->getValue(2, 0); }
-	float j() { return this->getValue(2, 1); }
+	float g() { return this->getValue(2, 1); }
+	float h() { return this->getValue(3, 1); }
+	float i() { return this->getValue(0, 2); }
+	float j() { return this->getValue(1, 2); }
 	float k() { return this->getValue(2, 2); }
-	float l() { return this->getValue(2, 3); }
-	float m() { return this->getValue(3, 0); }
-	float n() { return this->getValue(3, 1); }
-	float o() { return this->getValue(3, 2); }
+	float l() { return this->getValue(3, 2); }
+	float m() { return this->getValue(0, 3); }
+	float n() { return this->getValue(1, 3); }
+	float o() { return this->getValue(2, 3); }
 	float p() { return this->getValue(3, 3); }
 
 	Matrix4x4 operator*(float f) {

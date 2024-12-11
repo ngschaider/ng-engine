@@ -1,6 +1,7 @@
 #include "graphics.h"
 #include "matrix4x4.h"
 #include <exception>
+#include <string>
 
 Graphics::Graphics() {
 }
@@ -35,6 +36,10 @@ void Graphics::triangle() {
 
 void Graphics::rectangle() {
 	throw new std::exception();
+}
+
+void Graphics::text(std::string text) {
+
 }
 
 Matrix4x4 Graphics::getScreenToClipMatrix() {

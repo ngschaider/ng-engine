@@ -6,12 +6,15 @@
 #include <sstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "matrix4x4.h"
+#include "vector3.h"
 
 unsigned int createShader(GLenum type, std::string source) {
 	unsigned int shader = glCreateShader(type);
 	if (shader == 0) {
 		throw std::exception("Failed to create shader.");
 	}
+
 	const char* constSource = source.c_str();
 	glShaderSource(shader, 1, &constSource, NULL);
 	glCompileShader(shader);
@@ -21,6 +24,7 @@ unsigned int createShader(GLenum type, std::string source) {
 	if (success == GL_FALSE) {
 		char msg[512];
 		glGetShaderInfoLog(shader, 512, NULL, msg);
+		std::cout << "Error during shader compilation: " << std::endl;
 		std::cout << msg << std::endl;
 		glDeleteShader(shader);
 		throw std::exception("Failed to compile shader");
@@ -71,18 +75,31 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
 	this->id = createProgram(vertexShader, fragmentShader);
 }
 
+Shader::~Shader() {
+	glDeleteProgram(this->id);
+}
+
 void Shader::use() {
 	glUseProgram(this->id);
 }
 
-void Shader::setBool(const std::string& name, bool value) const {
-	glUniform1i(glGetUniformLocation(this->id, name.c_str()), (int)value);
+void Shader::setMatrix4x4(const std::string& name, Matrix4x4 m) const {
+	float values[] = {
+		m.a(), m.b(), m.c(), m.d(),
+		m.e(), m.f(), m.g(), m.h(),
+		m.i(), m.j(), m.k(), m.l(),
+		m.m(), m.n(), m.o(), m.p(),
+	};
+	//float values[] = {
+	//	m.a(), m.e(), m.i(), m.m(),
+	//	m.b(), m.f(), m.j(), m.n(),
+	//	m.c(), m.g(), m.k(), m.o(),
+	//	m.d(), m.h(), m.l(), m.p(),
+	//};
+	glUniformMatrix4fv(glGetUniformLocation(this->id, name.c_str()), 1, false, values);
 }
 
-void Shader::setInt(const std::string& name, int value) const {
-	glUniform1i(glGetUniformLocation(this->id, name.c_str()), value);
-}
-
-void Shader::setFloat(const std::string& name, float value) const {
-	glUniform1f(glGetUniformLocation(this->id, name.c_str()), value);
+void Shader::setVector3(const std::string& name, Vector3 v) const {
+	float values[] = { v.x(), v.y(), v.z() };
+	glUniform3fv(glGetUniformLocation(this->id, name.c_str()), 1, values);
 }

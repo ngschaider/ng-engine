@@ -1,13 +1,14 @@
 #pragma once
 
 #include <string>
+#include "matrix4x4.h"
 
 class Shader {
 public:
     unsigned int id;
-    Shader(const char* vertexPath, const char* fragmentPath);
+    Shader(const char*, const char*);
+    ~Shader();
     void use();
-    void setBool(const std::string& name, bool value) const;
-    void setInt(const std::string& name, int value) const;
-    void setFloat(const std::string& name, float value) const;
+    void setMatrix4x4(const std::string&, Matrix4x4) const;
+    void setVector3(const std::string&, Vector3) const;
 };

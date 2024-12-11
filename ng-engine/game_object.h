@@ -38,5 +38,14 @@ public:
 		return ret;
 	}
 
+	// because of some weird c++ shit we have to implement the function in the header
+	// (we dont have to, but it is more portable this way)
+	template<class T>
+	T* getComponent() {
+		std::vector<T*> components = this->getComponents<T>();
+		if (components.empty()) return nullptr;
+		return components.front();
+	}
+
 	void update();
 };

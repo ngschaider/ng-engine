@@ -107,7 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\glad\include;$(ProjectDir)Dependencies\freetype\include;$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\imgui;$(ProjectDir)Dependencies\glad\include;$(ProjectDir)Dependencies\freetype\include;$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalModuleDependencies>%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
     </ClCompile>
@@ -126,18 +126,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\imgui;$(ProjectDir)Dependencies\glad\include;$(ProjectDir)Dependencies\freetype\include;$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\lib-vc2022;$(ProjectDir)Dependencies\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="component.cpp" />
+    <ClCompile Include="control_velocity.cpp" />
     <ClCompile Include="Dependencies\glad\glad.c" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="game_object.cpp" />
@@ -163,6 +167,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="component.h" />
+    <ClInclude Include="control_velocity.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="game_object.h" />
     <ClInclude Include="graphics.h" />
@@ -184,10 +189,14 @@
     <ClInclude Include="vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dependencies\imgui\misc\debuggers\imgui.natstepfilter" />
     <None Include="solid.fs" />
     <None Include="solid.vs" />
     <None Include="text.fs" />
     <None Include="text.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="Dependencies\imgui\misc\debuggers\imgui.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

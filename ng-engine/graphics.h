@@ -2,6 +2,7 @@
 
 #include "matrix4x4.h"
 #include "color.h"
+#include <string>
 
 class Graphics {
 public:
@@ -22,6 +23,7 @@ public:
 	virtual void endOfFrame();
 	virtual void triangle();
 	virtual void rectangle();
+	virtual void text(std::string text);
 	Matrix4x4 getScreenToClipMatrix();
 	Matrix4x4 getClipToScreenMatrix();
 };

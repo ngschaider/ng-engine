@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "component.h"
 #include "color.h"
+#include "shader.h"
 
 enum class RendererSpace {
 	Local,
@@ -26,5 +27,5 @@ public:
 
 	RendererSpace space = RendererSpace::Local;
 
-	virtual void render(Graphics* graphics);
+	virtual void render(Graphics*);
 };

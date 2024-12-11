@@ -13,8 +13,8 @@
 
 struct Character {
 	unsigned int textureId; // id handle of the glyph texture
-	Vector2 size; // size of glyph
-	Vector2 bearing; // offset from baseline to left/top of glyph
+	Vector2 size = Vector2(0, 0); // size of glyph
+	Vector2 bearing = Vector2(0, 0); // offset from baseline to left/top of glyph
 	unsigned int advance; // offset to advance to next glyph
 };
 
@@ -25,6 +25,7 @@ private:
 	Shader* solidShader;
 	std::map<char, Character> characters;
 	void draw(std::vector<Vector3>, GLenum);
+	Matrix4x4 transformationMatrix = Matrix4x4::identity();
 public:
 	GLFWwindow* window;
 	OpenGL();

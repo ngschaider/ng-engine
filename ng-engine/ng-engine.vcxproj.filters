@@ -78,9 +78,6 @@
     <ClCompile Include="engine.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
-    <ClCompile Include="component.cpp">
-      <Filter>Quelldateien\core</Filter>
-    </ClCompile>
     <ClCompile Include="game_object.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="shader.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="control_velocity.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cpp">
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +146,6 @@
     <ClInclude Include="color.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
-    <ClInclude Include="component.h">
-      <Filter>Headerdateien\core</Filter>
-    </ClInclude>
     <ClInclude Include="engine.h">
       <Filter>Headerdateien\core</Filter>
     </ClInclude>
@@ -170,6 +170,12 @@
     <ClInclude Include="shader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="control_velocity.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="text.vs">
@@ -184,5 +190,9 @@
     <None Include="solid.vs">
       <Filter>Ressourcendateien</Filter>
     </None>
+    <None Include="Dependencies\imgui\misc\debuggers\imgui.natstepfilter" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="Dependencies\imgui\misc\debuggers\imgui.natvis" />
   </ItemGroup>
 </Project>

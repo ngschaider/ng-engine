@@ -6,10 +6,11 @@
 
 class RigidBody : public Component {
 public:
-	Vector3 linearAcceleration;
-	Quaternion angularAcceleration;
-	Vector3 linearVelocity;
-	Quaternion angularVelocity;
+	RigidBody();
+	Vector3 linearAcceleration = Vector3(0, 0, 0);
+	Quaternion angularAcceleration = Quaternion::identity();
+	Vector3 linearVelocity = Vector3(0, 0, 0);
+	Quaternion angularVelocity = Quaternion::identity();
 	float mass;
 	void update();
 
