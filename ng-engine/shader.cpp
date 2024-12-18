@@ -7,16 +7,37 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "matrix4x4.h"
+#include "vector2.h"
+#include "vector2i.h"
 #include "vector3.h"
+#include "vector4.h"
 
-unsigned int createShader(GLenum type, std::string source) {
+std::string read(const char* path) {
+	std::stringstream stream;
+	std::ifstream file;
+	file.open(path);
+
+	if (!file.good()) {
+		throw new std::exception("Could not open shader source file");
+	}
+
+	stream << file.rdbuf();
+	file.close();
+
+	return stream.str();
+}
+
+unsigned int createShader(const GLenum type, const std::string sourceFile) {
 	unsigned int shader = glCreateShader(type);
 	if (shader == 0) {
 		throw std::exception("Failed to create shader.");
 	}
 
-	const char* constSource = source.c_str();
-	glShaderSource(shader, 1, &constSource, NULL);
+	const char* sourceFileStr = sourceFile.c_str();
+	const std::string source = read(sourceFileStr);
+	const char* sourceStr = source.c_str();
+
+	glShaderSource(shader, 1, &sourceStr, NULL);
 	glCompileShader(shader);
 
 	int success;
@@ -27,17 +48,17 @@ unsigned int createShader(GLenum type, std::string source) {
 		std::cout << "Error during shader compilation: " << std::endl;
 		std::cout << msg << std::endl;
 		glDeleteShader(shader);
-		throw std::exception("Failed to compile shader");
+		throw std::exception("Failed to compile shader.");
 	}
 
 	return shader;
 }
 
-unsigned int createProgram(unsigned int vertexShader, unsigned int fragmentShader) {
+unsigned int createProgram(const char* vertexFile, const char* fragmentFile) {
 	unsigned int program = glCreateProgram();
 
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+	glAttachShader(program, createShader(GL_VERTEX_SHADER, vertexFile));
+	glAttachShader(program, createShader(GL_FRAGMENT_SHADER, fragmentFile));
 
 	glLinkProgram(program);
 
@@ -48,11 +69,8 @@ unsigned int createProgram(unsigned int vertexShader, unsigned int fragmentShade
 		glGetProgramInfoLog(program, 512, NULL, msg);
 		std::cout << msg << std::endl;
 		glDeleteProgram(program);
-		throw std::exception("Failed to link program");
+		throw std::exception("Failed to link program.");
 	}
-
-	//glDetachShader(program, vertexShader);
-	//glDetachShader(program, fragmentShader);
 
 	//glDeleteShader(vertexShader);
 	//glDeleteShader(fragmentShader);
@@ -60,19 +78,8 @@ unsigned int createProgram(unsigned int vertexShader, unsigned int fragmentShade
 	return program;
 }
 
-std::string read(const char* path) {
-	std::stringstream stream;
-	std::ifstream file;
-	file.open(path);
-	stream << file.rdbuf();
-	file.close();
-	return stream.str();
-}
-
-Shader::Shader(const char* vertexPath, const char* fragmentPath) {
-	unsigned int vertexShader = createShader(GL_VERTEX_SHADER, read(vertexPath));
-	unsigned int fragmentShader = createShader(GL_FRAGMENT_SHADER, read(fragmentPath));
-	this->id = createProgram(vertexShader, fragmentShader);
+Shader::Shader(const char* vertexFile, const char* fragmentFile) {
+	this->id = createProgram(vertexFile, fragmentFile);
 }
 
 Shader::~Shader() {
@@ -83,23 +90,45 @@ void Shader::use() {
 	glUseProgram(this->id);
 }
 
-void Shader::setMatrix4x4(const std::string& name, Matrix4x4 m) const {
-	float values[] = {
-		m.a(), m.b(), m.c(), m.d(),
-		m.e(), m.f(), m.g(), m.h(),
-		m.i(), m.j(), m.k(), m.l(),
-		m.m(), m.n(), m.o(), m.p(),
-	};
-	//float values[] = {
-	//	m.a(), m.e(), m.i(), m.m(),
-	//	m.b(), m.f(), m.j(), m.n(),
-	//	m.c(), m.g(), m.k(), m.o(),
-	//	m.d(), m.h(), m.l(), m.p(),
-	//};
-	glUniformMatrix4fv(glGetUniformLocation(this->id, name.c_str()), 1, false, values);
+void Shader::setFloat(const char* name, float value) const {
+	glUniform1f(glGetUniformLocation(this->id, name), value);
 }
 
-void Shader::setVector3(const std::string& name, Vector3 v) const {
-	float values[] = { v.x(), v.y(), v.z() };
-	glUniform3fv(glGetUniformLocation(this->id, name.c_str()), 1, values);
+void Shader::setInteger(const char* name, int value) const {
+	glUniform1i(glGetUniformLocation(this->id, name), value);
+}
+
+void Shader::setVector2(const char* name, Vector2 value) const {
+	glUniform2f(glGetUniformLocation(this->id, name), value.x(), value.y());
+}
+
+void Shader::setVector2i(const char* name, Vector2i value) const {
+	glUniform2i(glGetUniformLocation(this->id, name), value.x(), value.y());
+}
+
+void Shader::setVector3(const char* name, Vector3 value) const {
+	glUniform3f(glGetUniformLocation(this->id, name), value.x(), value.y(), value.z());
+}
+
+void Shader::setVector4(const char* name, Vector4 value) const {
+	glUniform4f(glGetUniformLocation(this->id, name), value.x(), value.y(), value.z(), value.w());
+}
+
+void Shader::setMatrix3x3(const char* name, Matrix3x3 m) const {
+	float values[] = {
+		m.a(), m.d(), m.g(),
+		m.b(), m.e(), m.h(),
+		m.c(), m.f(), m.i(),
+	};
+	glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, false, values);
+}
+
+void Shader::setMatrix4x4(const char* name, Matrix4x4 m) const {
+	float values[] = {
+		m.a(), m.e(), m.i(), m.m(),
+		m.b(), m.f(), m.j(), m.n(),
+		m.c(), m.g(), m.k(), m.o(),
+		m.d(), m.h(), m.l(), m.p(),
+	};
+	glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, false, values);
 }

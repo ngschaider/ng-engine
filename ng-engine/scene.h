@@ -8,20 +8,26 @@
 class Engine;
 
 class Scene {
-private:
-	std::vector<GameObject*> gameObjects;
 public:
-	Engine* engine; // this should only be written to by the engine
+	
+	Engine* engine; // the engine this scene is attached to, this should only be written to by the engine
 	Scene();
 	virtual ~Scene(); // always define destructors as virtual
 
+	std::vector<GameObject*> gameObjects;
 	void addGameObject(GameObject*);
 	void removeGameObject(GameObject*);
 		
 	Camera* getActiveCamera();
 
+	// events
+	void addedToEngine(); // Called when the scene gets attached to an engine, this should only be called by the engine
+	void removedFromEngine(); // Called when the scene gets removed from an engine, this should only be called by the engine
+	void started(); // Called when this->engine() gets started, this should only be called by the engine
+	void stopped(); // Called when this->engine() gets stopped, this should only be called by the engine
 
-	// because of some weird c++ shit we have to implement the function in the header (we dont have to, but it is more portable this way)
+
+	// because of some weird c++ shit we have to implement the function in the header
 	template<class T>
 	std::vector<T*> getComponents() {
 		std::vector<T*> ret;
@@ -37,7 +43,7 @@ public:
 	}
 
 
-	// because of some weird c++ shit we have to implement the function in the header (we dont have to, but it is more portable this way)
+	// because of some weird c++ shit we have to implement the function in the header
 	template<class T>
 	T* getComponent() {
 		std::vector<T*> components = this->getComponents<T>();

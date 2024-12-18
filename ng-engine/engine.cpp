@@ -3,6 +3,7 @@
 #include "game_object.h"
 #include <cassert>
 #include <string>
+#include <iostream>
 
 Engine::Engine() {
 	this->scene = nullptr;
@@ -29,4 +30,28 @@ void Engine::setScene(Scene* scene) {
 void Engine::update() {
 	if (this->scene == nullptr) return;
 	this->scene->update();
+}
+
+void Engine::stop() {
+	this->shouldStop = true;
+
+	if (this->scene != nullptr) {
+		this->scene->stopped();
+	}
+}
+
+void Engine::start() {
+	if (this->scene != nullptr) {
+		this->scene->started();
+	}
+
+	this->shouldStop = false;
+	while (!this->shouldStop) {
+		try {
+			this->update();
+		}
+		catch (std::exception e) {
+			std::cout << "Exception!" << std::endl;
+		}
+	}
 }

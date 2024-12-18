@@ -3,7 +3,7 @@
 #include <vector>
 #include "component.h"
 #include "transform.h"
-#include <vector>
+#include <string>
 
 // forward declare Engine to avoid circular references (Engine is importing GameObject)
 class Engine;
@@ -17,14 +17,26 @@ private:
 	Transform* _transform;
 public:
 	Transform* transform() const { return this->_transform; }
-	Scene* scene; // this should only be written to by the scene
+	std::string name = "Unnamed GameObject"; // Name of the game object
+	Scene* scene; // the scene this game object is attached to, this should only be written to by the scene
 	GameObject();
+	GameObject(const char*);
 	virtual ~GameObject(); // always define destructors as virtual
 	void addComponent(Component*);
 	void removeComponent(Component*);
 
+	// quick access including null-checks
+	Engine* engine() const;
+
+	// events
+	void addedToScene(); // called when the game objects gets attached to a scene, this should only be called by the scene
+	void removedFromScene(); // called when the game objects gets removed from a scene, this should only be called by the scene
+	void addedToEngine(); // called when this->engine() changes from NULL to an engine instance, this should only be called by the scene
+	void removedFromEngine(); // called when this->engine() changes from an engine instance to NULL, this should only be called by the scene
+	void started(); // Called when this->engine() gets started, this should only be called by the scene
+	void stopped(); // Called when this->engine() gets stopped, this should only be called by the scene
+
 	// because of some weird c++ shit we have to implement the function in the header
-	// (we dont have to, but it is more portable this way)
 	template<class T>
 	std::vector<T*> getComponents() {
 		std::vector<T*> ret;
@@ -39,7 +51,6 @@ public:
 	}
 
 	// because of some weird c++ shit we have to implement the function in the header
-	// (we dont have to, but it is more portable this way)
 	template<class T>
 	T* getComponent() {
 		std::vector<T*> components = this->getComponents<T>();

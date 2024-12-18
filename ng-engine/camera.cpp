@@ -25,7 +25,7 @@ Matrix4x4 Camera::getCameraToClipMatrix() {
 
 	// make the scene appear distorted when in the clip space as it later gets stretched into screen space (from size 1,1 to 1920,1080)
 	// this creates black bars but ensures, that we exactly see the region captured by the camera
-	float ratio = renderSystem->graphics->ratio();
+	float ratio = renderSystem->ratio();
 	float factorX = ratio > 1 ? ratio : 1;
 	float factorY = ratio < 1 ? ratio : 1;
 	Matrix4x4 distort = Matrix4x4::scale(Vector3(1 / factorX, 1 / factorY, 1.0f));

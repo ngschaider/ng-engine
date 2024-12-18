@@ -2,18 +2,11 @@
 #include "camera.h"
 #include "transform.h"
 #include "scene.h"
+#include "matrix4x4.h"
 #include <exception>
+#include "render_system.h"
 
-void Renderer::render(Graphics* graphics) {
-	graphics->fillColor = this->fillColor;
-	graphics->doFill = this->doFill;
-
-	graphics->strokeColor = strokeColor;
-	graphics->doStroke = this->doStroke;
-
-	graphics->lineWidth = this->lineWidth;
-	graphics->fontSize = this->fontSize;
-
+Matrix4x4 Renderer::getTransformationMatrix() {
 	Camera* camera = this->scene()->getActiveCamera();
 	if (camera == nullptr) throw new std::exception("Renderer requries an active camera in the scene.");
 
@@ -21,25 +14,43 @@ void Renderer::render(Graphics* graphics) {
 	Matrix4x4 worldToCamera = camera->getWorldToCameraMatrix();
 	Matrix4x4 cameraToClip = camera->getCameraToClipMatrix();
 
+	//Matrix4x4 m = Matrix4x4(
+	//	1.0f, 0.0f, 0.0f, 0.0f,
+	//	0.0f, 1.0f, 0.0f, 0.0f,
+	//	0.0f, 0.0f, 1.0f, 0.0f,
+	//	0.0f, 0.0f, 0.0f, 1.0f
+	//);
+	//graphics->setTransformationMatrix(m);
+
+	//graphics->setTransformationMatrix(localToWorld);
+
 	if (this->space == RendererSpace::Local) {
 		// local -> world -> camera -> clip
-		Matrix4x4 m = cameraToClip * worldToCamera * localToWorld;
-		graphics->setTransformationMatrix(m);
+		return cameraToClip * worldToCamera * localToWorld;
 	}
 	else if (this->space == RendererSpace::World) {
 		// world -> camera -> clip
-		graphics->setTransformationMatrix(cameraToClip * worldToCamera);
+		return cameraToClip * worldToCamera;
 	}
 	else if (this->space == RendererSpace::Camera) {
 		// camera -> clip
-		graphics->setTransformationMatrix(cameraToClip);
+		return cameraToClip;
 	}
 	else if (this->space == RendererSpace::Clip) {
-		graphics->setTransformationMatrix(Matrix4x4::identity());
+		return Matrix4x4::identity();
 	}
 	else if (this->space == RendererSpace::Screen) {
-		Matrix4x4 screenToClip = graphics->getScreenToClipMatrix();
-		graphics->setTransformationMatrix(screenToClip);
+		RenderSystem* renderSystem = this->scene()->getComponent<RenderSystem>();
+		if (renderSystem == nullptr) throw new std::exception("Renderer requires a RenderSystem component to be present in the current scene.");
+		return renderSystem->getScreenToClipMatrix();
 	}
 
+	throw new std::exception("Encountered unexpected RendererSpace");
+}
+
+void Renderer::beforeRender() {
+}
+void Renderer::render() {
+}
+void Renderer::afterRender() {
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "graphics.h"
 #include "component.h"
 #include "color.h"
 #include "shader.h"
@@ -14,18 +13,15 @@ enum class RendererSpace {
 };
 
 class Renderer : public Component {
-private:
+protected:
+	Matrix4x4 getTransformationMatrix();
 public:
-	Color fillColor = Color::white();
-	bool doFill = true;
-
-	Color strokeColor = Color::white();
-	bool doStroke = false;
-
-	float lineWidth = 0.03f;
-	float fontSize = 0.03f;
-
 	RendererSpace space = RendererSpace::Local;
+	Shader* shader = nullptr;
 
-	virtual void render(Graphics*);
+	// int renderingOrder = 0; // Renderer instances with higher order are rendered later
+
+	virtual void beforeRender();
+	virtual void render();
+	virtual void afterRender();
 };

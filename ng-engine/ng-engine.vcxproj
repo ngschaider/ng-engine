@@ -114,9 +114,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\lib-vc2022;$(ProjectDir)Dependencies\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ProjectDir)Dependencies\freetype\lib;$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\lib-vc2022</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)*.glsl $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -136,31 +139,50 @@
       <AdditionalDependencies>glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\lib-vc2022;$(ProjectDir)Dependencies\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)*.glsl $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="component.cpp" />
     <ClCompile Include="control_velocity.cpp" />
+    <ClCompile Include="cube_renderer.cpp" />
     <ClCompile Include="Dependencies\glad\glad.c" />
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="game_object.cpp" />
-    <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="imgui_renderer.cpp" />
     <ClCompile Include="input_system.cpp" />
+    <ClCompile Include="hierarchy_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix3x3.cpp" />
     <ClCompile Include="matrix4x4.cpp" />
-    <ClCompile Include="opengl.cpp" />
-    <ClCompile Include="rectangle_renderer.cpp" />
+    <ClCompile Include="opengl.cpp">
+      <FileType>CppCode</FileType>
+    </ClCompile>
+    <ClCompile Include="square_renderer.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_system.cpp" />
+    <ClCompile Include="resource_manager.cpp" />
     <ClCompile Include="rigid_body.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="sprite_renderer.cpp" />
+    <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="texture2d.cpp" />
     <ClCompile Include="text_renderer.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="triangle_renderer.cpp" />
     <ClCompile Include="vector2.cpp" />
+    <ClCompile Include="vector2i.cpp" />
     <ClCompile Include="vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,32 +190,55 @@
     <ClInclude Include="color.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="control_velocity.h" />
+    <ClInclude Include="cube_renderer.h" />
     <ClInclude Include="engine.h" />
+    <ClInclude Include="event.h" />
     <ClInclude Include="game_object.h" />
-    <ClInclude Include="graphics.h" />
+    <ClInclude Include="hierarchy_window.h" />
+    <ClInclude Include="imgui_renderer.h" />
     <ClInclude Include="input_system.h" />
     <ClInclude Include="matrix3x3.h" />
     <ClInclude Include="matrix4x4.h" />
-    <ClInclude Include="opengl.h" />
     <ClInclude Include="quaternion.h" />
-    <ClInclude Include="rectangle_renderer.h" />
+    <ClInclude Include="square_renderer.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_system.h" />
+    <ClInclude Include="resource_manager.h" />
     <ClInclude Include="rigid_body.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="sprite_renderer.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="texture2d.h" />
     <ClInclude Include="text_renderer.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="triangle_renderer.h" />
     <ClInclude Include="vector2.h" />
+    <ClInclude Include="vector2i.h" />
     <ClInclude Include="vector3.h" />
+    <ClInclude Include="vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\imgui\misc\debuggers\imgui.natstepfilter" />
-    <None Include="solid.fs" />
-    <None Include="solid.vs" />
-    <None Include="text.fs" />
-    <None Include="text.vs" />
+    <None Include="solid_fragment.glsl">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="solid_vertex.glsl">
+      <DeploymentContent>false</DeploymentContent>
+      <FileType>Document</FileType>
+    </None>
+    <None Include="sprite_fragment.glsl">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="sprite_vertex.glsl">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="text2d_fragment.glsl">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="text2d_vertex.glsl">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Dependencies\imgui\misc\debuggers\imgui.natvis" />

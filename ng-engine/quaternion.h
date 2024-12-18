@@ -16,19 +16,32 @@ public:
 		return Quaternion(0, 0, 0, 1);
 	}
 
-	static Quaternion fromAngleAxis(Vector3 ax) {
-		float cx = cosf(ax.x() / 2);
-		float sx = sinf(ax.x() / 2);
-		float cy = cosf(ax.y() / 2);
-		float sy = sinf(ax.y() / 2);
-		float cz = cosf(ax.z() / 2);
-		float sz = sinf(ax.z() / 2);
+	static Quaternion fromAngleAxis(float deg, Vector3 axis) {
+		float rad = deg * PI / 180;
+		Vector3 vec = axis * sinf(rad / 2);
+		float scalar = cosf(rad / 2);
+
+		return Quaternion(vec.x(), vec.y(), vec.z(), scalar);
+	}
+
+	static Quaternion fromEulerAngles(float pitch, float roll, float yaw) {
+		return Quaternion::fromEulerAngles(Vector3(yaw, roll, pitch));
+	}
+
+	static Quaternion fromEulerAngles(Vector3 deg) {
+		Vector3 rad = deg * PI / 180;
+		float cx = cosf(rad.x() / 2);
+		float sx = sinf(rad.x() / 2);
+		float cy = cosf(rad.y() / 2);
+		float sy = sinf(rad.y() / 2);
+		float cz = cosf(rad.z() / 2);
+		float sz = sinf(rad.z() / 2);
 
 		return Quaternion(
-			cx * cy * cz + sx * sy * sz,
-			sx * cy * cz - cx * sy * sz,
-			cx * cy * sz + sx * cy * sz,
-			cx * cy * sz - sx * sy * cz
+			sx * sy * sz + cx * sy * cz,
+			sx * sy * cz - cx * sy * sz,
+			sx * cy * cz + cx * cy * sz,
+			cx * cy * cz + sx * sy * sz
 		);
 	}
 

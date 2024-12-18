@@ -8,5 +8,5 @@ public:
 	TextRenderer();
 	TextRenderer(std::string);
 	std::string text;
-	void render(Graphics*);
+	void render();
 };

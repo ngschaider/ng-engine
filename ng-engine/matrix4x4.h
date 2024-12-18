@@ -39,8 +39,8 @@ public:
 	}
 
 	static Matrix4x4 rotateX(float rotation) {
-		float c = cosf(rotation);
-		float s = sinf(rotation);
+		float c = cosf(rotation / 180 * PI);
+		float s = sinf(rotation / 180 * PI);
 		return Matrix4x4(
 			1, 0, 0, 0,
 			0, c, -s, 0,
@@ -50,8 +50,8 @@ public:
 	}
 
 	static Matrix4x4 rotateY(float rotation) {
-		float c = cosf(rotation);
-		float s = sinf(rotation);
+		float c = cosf(rotation / 180 * PI);
+		float s = sinf(rotation / 180 * PI);
 		return Matrix4x4(
 			c, 0, s, 0,
 			0, 1, 0, 0,
@@ -61,12 +61,25 @@ public:
 	}
 
 	static Matrix4x4 rotateZ(float rotation) {
-		float c = cosf(rotation);
-		float s = sinf(rotation);
+		float c = cosf(rotation / 180 * PI);
+		float s = sinf(rotation / 180 * PI);
 		return Matrix4x4(
 			c, -s, 0, 0,
 			s, c, 0, 0,
 			0, 0, 1, 0,
+			0, 0, 0, 1
+		);
+	}
+
+	static Matrix4x4 rotate(Quaternion q) {
+		float x2 = powf(q.x(), 2);
+		float y2 = powf(q.y(), 2);
+		float z2 = powf(q.z(), 2);
+		float w2 = powf(q.w(), 2);
+		return Matrix4x4(
+			w2 + x2 - y2 - z2, -2 * q.w() * q.z() + 2 * q.x() * q.y(), 2 * q.w() * q.x() + 2 * q.x() * q.y(), 0,
+			2 * q.w() * q.z() + 2 * q.x() * q.y(), w2 - x2 + y2 - z2, -2 * q.w() * q.x() + 2 * q.y() * q.z(), 0,
+			-2 * q.w() * q.y() + 2 * q.x() * q.z(), 2 * q.w() * q.x() + 2 * q.y() * q.z(), w2 - x2 - y2 + z2, 0,
 			0, 0, 0, 1
 		);
 	}
@@ -93,6 +106,7 @@ public:
 		Vector3 euler = rotation.eulerAngles();
 
 		return Matrix4x4::translate(pos)
+			// * Matrix4x4::rotate(rotation)
 			* Matrix4x4::rotateZ(euler.z())
 			* Matrix4x4::rotateY(euler.y())
 			* Matrix4x4::rotateX(euler.x())

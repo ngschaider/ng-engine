@@ -31,12 +31,12 @@
     <Filter Include="Quelldateien\core">
       <UniqueIdentifier>{590a103c-ac25-4d02-9ab0-258cf86b4e4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\vendor">
+      <UniqueIdentifier>{246b0dce-9aba-47b1-8288-f571b4168b83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="opengl.cpp">
@@ -45,7 +45,7 @@
     <ClCompile Include="render_system.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="rectangle_renderer.cpp">
+    <ClCompile Include="square_renderer.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="rigid_body.cpp">
@@ -93,9 +93,6 @@
     <ClCompile Include="text_renderer.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="Dependencies\glad\glad.c">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="shader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -105,18 +102,60 @@
     <ClCompile Include="component.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
+    <ClCompile Include="cube_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="texture2d.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="resource_manager.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vector2i.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_renderer.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\glad\glad.c">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\imgui.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\imgui_demo.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\imgui_draw.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\imgui_tables.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="hierarchy_window.cpp">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="graphics.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="opengl.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="render_system.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle_renderer.h">
+    <ClInclude Include="square_renderer.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="rigid_body.h">
@@ -176,21 +215,57 @@
     <ClInclude Include="component.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
+    <ClInclude Include="cube_renderer.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="texture2d.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_renderer.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="resource_manager.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2i.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vector4.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_renderer.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="hierarchy_window.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="text.vs">
+    <None Include="text2d_vertex.glsl">
       <Filter>Ressourcendateien</Filter>
     </None>
-    <None Include="text.fs">
+    <None Include="text2d_fragment.glsl">
       <Filter>Ressourcendateien</Filter>
     </None>
-    <None Include="solid.fs">
+    <None Include="solid_fragment.glsl">
       <Filter>Ressourcendateien</Filter>
     </None>
-    <None Include="solid.vs">
+    <None Include="solid_vertex.glsl">
       <Filter>Ressourcendateien</Filter>
     </None>
     <None Include="Dependencies\imgui\misc\debuggers\imgui.natstepfilter" />
+    <None Include="sprite_vertex.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="sprite_fragment.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Dependencies\imgui\misc\debuggers\imgui.natvis" />
