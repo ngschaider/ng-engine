@@ -9,7 +9,6 @@ class Engine;
 
 class Scene {
 public:
-	
 	Engine* engine; // the engine this scene is attached to, this should only be written to by the engine
 	Scene();
 	virtual ~Scene(); // always define destructors as virtual

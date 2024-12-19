@@ -1,6 +1,10 @@
 #pragma once
 
 #include "math.h"
+#include "vector2.h"
+
+// forward declare Vector4 to avoid circular references (Vector4 is importing Vector3)
+class Vector4;
 
 class Vector3 {
 private:
@@ -9,41 +13,113 @@ private:
 	float _z;
 
 public:
-	Vector3(float x, float y, float z) {
-		this->_x = x;
-		this->_y = y;
-		this->_z = z;
-	}
+	/**
+	* Construct a new Vector3 from the given values
+	*/
+	Vector3(float x, float y, float z);
 
-	float x() const { return this->_x; }
-	float y() const { return this->_y; }
-	float z() const { return this->_z; }
+	/**
+	* Returns the x-component of the vector [x y]
+	*/
+	float x() const;
 
-	float magnitudeSquared() {
-		return this->x() * this->x() + this->y() * this->y() + this->z() * this->z();
-	}
+	/**
+	* Returns the y-component of the vector [x y]
+	*/
+	float y() const;
 
-	float magnitude() {
-		return sqrtf(this->magnitudeSquared());
-	}
+	/**
+	* Returns the z-component of the vector [x y z]
+	*/
+	float z() const;
 
-	bool operator==(Vector3 v) {
-		return this->x() == v.x() && this->y() == v.y() && this->z() == v.z();
-	}
+	/**
+	* Returns the squared magnitude (squared "length") of the vector
+	* If performance is an issue use this instead of magnitude if possible
+	*/
+	float magnitudeSquared() const;
 
-	Vector3 operator+(Vector3 v) {
-		return Vector3(this->x() + v.x(), this->y() + v.y(), this->z() + v.z());
-	}
-	Vector3 operator*(float v) {
-		return Vector3(this->x() * v, this->y() * v, this->z() * v);
-	}
-	Vector3 operator/(float v) {
-		return Vector3(this->x() / v, this->y() / v, this->z() / v);
-	}
+	/**
+	* Returns the magnitude ("length") of the vector
+	* If performance is an issue use magnitudeSquared if possible
+	*/
+	float magnitude() const;
 
-	float dot(Vector3 v) {
-		return this->x() * v.x()
-			+ this->y() * v.y()
-			+ this->z() * v.z();
-	}
+	/**
+	* Compares two vectors
+	* Attention: This compares element-wise and is not safe due to floating-point inaccuracy
+	*/
+	bool operator==(Vector3 v);
+
+	/**
+	* Adds a vector and returns the result as a new vector
+	*/
+	Vector3 operator+(Vector3 v);
+
+	/**
+	* Multiplies this vector with a scalar value (element-wise) and returns the result as a new vector
+	*/
+	Vector3 operator*(float v);
+
+	/**
+	* Divides the vector through a scalar value (element-wise) and returns the result as a new vector
+	*/
+	Vector3 operator/(float v);
+
+	/**
+	* Returns the dot product between this and another vector
+	*/
+	float dot(Vector3 v) const;
+
+#pragma region Vector2 Conversion Methods
+	/**
+	* Returns a new vector based on this vector's x and x component
+	*/
+	Vector2 xx() const;
+
+	/**
+	* Returns a new vector based on this vector's x and y component
+	*/
+	Vector2 xy() const;
+
+	/**
+	* Returns a new vector based on this vector's x and z component
+	*/
+	Vector2 xz() const;
+
+	/**
+	* Returns a new vector based on this vector's y and x component
+	*/
+	Vector2 yx() const;
+
+	/**
+	* Returns a new vector based on this vector's y and y component
+	*/
+	Vector2 yy() const;
+
+	/**
+	* Returns a new vector based on this vector's y and z component
+	*/
+	Vector2 yz() const;
+
+	/**
+	* Returns a new vector based on this vector's z and x component
+	*/
+	Vector2 zx() const;
+
+	/**
+	* Returns a new vector based on this vector's z and y component
+	*/
+	Vector2 zy() const;
+
+	/**
+	* Returns a new vector based on this vector's z and z component
+	*/
+	Vector2 zz() const;
+#pragma endregion
+
+	/**
+	* Returns a new vector constructed by this vector's x, y and z components and the provided w-component.
+	*/
+	Vector4 toVector4(float w) const;
 };

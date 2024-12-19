@@ -12,6 +12,6 @@ public:
 	void stop();
 	Engine();
 	virtual ~Engine(); // always define destructors as virtual
-	void setScene(Scene*);
+	Scene* setScene(Scene*);
 	void update();
 };

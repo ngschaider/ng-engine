@@ -16,6 +16,7 @@ class Component {
 public:
 	GameObject* gameObject; // the game object this component is attached to, this should only be written to by the game object
 	Component();
+	virtual ~Component();
 
 	Scene* scene() const; // Quick access for this->gameObject->scene including null-checks
 	Engine* engine() const; // Quick access for this->gameObject->scene->engine including null-checks

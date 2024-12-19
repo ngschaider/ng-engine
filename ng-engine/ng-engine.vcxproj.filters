@@ -34,27 +34,27 @@
     <Filter Include="Quelldateien\vendor">
       <UniqueIdentifier>{246b0dce-9aba-47b1-8288-f571b4168b83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\collision">
+      <UniqueIdentifier>{6b240b44-4c8f-4f6b-a20c-5280c33cbb98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\graphics">
+      <UniqueIdentifier>{ab715cf0-4779-415d-ab34-6dbfdeb3248a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\graphics">
+      <UniqueIdentifier>{408e3b76-cbb8-4cf9-bc7a-7e1dedf787c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\collision">
+      <UniqueIdentifier>{f05fc0d0-3df7-456c-8301-446f6ef00320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ui">
+      <UniqueIdentifier>{80121a09-fb2d-4a56-91dc-604d5b67c2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\ui">
+      <UniqueIdentifier>{12d02390-733c-4ace-8452-70dd7bbc4203}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="opengl.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="render_system.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="square_renderer.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
     <ClCompile Include="rigid_body.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="renderer.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="triangle_renderer.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="transform.cpp">
@@ -90,38 +90,14 @@
     <ClCompile Include="input_system.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="text_renderer.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="shader.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="control_velocity.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="component.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="cube_renderer.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite_renderer.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="texture2d.cpp">
       <Filter>Quelldateien\utils</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="resource_manager.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
     <ClCompile Include="vector2i.cpp">
       <Filter>Quelldateien\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_renderer.cpp">
-      <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\glad\glad.c">
       <Filter>Quelldateien\vendor</Filter>
@@ -147,27 +123,84 @@
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Quelldateien\vendor</Filter>
     </ClCompile>
-    <ClCompile Include="hierarchy_window.cpp">
+    <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Quelldateien\vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_bar.cpp">
       <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="render_system.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="text_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_checker2d.cpp">
+      <Filter>Quelldateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="cube_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_renderer.cpp">
+      <Filter>Quelldateien\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="hierarchy_window.cpp">
+      <Filter>Quelldateien\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="inspector_window.cpp">
+      <Filter>Quelldateien\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="resource_manager.cpp">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="square_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_system.cpp">
+      <Filter>Quelldateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="collider2d.cpp">
+      <Filter>Quelldateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="rect.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="vector4.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="quaternion.cpp">
+      <Filter>Quelldateien\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="render_system.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="square_renderer.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
     <ClInclude Include="rigid_body.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="transform.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="triangle_renderer.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="vector3.h">
@@ -203,32 +236,11 @@
     <ClInclude Include="input_system.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="text_renderer.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="shader.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="control_velocity.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="component.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="cube_renderer.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="texture2d.h">
       <Filter>Headerdateien\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="sprite_renderer.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="resource_manager.h">
-      <Filter>Headerdateien\components</Filter>
     </ClInclude>
     <ClInclude Include="vector2i.h">
       <Filter>Headerdateien\utils</Filter>
@@ -236,14 +248,65 @@
     <ClInclude Include="vector4.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
-    <ClInclude Include="imgui_renderer.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
     <ClInclude Include="event.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="resource_manager.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_system.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collider2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="text_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="render_system.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="square_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="cube_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_checker2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Headerdateien\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="hierarchy_window.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_renderer.h">
+      <Filter>Headerdateien\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="inspector_window.h">
+      <Filter>Headerdateien\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="rect.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers.h">
+      <Filter>Headerdateien\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +328,9 @@
     </None>
     <None Include="sprite_fragment.glsl">
       <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="menu_bar.h">
+      <Filter>Headerdateien\components</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -13,9 +13,9 @@ class Scene;
 
 class GameObject {
 private:
-	std::vector<Component*> components;
 	Transform* _transform;
 public:
+	std::vector<Component*> components; // The components attached to this game object, this should only be written to by the game object
 	Transform* transform() const { return this->_transform; }
 	std::string name = "Unnamed GameObject"; // Name of the game object
 	Scene* scene; // the scene this game object is attached to, this should only be written to by the scene

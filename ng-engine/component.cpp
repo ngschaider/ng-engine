@@ -7,6 +7,10 @@ Component::Component() {
 	this->gameObject = nullptr;
 }
 
+Component::~Component() {
+
+}
+
 void Component::update() {
 
 }

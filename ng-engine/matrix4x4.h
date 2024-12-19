@@ -1,11 +1,11 @@
 #pragma once
 
 #include "vector3.h"
+#include "vector4.h"
 #include "quaternion.h"
 #include "matrix3x3.h"
 #include <array>
 #include <vector>
-#include <exception>
 
 class Matrix4x4 {
 private:
@@ -13,235 +13,259 @@ private:
 
 	// keep this private as we do not want to modify the matrix after instantiation and
 	// this is the only way we can make sure nobody modifies it from the outside!
-	void setValue(unsigned int x, unsigned int y, float value) {
-		if (x > 3 || y > 3) throw new std::exception();
-
-		unsigned int index = y * 4 + x;
-		values[index] = value;
-	}
+	void setValue(unsigned int x, unsigned int y, float value);
 public:
-	static Matrix4x4 identity() {
-		return Matrix4x4(
-			1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 identity matrix
+	*/
+	static Matrix4x4 identity();
 
-	static Matrix4x4 translate(Vector3 pos) {
-		return Matrix4x4(
-			1, 0, 0, pos.x(),
-			0, 1, 0, pos.y(),
-			0, 0, 1, pos.z(),
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to translate any vector by the given position
+	*/
+	static Matrix4x4 translate(Vector3 pos);
 
-	static Matrix4x4 rotateX(float rotation) {
-		float c = cosf(rotation / 180 * PI);
-		float s = sinf(rotation / 180 * PI);
-		return Matrix4x4(
-			1, 0, 0, 0,
-			0, c, -s, 0,
-			0, s, c, 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to rotate any vector around the x-axis by the given rotation
+	*/
+	static Matrix4x4 rotateX(float rotation);
 
-	static Matrix4x4 rotateY(float rotation) {
-		float c = cosf(rotation / 180 * PI);
-		float s = sinf(rotation / 180 * PI);
-		return Matrix4x4(
-			c, 0, s, 0,
-			0, 1, 0, 0,
-			-s, 0, c, 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to rotate any vector around the y-axis by the given rotation
+	*/
+	static Matrix4x4 rotateY(float rotation);
 
-	static Matrix4x4 rotateZ(float rotation) {
-		float c = cosf(rotation / 180 * PI);
-		float s = sinf(rotation / 180 * PI);
-		return Matrix4x4(
-			c, -s, 0, 0,
-			s, c, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to rotate any vector around the z-axis by the given rotation
+	*/
+	static Matrix4x4 rotateZ(float rotation);
 
-	static Matrix4x4 rotate(Quaternion q) {
-		float x2 = powf(q.x(), 2);
-		float y2 = powf(q.y(), 2);
-		float z2 = powf(q.z(), 2);
-		float w2 = powf(q.w(), 2);
-		return Matrix4x4(
-			w2 + x2 - y2 - z2, -2 * q.w() * q.z() + 2 * q.x() * q.y(), 2 * q.w() * q.x() + 2 * q.x() * q.y(), 0,
-			2 * q.w() * q.z() + 2 * q.x() * q.y(), w2 - x2 + y2 - z2, -2 * q.w() * q.x() + 2 * q.y() * q.z(), 0,
-			-2 * q.w() * q.y() + 2 * q.x() * q.z(), 2 * q.w() * q.x() + 2 * q.y() * q.z(), w2 - x2 - y2 + z2, 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to rotate any vector by the given quaternion
+	*/
+	static Matrix4x4 rotate(Quaternion q);
 
-	static Matrix4x4 scale(Vector3 scale) {
-		return Matrix4x4(
-			scale.x(), 0, 0, 0,
-			0, scale.y(), 0, 0,
-			0, 0, scale.z(), 0,
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 transformation matrix that can be used to scale any vector by the given factors
+	*/
+	static Matrix4x4 scale(Vector3 scale);
 
-	static Matrix4x4 orthographic(Vector3 pos, Vector3 size, float near, float far) {
-		return Matrix4x4(
-			2 / size.x(), 0, 0, pos.x(),
-			0, 2 / size.y(), 0, pos.y(),
-			0, 0, 2 / (near - far), pos.z(),
-			0, 0, 0, 1
-		);
-	}
+	/**
+	* Returns a 4x4 orthographics projections matrix
+	*/
+	static Matrix4x4 orthographic(Vector3 pos, Vector3 size, float near, float far);
 
-	static Matrix4x4 TRS(Vector3 pos, Quaternion rotation, Vector3 scaling) {
-		Vector3 euler = rotation.eulerAngles();
+	/**
+	* Returns a 4x4 transformation matrix that can be used to translate, rotate and scale any vector by the given vectors.
+	*/
+	static Matrix4x4 TRS(Vector3 pos, Quaternion rotation, Vector3 scaling);
 
-		return Matrix4x4::translate(pos)
-			// * Matrix4x4::rotate(rotation)
-			* Matrix4x4::rotateZ(euler.z())
-			* Matrix4x4::rotateY(euler.y())
-			* Matrix4x4::rotateX(euler.x())
-			* Matrix4x4::scale(scaling);
-	}
-
+	/**
+	* Constructs a new Matrix4x4 instance using the specified values
+	*/
 	Matrix4x4(float a, float b, float c, float d, 
 		float e, float f, float g, float h, 
 		float i, float j, float k, float l, 
-		float m, float n, float o, float p) {
-		this->values = {
-			a, b, c, d,
-			e, f, g, h,
-			i, j, k, l,
-			m, n, o, p
-		};
-	}
+		float m, float n, float o, float p);
 
-	Matrix4x4(std::array<float, 16> values) {
-		this->values = values;
-	}
+	/**
+	* Constructs a new Matrix4x4 instance using the specified values
+	*/
+	Matrix4x4(std::array<float, 16> values);
 
-	Matrix4x4(std::vector<float> values) {
-		if (values.size() != 16) throw new std::exception("Invalid size.");
-		std::copy_n(values.begin(), 16, this->values.begin());
-	}
+	/**
+	* Constructs a new Matrix4x4 instance using the specified values.
+	* The given vector must have a length of exactly 16.
+	*/
+	Matrix4x4(std::vector<float> values);
 
-	std::array<float, 16> getValues() {
-		return this->values;
-	}
+	/**
+	* Returns an array of all 16 elements of the array sorted in row major format
+	*/
+	std::array<float, 16> getValues();
 
-	float getValue(unsigned int x, unsigned int y) {
-		if (x > 3 || y > 3) throw new std::exception();
+	/**
+	* Returns the value of the matrix at row `y` and column `x`
+	*/
+	float getValue(unsigned int x, unsigned int y);
 
-		unsigned int index = y * 4 + x;
-		float value = this->values[index];
+	/**
+	* Returns the 1st value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float a();
 
-		return value;
-	}
+	/**
+	* Returns the 2nd value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float b();
 
-	float a() { return this->getValue(0, 0); }
-	float b() { return this->getValue(1, 0); }
-	float c() { return this->getValue(2, 0); }
-	float d() { return this->getValue(3, 0); }
-	float e() { return this->getValue(0, 1); }
-	float f() { return this->getValue(1, 1); }
-	float g() { return this->getValue(2, 1); }
-	float h() { return this->getValue(3, 1); }
-	float i() { return this->getValue(0, 2); }
-	float j() { return this->getValue(1, 2); }
-	float k() { return this->getValue(2, 2); }
-	float l() { return this->getValue(3, 2); }
-	float m() { return this->getValue(0, 3); }
-	float n() { return this->getValue(1, 3); }
-	float o() { return this->getValue(2, 3); }
-	float p() { return this->getValue(3, 3); }
+	/**
+	* Returns the 3th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float c();
 
-	Matrix4x4 operator*(float f) {
-		std::array<float, 16> retValues;
+	/**
+	* Returns the 4th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float d();
 
-		for (unsigned int row = 0; row < 4; row++) {
-			for (unsigned int column = 0; column < 4; column++) {
-				retValues[column + row * 4] = this->getValue(column, row) * f;
-			}
-		}
+	/**
+	* Returns the 5th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float e();
 
-		return Matrix4x4(retValues);
-	}
+	/**
+	* Returns the 6th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float f();
 
-	Matrix4x4 operator/(float f) {
-		return (*this) * (1 / f);
-	}
+	/**
+	* Returns the 7th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float g();
 
-	Matrix4x4 operator*(Matrix4x4 m) {
-		std::array<float, 16> retValues;
+	/**
+	* Returns the 8th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float h();
 
-		for (unsigned int row = 0; row < 4; row++) {
-			for (unsigned int column = 0; column < 4; column++) {
-				float sum = 0;
-				for (int i = 0; i < 4; i++) {					
-					sum += this->getValue(i, row) * m.getValue(column, i);
-				}
+	/**
+	* Returns the 9th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float i();
 
-				retValues[column + row * 4] = sum;
-			}
-		}
+	/**
+	* Returns the 10th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float j();
 
-		return Matrix4x4(retValues);
-	}
+	/**
+	* Returns the 11th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float k();
 
-	float det() {
-		// this is probably more efficient when not generalized,
-		// but this can be reused for other matrix sizes as well
-		float ret = 0;
-		for (unsigned int i = 0; i < 4; i++) {
-			float product = 1;
-			for (unsigned int j = 0; j < 4; j++) {
-				product *= this->getValue(j, (i + j) % 4);
-			}
-			ret += product;
-		}
+	/**
+	* Returns the 12th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float l();
 
-		return ret;
-	}
+	/**
+	* Returns the 13th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float m();
 
-	Matrix4x4 adj() {
-		std::array<float, 16> retValues;
-		int retIndex = 0;
-		for (unsigned int row = 0; row < 4; row++) {
-			for (unsigned int column = 0; column < 4; column++) {
-				// get the minor for the given (column, row) of the "this" matrix
-				std::array<float, 9> minorValues = {};
-				int minorIndex = 0;
-				for (unsigned int y = 0; y < 4; y++) {
-					for (unsigned int x = 0; x < 4; x++) {
-						if (x == row || y == column) continue;
-						minorValues[minorIndex] = this->getValue(x, y);
-						minorIndex++;
-					}
-				}
-				Matrix3x3 minor = Matrix3x3(minorValues);
+	/**
+	* Returns the 14th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float n();
 
-				// calculate the cofactor
-				float exponent = (row + column) * 1.0f;
-				float cofactor = powf(-1, exponent) * minor.det();
+	/**
+	* Returns the 15th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float o();
 
-				retValues[retIndex] = cofactor;
-				retIndex++;
-			}
-		}
+	/**
+	* Returns the 16th value of the matrix:
+	* a b c d
+	* e f g h
+	* i j k l
+	* m n o p
+	*/
+	float p();
 
-		return Matrix4x4(retValues);
-	}
+	/**
+	* Multiplies the Matrix4x4 with the given value (element-wise) and returns the result in a new Matrix4x4.
+	*/
+	Matrix4x4 operator*(float f);
 
-	Matrix4x4 invert() {
-		return this->adj() / this->det();
-	}
+	/**
+	* Divides the matrix by the given value (element-wise) and returns the result in a new Matrix4x4.
+	*/
+	Matrix4x4 operator/(float f);
+
+	/**
+	* Multiplies the matrix with another matrix using standard mathematics and returns the result in a new Matrix4x4.
+	*/
+	Matrix4x4 operator*(Matrix4x4 m);
+
+	/**
+	* Multiplies the matrix with a vector of length 4 and returns the result in a new Vector4.
+	* One could also call this "applying" the matrix to the vector.
+	*/
+	Vector4 operator*(Vector4 v);
+
+	/**
+	* Returns the determinant of the matrix
+	*/
+	float det();
+
+	/**
+	* Returns the adjugate of this matrix
+	*/
+	Matrix4x4 adj();
+
+	/**
+	* Returns the inverse of this matrix
+	*/
+	Matrix4x4 invert();
 };

@@ -3,8 +3,6 @@
 #include "math.h"
 #include "vector3.h"
 
-#define PI 3.141592653f
-
 class Quaternion {
 private:
 	float _x;
@@ -12,86 +10,73 @@ private:
 	float _z;
 	float _w;
 public:
-	static Quaternion identity() {
-		return Quaternion(0, 0, 0, 1);
-	}
+	/**
+	* Returns the identity quaternion
+	*/
+	static Quaternion identity();
 
-	static Quaternion fromAngleAxis(float deg, Vector3 axis) {
-		float rad = deg * PI / 180;
-		Vector3 vec = axis * sinf(rad / 2);
-		float scalar = cosf(rad / 2);
+	/**
+	* Returns a quaternion that represents a rotation around the provided axis by the provided angle (in degrees)
+	*/
+	static Quaternion fromAngleAxis(float deg, Vector3 axis);
 
-		return Quaternion(vec.x(), vec.y(), vec.z(), scalar);
-	}
+	/**
+	* Returns a new quaternion from the provided euler angles (in degrees)
+	* TODO: Find out the correct order of the function signature and change the naming to x, y and z
+	*/
+	static Quaternion fromEulerAngles(float pitch, float roll, float yaw);
 
-	static Quaternion fromEulerAngles(float pitch, float roll, float yaw) {
-		return Quaternion::fromEulerAngles(Vector3(yaw, roll, pitch));
-	}
+	/**
+	* Returns a new quaternion from the provided euler angles (in degree)
+	*/
+	static Quaternion fromEulerAngles(Vector3 deg);
 
-	static Quaternion fromEulerAngles(Vector3 deg) {
-		Vector3 rad = deg * PI / 180;
-		float cx = cosf(rad.x() / 2);
-		float sx = sinf(rad.x() / 2);
-		float cy = cosf(rad.y() / 2);
-		float sy = sinf(rad.y() / 2);
-		float cz = cosf(rad.z() / 2);
-		float sz = sinf(rad.z() / 2);
+	/**
+	* Interpolates linearly between two provided quaternions by the interpolant t (0 <= t <= 1)
+	* The result of the interpolation is returned as a new quaternion
+	*/
+	static Quaternion Lerp(Quaternion a, Quaternion b, float t);
 
-		return Quaternion(
-			sx * sy * sz + cx * sy * cz,
-			sx * sy * cz - cx * sy * sz,
-			sx * cy * cz + cx * cy * sz,
-			cx * cy * cz + sx * sy * sz
-		);
-	}
+	/**
+	* Creates a new quaternion from the provided values
+	* These values do NOT represent rotations in degrees or something similar. 
+	* Only use this constructor if you really know quaternions and how they represent rotations.
+	*/
+	Quaternion(float x, float y, float z, float w);
 
-	static Quaternion Lerp(Quaternion a, Quaternion b, float t) {
-		Vector3 vector = a.vector() * (1 - t) + b.vector() * t;
-		float scalar = a.w() * (1 - t) + b.w() * t;
+	/**
+	* Returns the x component of the quaternion [x y z w]
+	*/
+	float x() const;
 
-		float factor = sqrtf(vector.magnitudeSquared() + scalar * scalar);
+	/**
+	* Returns the y component of the quaternion [x y z w]
+	*/
+	float y() const;
 
-		Vector3 v = vector / factor;
-		float w = scalar / factor;
+	/**
+	* Returns the z component of the quaternion [x y z w]
+	*/
+	float z() const;
 
-		return Quaternion(v.x(), v.y(), v.z(), w);
-	}
+	/**
+	* Returns the w component of the quaternion [x y z w]
+	*/
+	float w() const;
 
-	Quaternion(float x, float y, float z, float w) {
-		this->_x = x;
-		this->_y = y;
-		this->_z = z;
-		this->_w = w;
-	}
+	/**
+	* Returns a vector representing the rotation of the quaternion in degrees
+	*/
+	Vector3 eulerAngles() const;
 
-	float x() const { return this->_x; }
-	float y() const { return this->_y; }
-	float z() const { return this->_z; }
-	float w() const { return this->_w; }
+	/**
+	* Returns a Vector3 consisting of the vector components of the quaternion (x, y and z)
+	*/
+	Vector3 vector() const;
 
-	Vector3 eulerAngles() {
-		float sx_cy = 2 * (this->w() * this->x() + this->y() * this->z());
-		float cx_cy = 1 - 2 * (this->x() * this->x() + this->y() * this->y());
-		float sy = sqrtf(1 + 2 * (this->w() * this->y() - this->x() * this->z()));
-		float cy = sqrtf(1 - 2 * (this->w()* this->y() - this->x() * this->z()));
-		float sz_cy = 2 * (this->w() * this->z() + this->x() * this->y());
-		float cz_cy = 1 - 2 * (this->y() * this->y() + this->z() * this->z());
-
-		return Vector3(
-			atan2f(sx_cy, cx_cy) * 180 / PI,
-			(2 * atan2f(sy, cy) - PI / 2) * 180 / PI,
-			atan2f(sz_cy, cz_cy) * 180 / PI
-		);
-	}
-
-	Vector3 vector() {
-		return Vector3(this->x(), this->y(), this->z());
-	}
-
-	Quaternion operator*(Quaternion q) {
-		Vector3 vector = q.vector() * this->w() + this->vector() * q.w();
-		float scalar = this->w() * q.w() - this->vector().dot(q.vector());
-
-		return Quaternion(vector.x(), vector.y(), vector.z(), scalar);
-	}
+	/**
+	* Multiplies the quaternion with another quaternion and returns the result as a new quaternion.
+	* This effectively combines the rotations each quaternion would produce
+	*/
+	Quaternion operator*(Quaternion q);
 };

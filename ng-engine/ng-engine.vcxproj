@@ -145,6 +145,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="collider2d.cpp" />
+    <ClCompile Include="collision_checker2d.cpp" />
+    <ClCompile Include="collision_system.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="component.cpp" />
     <ClCompile Include="control_velocity.cpp" />
@@ -157,17 +160,22 @@
     <ClCompile Include="Dependencies\imgui\imgui_draw.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="imgui_renderer.cpp" />
     <ClCompile Include="input_system.cpp" />
     <ClCompile Include="hierarchy_window.cpp" />
+    <ClCompile Include="inspector_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix3x3.cpp" />
     <ClCompile Include="matrix4x4.cpp" />
+    <ClCompile Include="menu_bar.cpp" />
     <ClCompile Include="opengl.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
+    <ClCompile Include="quaternion.cpp" />
+    <ClCompile Include="rect.cpp" />
     <ClCompile Include="square_renderer.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_system.cpp" />
@@ -184,9 +192,13 @@
     <ClCompile Include="vector2.cpp" />
     <ClCompile Include="vector2i.cpp" />
     <ClCompile Include="vector3.cpp" />
+    <ClCompile Include="vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="collider2d.h" />
+    <ClInclude Include="collision_checker2d.h" />
+    <ClInclude Include="collision_system.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="control_velocity.h" />
@@ -197,9 +209,12 @@
     <ClInclude Include="hierarchy_window.h" />
     <ClInclude Include="imgui_renderer.h" />
     <ClInclude Include="input_system.h" />
+    <ClInclude Include="inspector_window.h" />
     <ClInclude Include="matrix3x3.h" />
     <ClInclude Include="matrix4x4.h" />
+    <ClInclude Include="numbers.h" />
     <ClInclude Include="quaternion.h" />
+    <ClInclude Include="rect.h" />
     <ClInclude Include="square_renderer.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_system.h" />
@@ -220,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\imgui\misc\debuggers\imgui.natstepfilter" />
+    <None Include="menu_bar.h" />
     <None Include="solid_fragment.glsl">
       <DeploymentContent>false</DeploymentContent>
     </None>

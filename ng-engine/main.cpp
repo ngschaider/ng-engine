@@ -13,6 +13,8 @@
 #include "rigid_body.h"
 #include "quaternion.h"
 #include "hierarchy_window.h"
+#include "inspector_window.h"
+#include "menu_bar.h"
 
 int main() {
 	Engine* engine = new Engine();
@@ -27,6 +29,8 @@ int main() {
 		systems->addComponent(new InputSystem());
 		systems->addComponent(new ImGuiRenderer());
 		systems->addComponent(new HierarchyWindow());
+		systems->addComponent(new InspectorWindow());
+		systems->addComponent(new MenuBar());
 		scene->addGameObject(systems);
 
 		GameObject* go1 = new GameObject("Triangle");
@@ -37,7 +41,12 @@ int main() {
 		GameObject* go2 = new GameObject("Square");
 		go2->transform()->position = Vector3(5, 5, 0);
 		go2->addComponent(new SquareRenderer());
+		go2->addComponent(new RigidBody());
+		go2->addComponent(new ControlVelocity());
 		scene->addGameObject(go2);
+
+		GameObject* go3 = new GameObject("Square Child");
+		go3->transform()->parent = go2->transform();
 	}
 	catch (std::exception e) {
 		std::cout << "Exception in setup:" << std::endl;
