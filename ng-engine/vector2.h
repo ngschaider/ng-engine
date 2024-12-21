@@ -94,4 +94,17 @@ public:
 	* Returns the dot product between this vector and another vector.
 	*/
 	float dot(Vector2 v);
+
+	/**
+	* Returns a vector normal to this vector
+	*/
+	Vector2 normal();
+
+	/**
+	* Returns a normalized vector pointing into the same direction as this vector
+	*/
+	Vector2 normalized();
 };
+
+Vector2 operator*(float scalar, Vector2 vector);
+Vector2 operator/(float scalar, Vector2 vector);

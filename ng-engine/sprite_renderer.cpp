@@ -1,5 +1,5 @@
 #include "sprite_renderer.h"
-#include "texture2d.h"
+#include "texture_2d.h"
 #include "resource_manager.h"
 
 SpriteRenderer::SpriteRenderer() {

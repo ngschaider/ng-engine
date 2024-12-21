@@ -64,3 +64,19 @@ float Vector2::distance(Vector2 v) {
 float Vector2::dot(Vector2 v) {
 	return this->x() * v.x() + this->y() * v.y();
 }
+
+Vector2 operator*(float scalar, Vector2 vector) {
+	return vector * scalar;
+}
+
+Vector2 operator/(float scalar, Vector2 vector) {
+	return Vector2(scalar / vector.x(), scalar / vector.y());
+}
+
+Vector2 Vector2::normal() {
+	return Vector2(-this->y(), this->x());
+}
+
+Vector2 Vector2::normalized() {
+	return (*this) / this->magnitude();
+}

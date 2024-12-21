@@ -13,4 +13,6 @@ public:
 	Transform* parent = nullptr;
 	Transform();
 	Matrix4x4 getLocalToWorldMatrix();
+	void move(Vector3 vector);
+	void move(Vector2 vector);
 };

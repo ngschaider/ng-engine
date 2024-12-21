@@ -36,6 +36,38 @@ private:
 	Vector2 _size;
 
 	/**
+	* Returns the y-component of the center
+	*/
+	float verticalCenter() const;
+
+	/**
+	* Returns the X-component of the center
+	*/
+	float horizontalCenter() const;
+public:
+	/**
+	* Constructs a new rect instance with a given position, size and anchor point.
+	* The anchor point defaults to bottom left
+	*/
+	Rect(Vector2 position, Vector2 size);
+	Rect(Vector2 position, Vector2 size, AnchorPoint anchorPoint);
+
+	/**
+	* Returns the anchor point of the rect
+	*/
+	AnchorPoint anchorPoint() const;
+
+	/**
+	* Returns the position of the rect
+	*/
+	Vector2 position() const;
+
+	/**
+	* Returns the size of the rect
+	*/
+	Vector2 size() const;
+
+	/**
 	* Returns the Y-component of the top edge
 	*/
 	float top() const;
@@ -54,38 +86,6 @@ private:
 	* Returns the X-component of the left edge
 	*/
 	float left() const;
-
-	/**
-	* Returns the y-component of the center
-	*/
-	float verticalCenter() const;
-
-	/**
-	* Returns the X-component of the center
-	*/
-	float horizontalCenter() const;
-public:
-	/**
-	* Constructs a new rect instance with a given position, size and anchor point.
-	* The anchor point defaults to bottom left
-	*/
-	Rect(Vector2, Vector2);
-	Rect(Vector2, Vector2, AnchorPoint);
-
-	/**
-	* Returns the anchor point of the rect
-	*/
-	AnchorPoint anchorPoint() const;
-
-	/**
-	* Returns the position of the rect
-	*/
-	Vector2 position() const;
-
-	/**
-	* Returns the size of the rect
-	*/
-	Vector2 size() const;
 
 	/**
 	* Returns the position of the rect's top left corner

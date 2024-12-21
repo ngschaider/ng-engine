@@ -2,11 +2,13 @@
 
 #include <vector>
 
+using funcType = void(*)();
+
 class Event {
 private:
-	std::vector<void()> listeners;
+	std::vector<funcType> listeners;
 public:
-	void on(void*);
-	void off(void*);
+	void on(funcType);
+	void off(funcType);
 	void emit();
 };

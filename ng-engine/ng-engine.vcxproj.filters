@@ -93,7 +93,7 @@
     <ClCompile Include="control_velocity.cpp">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
-    <ClCompile Include="texture2d.cpp">
+    <ClCompile Include="texture_2d.cpp">
       <Filter>Quelldateien\utils</Filter>
     </ClCompile>
     <ClCompile Include="vector2i.cpp">
@@ -159,7 +159,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="collision_checker2d.cpp">
+    <ClCompile Include="collision_checker_2d.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
     <ClCompile Include="cube_renderer.cpp">
@@ -183,7 +183,7 @@
     <ClCompile Include="collision_system.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
-    <ClCompile Include="collider2d.cpp">
+    <ClCompile Include="collider_2d.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
     <ClCompile Include="rect.cpp">
@@ -194,6 +194,24 @@
     </ClCompile>
     <ClCompile Include="quaternion.cpp">
       <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="event.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon_2d.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon_collider_2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="circle_collider_2d.cpp">
+      <Filter>Quelldateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon_collider_2d.cpp">
+      <Filter>Quelldateien\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="rectangle_collider_2d.cpp">
+      <Filter>Quelldateien\collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,7 +257,7 @@
     <ClInclude Include="control_velocity.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="texture2d.h">
+    <ClInclude Include="texture_2d.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
     <ClInclude Include="vector2i.h">
@@ -263,7 +281,7 @@
     <ClInclude Include="collision_system.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
-    <ClInclude Include="collider2d.h">
+    <ClInclude Include="collider_2d.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
     <ClInclude Include="text_renderer.h">
@@ -284,7 +302,7 @@
     <ClInclude Include="cube_renderer.h">
       <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="collision_checker2d.h">
+    <ClInclude Include="collision_checker_2d.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
@@ -307,6 +325,18 @@
     </ClInclude>
     <ClInclude Include="numbers.h">
       <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon_2d.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_collider_2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle_collider_2d.h">
+      <Filter>Headerdateien\collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

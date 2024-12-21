@@ -1,7 +1,7 @@
 #pragma once
 
 #include "renderer.h"
-#include "texture2d.h"
+#include "texture_2d.h"
 
 class SpriteRenderer : public Renderer {
 private:

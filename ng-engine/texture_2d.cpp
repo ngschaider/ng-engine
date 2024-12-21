@@ -1,4 +1,4 @@
-#include "texture2d.h"
+#include "texture_2d.h"
 #include "vector2i.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

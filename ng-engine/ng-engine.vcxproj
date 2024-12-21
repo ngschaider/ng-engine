@@ -145,8 +145,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
-    <ClCompile Include="collider2d.cpp" />
-    <ClCompile Include="collision_checker2d.cpp" />
+    <ClCompile Include="circle_collider_2d.cpp" />
+    <ClCompile Include="collider_2d.cpp" />
+    <ClCompile Include="collision_checker_2d.cpp" />
     <ClCompile Include="collision_system.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="component.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="event.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="imgui_renderer.cpp" />
     <ClCompile Include="input_system.cpp" />
@@ -174,8 +176,12 @@
     <ClCompile Include="opengl.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
+    <ClCompile Include="polygon_2d.cpp" />
+    <ClCompile Include="polygon_collider_2d.cpp" />
+    <ClCompile Include="polygon_collider_2d.h" />
     <ClCompile Include="quaternion.cpp" />
     <ClCompile Include="rect.cpp" />
+    <ClCompile Include="rectangle_collider_2d.cpp" />
     <ClCompile Include="square_renderer.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_system.cpp" />
@@ -185,7 +191,7 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="sprite_renderer.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="texture2d.cpp" />
+    <ClCompile Include="texture_2d.cpp" />
     <ClCompile Include="text_renderer.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="triangle_renderer.cpp" />
@@ -196,8 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
-    <ClInclude Include="collider2d.h" />
-    <ClInclude Include="collision_checker2d.h" />
+    <ClInclude Include="circle_collider_2d.h" />
+    <ClInclude Include="collider_2d.h" />
+    <ClInclude Include="collision_2d.h" />
+    <ClInclude Include="collision_checker_2d.h" />
     <ClInclude Include="collision_system.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="component.h" />
@@ -213,8 +221,10 @@
     <ClInclude Include="matrix3x3.h" />
     <ClInclude Include="matrix4x4.h" />
     <ClInclude Include="numbers.h" />
+    <ClInclude Include="polygon_2d.h" />
     <ClInclude Include="quaternion.h" />
     <ClInclude Include="rect.h" />
+    <ClInclude Include="rectangle_collider_2d.h" />
     <ClInclude Include="square_renderer.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_system.h" />
@@ -224,7 +234,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="texture2d.h" />
+    <ClInclude Include="texture_2d.h" />
     <ClInclude Include="text_renderer.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="triangle_renderer.h" />

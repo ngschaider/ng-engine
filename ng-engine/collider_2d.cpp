@@ -1,5 +1,5 @@
 #pragma once
-#include "collider2d.h"
+#include "collider_2d.h"
 #include "rect.h"
 #include <exception>
 #include "matrix4x4.h"
@@ -21,6 +21,5 @@ Rect Collider2D::getGlobalBounds() {
 
 	return Rect(min, size, AnchorPoint::BottomLeft);
 }
-
 
 

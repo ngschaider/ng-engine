@@ -19,3 +19,11 @@ Matrix4x4 Transform::getLocalToWorldMatrix() {
 
 	return this->parent->getLocalToWorldMatrix() * myMatrix;
 }
+
+void Transform::move(Vector3 vector) {
+	this->position = this->position + vector;
+}
+
+void Transform::move(Vector2 vector) {
+	this->move(vector.toVector3(0));
+}
