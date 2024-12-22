@@ -109,7 +109,7 @@ RenderSystem::RenderSystem() {
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true); // this makes everything significantly slower !!!
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-	this->window = glfwCreateWindow(800, 800, "NG-ENGINE", nullptr, nullptr);
+	this->window = glfwCreateWindow(1840, 900, "NG-ENGINE", nullptr, nullptr);
 	if (this->window == nullptr) {
 		throw std::exception("Failed to create GLFW window");
 	}
@@ -137,6 +137,8 @@ RenderSystem::RenderSystem() {
 	Vector2i size = this->size();
 	glViewport(0, 0, size.x(), size.y());
 	glfwSetFramebufferSizeCallback(this->window, framebufferSizeCallback);
+
+	glfwSetWindowPos(this->window, 40, 100);
 }
 
 RenderSystem::~RenderSystem() {

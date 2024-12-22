@@ -2,7 +2,7 @@
 
 #include "renderer.h"
 
-class SquareRenderer : public Renderer {
+class RectangleRenderer : public Renderer {
 private:
 	unsigned int VAO_fill;
 	unsigned int VAO_stroke;
@@ -11,7 +11,7 @@ public:
 	bool doStroke = false;
 	Color strokeColor = Color::black();
 	Color fillColor = Color::white();
-	SquareRenderer();
-	~SquareRenderer();
+	RectangleRenderer();
+	~RectangleRenderer();
 	void render();
 };

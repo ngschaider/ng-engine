@@ -28,33 +28,67 @@ Engine* GameObject::engine() const {
 }
 
 
-/**
-* Adds the specified Component to the GameEngine.
-* The GameObject takes ownership of the Component.
-*/
 void GameObject::addComponent(Component* component) {
+	assert(component != nullptr);
 	assert(component->gameObject == nullptr);
 	this->components.push_back(component);
 	component->gameObject = this;
 	component->addedToGameObject();
 }
 
-/**
-* Removes the specified Component from the GameObject.
-* The ownership of the Component is returned to the caller.
-*/
+
 void GameObject::removeComponent(Component* component) {
+	assert(component != nullptr);
 	assert(component->gameObject == this);
-	std::vector<Component*>::iterator index = std::find(this->components.begin(), this->components.end(), component);
-	assert(index != this->components.end());
-	this->components.erase(index);
+	std::vector<Component*>::iterator it = std::find(this->components.begin(), this->components.end(), component);
+	assert(it != this->components.end());
+	this->components.erase(it);
 	component->gameObject = nullptr;
 	component->removedFromGameObject();
+}
+
+void GameObject::deleteComponentLater(Component* component) {
+	assert(component != nullptr);
+	assert(component->gameObject == this);
+
+	// assert that component exists in our list of attached components
+	std::vector<Component*>::iterator it1 = std::find(this->components.begin(), this->components.end(), component);
+	assert(it1 != this->components.end());
+
+	// check if component does NOT exist in our list of components to remove later
+	std::vector<Component*>::iterator it2 = std::find(this->components.begin(), this->components.end(), component);
+	if (it2 == this->components.end()) return;
+
+	this->toRemoveLater.push_back(component);
+}
+
+void GameObject::earlyUpdate() {
+	for (Component* component : this->components) {
+		component->earlyUpdate();
+	}
 }
 
 void GameObject::update() {
 	for (Component* component : this->components) {
 		component->update();
+	}
+}
+
+void GameObject::lateUpdate() {
+	for (Component* component : this->components) {
+		component->lateUpdate();
+	}
+
+	for (Component* component : this->toRemoveLater) {
+		std::vector<Component*>::iterator it1 = std::find(this->components.begin(), this->components.end(), component);
+		if (it1 == this->components.end()) return;
+
+		std::vector<Component*>::iterator it2 = std::find(this->toRemoveLater.begin(), this->toRemoveLater.end(), component);
+		assert(it2 != this->toRemoveLater.end());
+		this->toRemoveLater.erase(it2);
+
+		this->removeComponent(component);
+		delete component;
 	}
 }
 

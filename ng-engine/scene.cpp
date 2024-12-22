@@ -64,9 +64,19 @@ Camera* Scene::getActiveCamera() {
 	return nullptr; 
 }
 
+void Scene::earlyUpdate() {
+	for (GameObject* gameObject : this->gameObjects) {
+		gameObject->earlyUpdate();
+	}
+}
 void Scene::update() {
 	for (GameObject* gameObject : this->gameObjects) {
 		gameObject->update();
+	}
+}
+void Scene::lateUpdate() {
+	for (GameObject* gameObject : this->gameObjects) {
+		gameObject->lateUpdate();
 	}
 }
 

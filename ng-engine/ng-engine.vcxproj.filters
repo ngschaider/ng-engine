@@ -177,7 +177,7 @@
     <ClCompile Include="resource_manager.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
-    <ClCompile Include="square_renderer.cpp">
+    <ClCompile Include="rectangle_renderer.cpp">
       <Filter>Quelldateien\graphics</Filter>
     </ClCompile>
     <ClCompile Include="collision_system.cpp">
@@ -296,7 +296,7 @@
     <ClInclude Include="triangle_renderer.h">
       <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="square_renderer.h">
+    <ClInclude Include="rectangle_renderer.h">
       <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
     <ClInclude Include="cube_renderer.h">
@@ -336,6 +336,9 @@
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
     <ClInclude Include="rectangle_collider_2d.h">
+      <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_test_result.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
   </ItemGroup>

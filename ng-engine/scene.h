@@ -50,5 +50,7 @@ public:
 		return components.front();
 	}
 
+	void earlyUpdate();
 	void update();
+	void lateUpdate();
 };

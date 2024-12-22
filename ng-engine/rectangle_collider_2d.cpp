@@ -9,3 +9,7 @@ Polygon2D RectangleCollider2D::getLocalPolygon() {
 		this->rect.topLeft(),
 		});
 }
+
+RectangleCollider2D::RectangleCollider2D() {
+
+}

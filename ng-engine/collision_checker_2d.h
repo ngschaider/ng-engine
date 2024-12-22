@@ -6,12 +6,7 @@
 #include <tuple>
 #include "polygon_2d.h"
 #include "collision_2d.h"
-
-typedef struct {
-	bool colliding;
-	float depth;
-	Vector2 normal;
-} CollisionTestResult;
+#include "collision_test_result.h"
 
 class CollisionChecker2D {
 private:

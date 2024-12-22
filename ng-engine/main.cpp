@@ -5,7 +5,7 @@
 #include "render_system.h"
 #include "triangle_renderer.h"
 #include "cube_renderer.h"
-#include "square_renderer.h"
+#include "rectangle_renderer.h"
 #include "text_renderer.h"
 #include "control_velocity.h"
 #include "input_system.h"
@@ -15,6 +15,8 @@
 #include "hierarchy_window.h"
 #include "inspector_window.h"
 #include "menu_bar.h"
+#include "collision_system.h"
+#include "rectangle_collider_2d.h"
 
 int main() {
 	Engine* engine = new Engine();
@@ -30,23 +32,15 @@ int main() {
 		systems->addComponent(new ImGuiRenderer());
 		systems->addComponent(new HierarchyWindow());
 		systems->addComponent(new InspectorWindow());
+		systems->addComponent(new CollisionSystem());
 		systems->addComponent(new MenuBar());
 		scene->addGameObject(systems);
 
-		GameObject* go1 = new GameObject("Triangle");
-		go1->transform()->position = Vector3(-5, -2, 0);
-		go1->addComponent(new TriangleRenderer());
-		scene->addGameObject(go1);
+		GameObject* go = new GameObject("Test");
+		go->addComponent(new RectangleCollider2D());
+		go->addComponent(new RectangleRenderer());
+		scene->addGameObject(go);
 
-		GameObject* go2 = new GameObject("Square");
-		go2->transform()->position = Vector3(5, 5, 0);
-		go2->addComponent(new SquareRenderer());
-		go2->addComponent(new RigidBody());
-		go2->addComponent(new ControlVelocity());
-		scene->addGameObject(go2);
-
-		GameObject* go3 = new GameObject("Square Child");
-		go3->transform()->parent = go2->transform();
 	}
 	catch (std::exception e) {
 		std::cout << "Exception in setup:" << std::endl;

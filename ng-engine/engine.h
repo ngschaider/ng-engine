@@ -13,5 +13,7 @@ public:
 	Engine();
 	virtual ~Engine(); // always define destructors as virtual
 	Scene* setScene(Scene*);
+	void earlyUpdate();
+	void lateUpdate();
 	void update();
 };

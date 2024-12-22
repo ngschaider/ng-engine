@@ -2,6 +2,7 @@
 #include "matrix4x4.h"
 #include "quaternion.h"
 #include "vector3.h"
+#include "scene.h"
 
 Transform::Transform() {
 	this->position = Vector3(0, 0, 0);
@@ -26,4 +27,17 @@ void Transform::move(Vector3 vector) {
 
 void Transform::move(Vector2 vector) {
 	this->move(vector.toVector3(0));
+}
+
+std::vector<Transform*> Transform::getChildren() {
+	std::vector<Transform*> children;
+
+	std::vector<Transform*> allTransforms = this->scene()->getComponents<Transform>();
+	for (Transform* transform : allTransforms) {
+		if (transform->parent == this) {
+			children.push_back(transform);
+		}
+	}
+
+	return children;
 }

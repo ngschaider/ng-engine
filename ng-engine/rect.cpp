@@ -2,8 +2,6 @@
 #include "vector2.h"
 #include <exception>
 
-Rect::Rect(Vector2 position, Vector2 size) : Rect(position, size, AnchorPoint::BottomLeft) {
-}
 Rect::Rect(Vector2 position, Vector2 size, AnchorPoint anchorPoint) : _position(position), _size(size), _anchorPoint(anchorPoint) {
 }
 
@@ -20,17 +18,17 @@ Vector2 Rect::size() const {
 float Rect::top() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
 		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::TopRight) { // top
 		return this->position().y();
 	}
 	else if (this->anchorPoint() == AnchorPoint::LeftCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::RightCenter) { // vertical center
 		return this->position().y() + this->size().y() / 2;
 	}
 	else if (this->anchorPoint() == AnchorPoint::BottomLeft
 		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // bottom
 		return this->position().y() + this->size().y();
 	} else {
 		throw new std::exception("Unexpected AnchorPoint encountered.");
@@ -39,18 +37,18 @@ float Rect::top() const {
 
 float Rect::right() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
-		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::LeftCenter
+		|| this->anchorPoint() == AnchorPoint::BottomLeft) { // left
 		return this->position().x() + this->size().x();
 	}
-	else if (this->anchorPoint() == AnchorPoint::LeftCenter
+	else if (this->anchorPoint() == AnchorPoint::TopCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::BottomCenter) { // horizontal center
 		return this->position().x() + this->size().x() / 2;
 	}
-	else if (this->anchorPoint() == AnchorPoint::BottomLeft
-		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+	else if (this->anchorPoint() == AnchorPoint::TopRight
+		|| this->anchorPoint() == AnchorPoint::RightCenter
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // right
 		return this->position().x();
 	}
 	else {
@@ -61,17 +59,17 @@ float Rect::right() const {
 float Rect::bottom() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
 		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::TopRight) { // top
 		return this->position().y() - this->size().y();
 	}
 	else if (this->anchorPoint() == AnchorPoint::LeftCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::RightCenter) { // vertical center
 		return this->position().y() - this->size().y() / 2;
 	}
 	else if (this->anchorPoint() == AnchorPoint::BottomLeft
 		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // bottom
 		return this->position().y();
 	}
 	else {
@@ -81,18 +79,18 @@ float Rect::bottom() const {
 
 float Rect::left() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
-		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::LeftCenter
+		|| this->anchorPoint() == AnchorPoint::BottomLeft) { // left
 		return this->position().x();
 	}
-	else if (this->anchorPoint() == AnchorPoint::LeftCenter
+	else if (this->anchorPoint() == AnchorPoint::TopCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::BottomCenter) { // horizontal center
 		return this->position().x() - this->size().x() / 2;
 	}
-	else if (this->anchorPoint() == AnchorPoint::BottomLeft
-		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+	else if (this->anchorPoint() == AnchorPoint::TopRight
+		|| this->anchorPoint() == AnchorPoint::RightCenter
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // right
 		return this->position().x() - this->size().x();
 	}
 	else {
@@ -103,17 +101,17 @@ float Rect::left() const {
 float Rect::verticalCenter() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
 		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::TopRight) { // top
 		return this->position().y() - this->size().y() / 2;
 	}
 	else if (this->anchorPoint() == AnchorPoint::LeftCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::RightCenter) { // vertical center
 		return this->position().y();
 	}
 	else if (this->anchorPoint() == AnchorPoint::BottomLeft
 		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // bottom
 		return this->position().y() + this->size().y() / 2;
 	}
 	else {
@@ -123,18 +121,18 @@ float Rect::verticalCenter() const {
 
 float Rect::horizontalCenter() const {
 	if (this->anchorPoint() == AnchorPoint::TopLeft
-		|| this->anchorPoint() == AnchorPoint::TopCenter
-		|| this->anchorPoint() == AnchorPoint::TopRight) {
+		|| this->anchorPoint() == AnchorPoint::LeftCenter
+		|| this->anchorPoint() == AnchorPoint::BottomLeft) { // left
 		return this->position().x() + this->size().x() / 2;
 	}
-	else if (this->anchorPoint() == AnchorPoint::LeftCenter
+	else if (this->anchorPoint() == AnchorPoint::TopCenter
 		|| this->anchorPoint() == AnchorPoint::CenterCenter
-		|| this->anchorPoint() == AnchorPoint::RightCenter) {
+		|| this->anchorPoint() == AnchorPoint::BottomCenter) { // horizontal center
 		return this->position().x();
 	}
-	else if (this->anchorPoint() == AnchorPoint::BottomLeft
-		|| this->anchorPoint() == AnchorPoint::BottomCenter
-		|| this->anchorPoint() == AnchorPoint::BottomRight) {
+	else if (this->anchorPoint() == AnchorPoint::TopRight
+		|| this->anchorPoint() == AnchorPoint::RightCenter
+		|| this->anchorPoint() == AnchorPoint::BottomRight) { // right
 		return this->position().x() - this->size().x();
 	}
 	else {

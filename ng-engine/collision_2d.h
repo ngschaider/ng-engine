@@ -3,7 +3,7 @@
 #include "collider_2d.h"
 #include "vector2.h"
 
-typedef struct Collision2D_Struct {
+typedef struct {
 	Collider2D* colliderA;
 	Collider2D* colliderB;
 	float depth;

@@ -36,9 +36,19 @@ Scene* Engine::setScene(Scene* scene) {
 	return oldScene; // return the reference to the old scene so it can be used again (we are transferring the object ownership to the caller)
 }
 
+void Engine::earlyUpdate() {
+	if (this->scene == nullptr) return;
+	this->scene->earlyUpdate();
+}
+
 void Engine::update() {
 	if (this->scene == nullptr) return;
 	this->scene->update();
+}
+
+void Engine::lateUpdate() {
+	if (this->scene == nullptr) return;
+	this->scene->lateUpdate();
 }
 
 void Engine::stop() {
@@ -53,7 +63,9 @@ void Engine::start() {
 	this->shouldStop = false;
 	while (!this->shouldStop) {
 		try {
+			this->earlyUpdate();
 			this->update();
+			this->lateUpdate();
 		}
 		catch (std::exception e) {
 			std::cout << "Exception!" << std::endl;

@@ -22,7 +22,7 @@ CollisionTestResult CollisionChecker2D::circleCircle(Vector2 center1, float radi
 	Vector2 normal = distance == 0 ? Vector2(0, -1) : center2 - center1;
 
 	if (distance < radii) {
-		CollisionTestResult a = {
+		return {
 			true, // success
 			radii - distance, // depth
 			normal, // normal
@@ -221,5 +221,8 @@ Collision2D* CollisionChecker2D::checkCollision(Collider2D* colliderA, Collider2
 			result.depth,
 			result.normal,
 			});
+	}
+	else {
+		return nullptr;
 	}
 }

@@ -110,6 +110,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\imgui;$(ProjectDir)Dependencies\glad\include;$(ProjectDir)Dependencies\freetype\include;$(ProjectDir)Dependencies\glfw-3.4.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalModuleDependencies>%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -182,7 +183,7 @@
     <ClCompile Include="quaternion.cpp" />
     <ClCompile Include="rect.cpp" />
     <ClCompile Include="rectangle_collider_2d.cpp" />
-    <ClCompile Include="square_renderer.cpp" />
+    <ClCompile Include="rectangle_renderer.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_system.cpp" />
     <ClCompile Include="resource_manager.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="collision_2d.h" />
     <ClInclude Include="collision_checker_2d.h" />
     <ClInclude Include="collision_system.h" />
+    <ClInclude Include="collision_test_result.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="control_velocity.h" />
@@ -225,7 +227,7 @@
     <ClInclude Include="quaternion.h" />
     <ClInclude Include="rect.h" />
     <ClInclude Include="rectangle_collider_2d.h" />
-    <ClInclude Include="square_renderer.h" />
+    <ClInclude Include="rectangle_renderer.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_system.h" />
     <ClInclude Include="resource_manager.h" />

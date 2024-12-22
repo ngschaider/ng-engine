@@ -14,6 +14,7 @@ class Scene;
 class GameObject {
 private:
 	Transform* _transform;
+	std::vector<Component*> toRemoveLater;
 public:
 	std::vector<Component*> components; // The components attached to this game object, this should only be written to by the game object
 	Transform* transform() const { return this->_transform; }
@@ -21,9 +22,26 @@ public:
 	Scene* scene; // the scene this game object is attached to, this should only be written to by the scene
 	GameObject();
 	GameObject(const char*);
-	virtual ~GameObject(); // always define destructors as virtual
+	virtual ~GameObject();
+
+
+	/**
+	* Adds the specified Component to the GameEngine.
+	* The GameObject takes ownership of the Component.
+	*/
 	void addComponent(Component*);
+
+	/**
+	* Removes the specified Component from the GameObject.
+	* The ownership of the Component is returned to the caller.
+	*/
 	void removeComponent(Component*);
+
+	/**
+	* Queues the component to get deleted in the next lateUpdate cycle.
+	* Component will be removed from the game object and subsequently deleted.
+	*/
+	void deleteComponentLater(Component*);
 
 	// quick access including null-checks
 	Engine* engine() const;
@@ -58,5 +76,7 @@ public:
 		return components.front();
 	}
 
+	void earlyUpdate();
 	void update();
+	void lateUpdate();
 };

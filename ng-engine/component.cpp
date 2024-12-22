@@ -11,7 +11,15 @@ Component::~Component() {
 
 }
 
+void Component::earlyUpdate() {
+
+}
+
 void Component::update() {
+
+}
+
+void Component::lateUpdate() {
 
 }
 

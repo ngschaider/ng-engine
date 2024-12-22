@@ -1,11 +1,11 @@
 
-#include "square_renderer.h"
+#include "rectangle_renderer.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "resource_manager.h"
 #include "vector4.h"
 
-SquareRenderer::SquareRenderer() {
+RectangleRenderer::RectangleRenderer() {
 	this->shader = ResourceManager::loadShader("solid_vertex.glsl", "solid_fragment.glsl");
 	
 	// setting up common
@@ -56,12 +56,12 @@ SquareRenderer::SquareRenderer() {
 	glBindVertexArray(0);
 }
 
-SquareRenderer::~SquareRenderer() {
+RectangleRenderer::~RectangleRenderer() {
 	glDeleteVertexArrays(1, &this->VAO_fill);
 	glDeleteVertexArrays(1, &this->VAO_stroke);
 }
 
-void SquareRenderer::render() {
+void RectangleRenderer::render() {
 	this->shader->use();
 	this->shader->setMatrix4x4("transformationMatrix", this->getTransformationMatrix());
 

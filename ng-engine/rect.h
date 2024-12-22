@@ -49,7 +49,6 @@ public:
 	* Constructs a new rect instance with a given position, size and anchor point.
 	* The anchor point defaults to bottom left
 	*/
-	Rect(Vector2 position, Vector2 size);
 	Rect(Vector2 position, Vector2 size, AnchorPoint anchorPoint);
 
 	/**

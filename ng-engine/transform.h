@@ -7,12 +7,49 @@
 
 class Transform : public Component {
 public:
+	/**
+	* The local position of the transform
+	*/
 	Vector3 position = Vector3(0, 0, 0);
+
+	/**
+	* The local rotation of the transform
+	*/
 	Quaternion rotation = Quaternion::identity();
+
+	/**
+	* The local scale of the transform
+	*/
 	Vector3 scale = Vector3(1, 1, 1);
+
+	/**
+	* The parent transform of this transform.
+	*/
 	Transform* parent = nullptr;
+
+	/**
+	* Constructs a new Transform instance
+	*/
 	Transform();
+
+	/**
+	* Returns the transformation matrix to transform coordinates from local space to world space
+	* This already respects the transform hierarchy.
+	*/
 	Matrix4x4 getLocalToWorldMatrix();
+
+	/**
+	* Moves the transform by the specified amount
+	*/
 	void move(Vector3 vector);
+
+	/**
+	* Moves the transform by the specified amount into the x and y direction
+	*/
 	void move(Vector2 vector);
+
+	/**
+	* Returns a list of references to all transforms in the scene which have this transform as their parent.
+	*/
+	std::vector<Transform*> getChildren();
 };
