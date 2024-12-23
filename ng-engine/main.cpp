@@ -16,7 +16,9 @@
 #include "inspector_window.h"
 #include "menu_bar.h"
 #include "collision_system.h"
+#include "circle_collider_2d.h"
 #include "rectangle_collider_2d.h"
+#include "collision_visualizer.h"
 
 int main() {
 	Engine* engine = new Engine();
@@ -33,14 +35,35 @@ int main() {
 		systems->addComponent(new HierarchyWindow());
 		systems->addComponent(new InspectorWindow());
 		systems->addComponent(new CollisionSystem());
+		systems->addComponent(new CollisionVisualizer());
 		systems->addComponent(new MenuBar());
 		scene->addGameObject(systems);
 
-		GameObject* go = new GameObject("Test");
-		go->addComponent(new RectangleCollider2D());
-		go->addComponent(new RectangleRenderer());
-		scene->addGameObject(go);
+		GameObject* square1 = new GameObject("Square 1");
+		square1->transform()->position = Vector3(-4, 0.5, 0);
+		RigidBody* rb1 = new RigidBody();
+		rb1->linearVelocity = Vector3(0.001f, 0, 0);
+		square1->addComponent(rb1);
+		square1->addComponent(new RectangleCollider2D());
+		square1->addComponent(new RectangleRenderer());
+		scene->addGameObject(square1);
 
+		GameObject* square2 = new GameObject("Square 2");
+		square2->transform()->position = Vector3(5, 0, 0);
+		RigidBody* rb2 = new RigidBody();
+		rb2->linearVelocity = Vector3(-0.001f, 0, 0);
+		square2->addComponent(rb2);
+		square2->addComponent(new RectangleCollider2D());
+		square2->addComponent(new RectangleRenderer());
+		scene->addGameObject(square2);
+
+		//GameObject* circle = new GameObject("Circle");
+		//circle->transform()->position = Vector3(-1, 0, 0);
+		//RigidBody* rb2 = new RigidBody();
+		//rb2->linearVelocity = Vector3(0, -0.001f, 0);
+		//circle->addComponent(rb2);
+		//circle->addComponent(new CircleCollider2D());
+		//scene->addGameObject(circle);
 	}
 	catch (std::exception e) {
 		std::cout << "Exception in setup:" << std::endl;

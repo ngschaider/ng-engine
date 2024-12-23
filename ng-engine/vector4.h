@@ -49,6 +49,11 @@ public:
 	*/
 	Vector4 operator/(float v);
 
+	/**
+	* Negates the vector
+	*/
+	Vector4 operator-();
+
 #pragma region Vector2 Conversion Methods
 	/**
 	* Returns a new Vector2 with the values of this vector's x and x components

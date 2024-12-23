@@ -31,6 +31,10 @@ Vector4 Vector4::operator/(float v) {
 	return Vector4(this->x() / v, this->y() / v, this->z() / v, this->w() / v);
 }
 
+Vector4 Vector4::operator-() {
+	return Vector4(-this->x(), -this->y(), -this->z(), -this->w());
+}
+
 #pragma region Vector2 Conversion Methods
 Vector2 Vector4::xx() const {
 	return Vector2(this->x(), this->x());

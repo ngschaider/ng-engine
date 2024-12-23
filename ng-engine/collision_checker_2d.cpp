@@ -6,11 +6,11 @@
 #include <algorithm>
 
 
-bool CollisionChecker2D::areRectsIntersecting(Rect rect1, Rect rect2) {
-	if (rect1.right() < rect2.left()) return false;
-	if (rect1.bottom() < rect2.top()) return false;
-	if (rect1.top() > rect2.bottom()) return false;
-	if (rect1.left() > rect2.right()) return false;
+bool CollisionChecker2D::areRectsIntersecting(Rect rectA, Rect rectB) {
+	if (rectA.left() > rectB.right()) return false;
+	if (rectA.right() < rectB.left()) return false;
+	if (rectA.top() < rectB.bottom()) return false;
+	if (rectA.bottom() > rectB.top()) return false;
 
 	return true;
 }
@@ -38,13 +38,13 @@ CollisionTestResult CollisionChecker2D::circleCircle(Vector2 center1, float radi
 }
 
 CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polygon2D polygonB) {
-	// get all normals
+	// get all surface normals (in counter clockwise order)
 	std::vector<Vector2> normals;
 	for (Vector2 edge : polygonA.getEdges()) {
-		normals.push_back(edge.normal());
+		normals.push_back(edge.normal().normalized());
 	}
 	for (Vector2 edge : polygonB.getEdges()) {
-		normals.push_back(edge.normal());
+		normals.push_back(edge.normal().normalized());
 	}
 
 	// use the normal vectors as an axis, project all vertices and see if there is a gap
@@ -55,7 +55,6 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 		std::pair<std::vector<float>::iterator, std::vector<float>::iterator> boundsA = std::minmax_element(projectionA.begin(), projectionA.end());
 		float minA = *boundsA.first;
 		float maxA = *boundsA.second;
-
 
 		std::vector<float> projectionB = polygonB.project(axis);
 		std::pair<std::vector<float>::iterator, std::vector<float>::iterator> boundsB = std::minmax_element(projectionB.begin(), projectionB.end());
@@ -83,7 +82,7 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 
 	Vector2 dir = centerB - centerA;
 
-	if (dir.dot(resolutionNormal) < 0) {
+	if (dir.dot(resolutionNormal) >= 0) {
 		resolutionNormal = resolutionNormal * -1;
 	}
 
@@ -159,8 +158,8 @@ std::pair<float, float> CollisionChecker2D::projectCircle(Vector2 circleCenter, 
 }
 
 Collision2D* CollisionChecker2D::checkCollision(Collider2D* colliderA, Collider2D* colliderB) {
-	Rect rectA = colliderA->getGlobalBounds();
-	Rect rectB = colliderB->getGlobalBounds();
+	Rect rectA = colliderA->getWorldBounds();
+	Rect rectB = colliderB->getWorldBounds();
 
 	if (!CollisionChecker2D::areRectsIntersecting(rectA, rectB)) {
 		return nullptr;

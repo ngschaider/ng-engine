@@ -42,6 +42,11 @@ public:
 	Vector2 operator-(Vector2 v);
 
 	/**
+	* Negates the vector
+	*/
+	Vector2 operator-();
+
+	/**
 	* Multiplies the vector with a given scalar (element-wise) and returns the result as a new vector
 	*/
 	Vector2 operator*(float v);

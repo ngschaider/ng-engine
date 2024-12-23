@@ -33,6 +33,10 @@ Vector2 Vector2::operator/(float v) {
 	return Vector2(mag * cosf(angle), mag * sinf(angle));
 }
 
+Vector2 Vector2::operator-() {
+	return Vector2(-this->x(), -this->y());
+}
+
 Vector3 Vector2::toVector3(float z) {
 	return Vector3(this->x(), this->y(), z);
 }
@@ -42,7 +46,7 @@ Vector4 Vector2::toVector4(float z, float w) {
 }
 
 float Vector2::magnitudeSquared() {
-	return this->x() * this->x() + this->y() + this->y();
+	return this->x() * this->x() + this->y() * this->y();
 }
 
 float Vector2::magnitude() {

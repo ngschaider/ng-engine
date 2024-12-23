@@ -213,6 +213,15 @@
     <ClCompile Include="rectangle_collider_2d.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
+    <ClCompile Include="event_handler.cpp">
+      <Filter>Quelldateien\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_visualizer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="line_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rigid_body.h">
@@ -340,6 +349,15 @@
     </ClInclude>
     <ClInclude Include="collision_test_result.h">
       <Filter>Headerdateien\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="event_handler.h">
+      <Filter>Headerdateien\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_visualizer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="line_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

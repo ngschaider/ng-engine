@@ -1,16 +1,19 @@
-#pragma once
 #include "collider_2d.h"
 #include "rect.h"
-#include <exception>
 #include "matrix4x4.h"
 #include "transform.h"
 #include "vector4.h"
 #include "imgui.h"
 #include "resource_manager.h"
+#include "event.h"
+#include <vector>
+#include <functional>
+#include <assert.h>
+#include <exception>
 
 Collider2D::Collider2D() {
 	this->shader = ResourceManager::loadShader("solid_vertex.glsl", "solid_fragment.glsl");
-	this->space = RendererSpace::Local;
+	this->space = RendererSpace::World;
 
 
 	// setting up stroke
@@ -40,18 +43,29 @@ Collider2D::Collider2D() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
 	glBindVertexArray(0);
+
+	this->onCollisionStart.on([this](Collider2D* other) {
+		this->collidingWith.push_back(other);
+	});
+
+	this->onCollisionEnd.on([this](Collider2D* other) {
+		std::vector<Collider2D*>::iterator it = std::find(this->collidingWith.begin(), this->collidingWith.end(), other);
+		assert(it != this->collidingWith.end());
+
+		this->collidingWith.erase(it);
+	});
 }
 
 Rect Collider2D::getLocalBounds() {
 	throw new std::exception("Collider2D::getLocalBounds has to be overwritten in child classes.");
 }
 
-Rect Collider2D::getGlobalBounds() {
+Rect Collider2D::getWorldBounds() {
 	Rect local = this->getLocalBounds();
 	Matrix4x4 m = this->transform()->getLocalToWorldMatrix();
 
-	Vector2 min = (m * local.bottomLeft().toVector4(0, 0)).xy();
-	Vector2 max = (m * local.topRight().toVector4(0, 0)).xy();
+	Vector2 min = (m * local.bottomLeft().toVector4(1, 1)).xy();
+	Vector2 max = (m * local.topRight().toVector4(1, 1)).xy();
 
 	return Rect(min, max - min, AnchorPoint::BottomLeft);
 }
@@ -61,11 +75,21 @@ void Collider2D::render() {
 		return;
 	}
 
-	Rect bounds = this->getLocalBounds();
-	//Rect bounds = Rect(Vector2(0.1, 0), Vector2(1, 1), AnchorPoint::BottomLeft);
+	// Rect bounds = this->getLocalBounds();
+	// Matrix4x4 m = Matrix4x4::TRS(bounds.bottomLeft().toVector3(0), Quaternion::identity(), bounds.size().toVector3(1));
+	// this->shader->setMatrix4x4("transformationMatrix", this->getTransformationMatrix() * m);
+
+	Rect bounds = this->getWorldBounds();
 	Matrix4x4 m = Matrix4x4::TRS(bounds.bottomLeft().toVector3(0), Quaternion::identity(), bounds.size().toVector3(1));
 	this->shader->setMatrix4x4("transformationMatrix", this->getTransformationMatrix() * m);
-	this->shader->setVector4("color", Vector4(0, 0, 1, 1));
+
+	if(this->collidingWith.size() > 0) {
+		this->shader->setVector4("color", Vector4(1, 0, 0, 1));
+	}
+	else {
+		this->shader->setVector4("color", Vector4(0, 0, 1, 1));
+	}
+	
 
 	glBindVertexArray(this->VAO);
 	glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);

@@ -3,7 +3,9 @@
 #include "component.h"
 #include "rect.h"
 #include "event.h"
+#include "collider_2d.h"
 #include "renderer.h"
+#include "line_renderer.h"
 
 class Collider2D : public Renderer {
 private:
@@ -19,18 +21,24 @@ public:
 	/**
 	* Emitted by the collision system whenever a new collision starts
 	*/
-	Event onCollisionStart;
+	Event<Collider2D*> onCollisionStart;
 
 	/**
 	* Emitted by the collision system whenever an existing collision ends
 	*/
-	Event onCollisionEnd;
+	Event<Collider2D*> onCollisionEnd;
+
+	/**
+	* Contains all colliders this collider is currently colliding with.
+	* This should not be edited outside of Collider2D.
+	*/
+	std::vector<Collider2D*> collidingWith;
 
 	/**
 	* Emitted by the collision system on each update cycle for each collision this collider is part of.
 	*/
-	Event onColliding;
+	Event<Collider2D*> onColliding;
 	virtual Rect getLocalBounds();
-	Rect getGlobalBounds();
+	Rect getWorldBounds();
 	void render();
 };

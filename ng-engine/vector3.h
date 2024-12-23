@@ -67,6 +67,16 @@ public:
 	Vector3 operator/(float v);
 
 	/**
+	* Negates the vector
+	*/
+	Vector3 operator-();
+
+	/**
+	* Subtracts a vector and returns the result as a new vector
+	*/
+	Vector3 operator-(Vector3 v);
+
+	/**
 	* Returns the dot product between this and another vector
 	*/
 	float dot(Vector3 v) const;

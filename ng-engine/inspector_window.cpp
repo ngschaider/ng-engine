@@ -130,7 +130,7 @@ void InspectorWindow::render() {
 						ImGui::LabelText("##anchorPoint_lbl", "Anchor Point");
 						ImGui::SameLine(100);
 						std::map<AnchorPoint, std::string> m = {
-							{AnchorPoint::BottomCenter, "TopLeft"},
+							{AnchorPoint::BottomCenter, "BottomCenter"},
 							{AnchorPoint::BottomLeft, "BottomLeft"},
 							{AnchorPoint::BottomRight, "BottomRight"},
 							{AnchorPoint::CenterCenter, "CenterCenter"},
@@ -140,13 +140,12 @@ void InspectorWindow::render() {
 							{AnchorPoint::TopLeft, "TopLeft"},
 							{AnchorPoint::TopRight, "TopRight"},
 						};
-						ImGui::BeginCombo("##anchorPoint", m[rectangleCollider->rect.anchorPoint()].c_str());
-						for (std::pair<AnchorPoint, std::string> pair : m) {
-							ImGui::PushID(pair.second.c_str());
-							if (ImGui::Selectable(pair.second.c_str())) {
-								rectangleCollider->rect = Rect(rectangleCollider->rect.position(), rectangleCollider->rect.size(), pair.first);
+						if (ImGui::BeginCombo("##anchorPoint", m[rectangleCollider->rect.anchorPoint()].c_str())) {
+							for (std::pair<AnchorPoint, std::string> pair : m) {
+								if (ImGui::Selectable(pair.second.c_str())) {
+									rectangleCollider->rect = Rect(rectangleCollider->rect.position(), rectangleCollider->rect.size(), pair.first);
+								}
 							}
-							ImGui::PopID();
 							ImGui::EndCombo();
 						}
 					}

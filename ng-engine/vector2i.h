@@ -9,4 +9,9 @@ public:
 
 	int x() const;
 	int y() const;
+
+	/**
+	* Negates the vector
+	*/
+	Vector2i operator-();
 };

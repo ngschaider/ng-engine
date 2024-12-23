@@ -31,11 +31,21 @@ bool Vector3::operator==(Vector3 v) {
 Vector3 Vector3::operator+(Vector3 v) {
 	return Vector3(this->x() + v.x(), this->y() + v.y(), this->z() + v.z());
 }
+
 Vector3 Vector3::operator*(float v) {
 	return Vector3(this->x() * v, this->y() * v, this->z() * v);
 }
+
 Vector3 Vector3::operator/(float v) {
 	return Vector3(this->x() / v, this->y() / v, this->z() / v);
+}
+
+Vector3 Vector3::operator-() {
+	return Vector3(-this->x(), -this->y(), -this->z());
+}
+
+Vector3 Vector3::operator-(Vector3 v) {
+	return Vector3(this->x() - v.x(), this->y() - v.y(), this->z() - v.z());
 }
 
 float Vector3::dot(Vector3 v) const {
