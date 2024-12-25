@@ -102,8 +102,8 @@ void CollisionSystem::resolveCollision(Collision2D* collision) {
 	float denominator = (1 / bodyA->mass) + (1 / bodyB->mass);
 	float j = enumerator / denominator;
 
-	bodyA->transform()->move(-collision->normal * collision->depth / 2);
-	bodyB->transform()->move(collision->normal * collision->depth / 2);
+	// bodyA->transform()->move(-collision->normal * collision->depth / 2);
+	// bodyB->transform()->move(collision->normal * collision->depth / 2);
 
 	//if (bodyA->mass != INFINITY) {
 	//	float factor = bodyB->mass == INFINITY ? 1.0f : 2.0f;

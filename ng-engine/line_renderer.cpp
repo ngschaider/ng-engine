@@ -5,7 +5,6 @@
 LineRenderer::LineRenderer() {
 	this->shader = ResourceManager::loadShader("solid_vertex.glsl", "solid_fragment.glsl");
 	this->space = RendererSpace::World;
-
 	
 	// setting up stroke
 	glGenVertexArrays(1, &this->VAO);
@@ -35,6 +34,8 @@ LineRenderer::LineRenderer() {
 }
 
 void LineRenderer::render() {
+	this->shader->use();
+
 	Vector3 diff = this->start - this->end;
 	Matrix4x4 m = Matrix4x4::rotate(Quaternion(diff.x(), diff.y(), diff.z(), 1)) * Matrix4x4::translate(this->start);
 	this->shader->setMatrix4x4("transformationMatrix", this->getTransformationMatrix() * m);
@@ -42,6 +43,6 @@ void LineRenderer::render() {
 
 	glBindVertexArray(this->VAO);
 	glLineWidth(2);
-	glDrawElements(GL_LINE, 2, GL_FLOAT, 0);
+	glDrawElements(GL_LINES, 2, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }

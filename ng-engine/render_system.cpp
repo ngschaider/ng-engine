@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "scene.h"
 #include "renderer.h"
+#include "debug.h"
 
 void errorCallback(int error, const char* msg) {
 	std::string s;
@@ -156,7 +157,7 @@ float RenderSystem::ratio() {
 	return (float) size.x() / size.y();
 }
 
-void RenderSystem::update() {
+void RenderSystem::lateUpdate() {
 	glfwPollEvents();
 
 	glClearColor(this->backgroundColor.r() / 255.0f, this->backgroundColor.g() / 255.0f, this->backgroundColor.b() / 255.0f, 1);
@@ -179,13 +180,22 @@ void RenderSystem::update() {
 	glfwSwapBuffers(this->window);
 }
 
-// TODO: This can be moved to Graphics class
 Matrix4x4 RenderSystem::getScreenToClipMatrix() {
 	return this->getClipToScreenMatrix().invert();
 }
 
-// TODO: This can be moved to Graphics class
 Matrix4x4 RenderSystem::getClipToScreenMatrix() {
 	Vector2i size = this->size();
-	return Matrix4x4::scale(Vector3((float) size.x(), (float) size.y(), 1));
+
+	Vector3 translate = Vector3((float)size.x() / 2, (float)size.y() / 2, 0);
+	Vector3 scale = Vector3((float)size.x(), (float)size.y(), 1);
+	return Matrix4x4::TRS(translate, Quaternion::identity(), scale);
 }
+
+//Vector2 RenderSystem::screenToClip(Vector2 screen) {
+//	return (this->getScreenToClipMatrix() * screen.toVector4(1, 1)).xy();
+//}
+//
+//Vector2 RenderSystem::clipToScreen(Vector2 clip) {
+//	return (this->getClipToScreenMatrix() * clip.toVector4(1, 1)).xy();
+//}

@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "engine.h"
+#include "debug.h"
 #include "render_system.h"
 #include "triangle_renderer.h"
 #include "cube_renderer.h"
@@ -37,6 +38,7 @@ int main() {
 		systems->addComponent(new CollisionSystem());
 		systems->addComponent(new CollisionVisualizer());
 		systems->addComponent(new MenuBar());
+		systems->addComponent(new Debug());
 		scene->addGameObject(systems);
 
 		GameObject* square1 = new GameObject("Square 1");
@@ -56,6 +58,10 @@ int main() {
 		square2->addComponent(new RectangleCollider2D());
 		square2->addComponent(new RectangleRenderer());
 		scene->addGameObject(square2);
+
+		//GameObject* testLine = new GameObject("Test Line");
+		//testLine->addComponent(new LineRenderer());
+		//scene->addGameObject(testLine);
 
 		//GameObject* circle = new GameObject("Circle");
 		//circle->transform()->position = Vector3(-1, 0, 0);

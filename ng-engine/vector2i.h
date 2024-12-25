@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vector2.h"
+
 class Vector2i {
 private:
 	int _x;
@@ -14,4 +16,6 @@ public:
 	* Negates the vector
 	*/
 	Vector2i operator-();
+
+	Vector2 toVector2();
 };

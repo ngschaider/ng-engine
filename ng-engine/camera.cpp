@@ -36,3 +36,15 @@ Matrix4x4 Camera::getCameraToClipMatrix() {
 Matrix4x4 Camera::getClipToCameraMatrix() {
 	return this->getCameraToClipMatrix().invert();
 }
+
+//Vector3 Camera::worldToCamera(Vector3 world) {
+//	return (this->getWorldToCameraMatrix() * world.toVector4(0)).xyz();
+//}
+//
+//Vector3 Camera::cameraToWorld(Vector3 camera) {
+//	return (this->getCameraToWorldMatrix() * camera.toVector4(0)).xyz();
+//}
+//
+//Vector2 Camera::cameraToClip(Vector3 camera) {
+//	return (this->getCameraToClipMatrix() * camera.toVector4(0)).xy();
+//}

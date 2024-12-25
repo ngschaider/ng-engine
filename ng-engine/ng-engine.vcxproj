@@ -155,6 +155,7 @@
     <ClCompile Include="component.cpp" />
     <ClCompile Include="control_velocity.cpp" />
     <ClCompile Include="cube_renderer.cpp" />
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="Dependencies\glad\glad.c" />
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="component.h" />
     <ClInclude Include="control_velocity.h" />
     <ClInclude Include="cube_renderer.h" />
+    <ClInclude Include="debug.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="event_handler.h" />

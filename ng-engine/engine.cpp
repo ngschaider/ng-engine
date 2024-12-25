@@ -4,6 +4,7 @@
 #include <cassert>
 #include <string>
 #include <iostream>
+#include "debug.h"
 
 Engine::Engine() {
 	this->scene = nullptr;
