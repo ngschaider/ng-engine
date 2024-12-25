@@ -192,10 +192,10 @@ Matrix4x4 RenderSystem::getClipToScreenMatrix() {
 	return Matrix4x4::TRS(translate, Quaternion::identity(), scale);
 }
 
-//Vector2 RenderSystem::screenToClip(Vector2 screen) {
-//	return (this->getScreenToClipMatrix() * screen.toVector4(1, 1)).xy();
-//}
-//
-//Vector2 RenderSystem::clipToScreen(Vector2 clip) {
-//	return (this->getClipToScreenMatrix() * clip.toVector4(1, 1)).xy();
-//}
+Vector2 RenderSystem::screenToClip(Vector2 screen) {
+	return (this->getScreenToClipMatrix() * screen.toVector4(1, 1)).xy();
+}
+
+Vector2 RenderSystem::clipToScreen(Vector2 clip) {
+	return (this->getClipToScreenMatrix() * clip.toVector4(1, 1)).xy();
+}

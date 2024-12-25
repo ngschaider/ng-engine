@@ -8,15 +8,14 @@ typedef struct {
 	Vector3 start;
 	Vector3 end;
 	Color color;
+	float width;
 } Line;
 
 class Debug : public Renderer {
 private:
 	std::vector<Line> lines;
 public:
-	void line(Vector3 start, Vector3 end, Color color);
-	//static void circle(Vector3 center, float radius);
-	//static void rect(Vector3 position, float width, float height);
+	void line(Vector3 start, Vector3 end, Color color, float width = 1);
 	void earlyUpdate();
 	void render();
 };

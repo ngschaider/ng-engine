@@ -29,19 +29,19 @@ public:
 	*/
 	Matrix4x4 getClipToCameraMatrix();
 
-	///**
-	//* Transforms the given coordinates from world space to camera space
-	//*/
-	//Vector3 worldToCamera(Vector3 world);
+	/**
+	* Transforms the given coordinates from world space to camera space
+	*/
+	Vector3 worldToCamera(Vector3 world);
 
-	///**
-	//* Transforms the given coordinates from camera space to world space
-	//*/
-	//Vector3 cameraToWorld(Vector3 camera);
+	/**
+	* Transforms the given coordinates from camera space to world space
+	*/
+	Vector3 cameraToWorld(Vector3 camera);
 
-	///**
-	//* Transforms the given coordinates from camera space to clip space
-	//* This is a lossy operation as the camera applies an orthographic projection
-	//*/
-	//Vector2 cameraToClip(Vector3 camera);
+	/**
+	* Transforms the given coordinates from camera space to clip space
+	* This is a lossy operation as the camera applies an orthographic projection
+	*/
+	Vector2 cameraToClip(Vector3 camera);
 };

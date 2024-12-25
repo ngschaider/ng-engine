@@ -42,20 +42,20 @@ int main() {
 		scene->addGameObject(systems);
 
 		GameObject* square1 = new GameObject("Square 1");
-		square1->transform()->position = Vector3(-4, 0.5, 0);
+		square1->transform()->position = Vector3(-0.25f, 0, 0);
 		RigidBody* rb1 = new RigidBody();
-		rb1->linearVelocity = Vector3(0.001f, 0, 0);
+		rb1->linearVelocity = Vector3(0, 0, 0);
 		square1->addComponent(rb1);
-		square1->addComponent(new RectangleCollider2D());
+		square1->addComponent(new CircleCollider2D());
 		square1->addComponent(new RectangleRenderer());
 		scene->addGameObject(square1);
 
 		GameObject* square2 = new GameObject("Square 2");
-		square2->transform()->position = Vector3(5, 0, 0);
+		square2->transform()->position = Vector3(0.25f, 0, 0);
 		RigidBody* rb2 = new RigidBody();
-		rb2->linearVelocity = Vector3(-0.001f, 0, 0);
+		rb2->linearVelocity = Vector3(0, 0, 0);
 		square2->addComponent(rb2);
-		square2->addComponent(new RectangleCollider2D());
+		square2->addComponent(new CircleCollider2D());
 		square2->addComponent(new RectangleRenderer());
 		scene->addGameObject(square2);
 

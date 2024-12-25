@@ -5,17 +5,19 @@
 #include "scene.h"
 #include "render_system.h"
 
-void Debug::line(Vector3 start, Vector3 end, Color color) {
+void Debug::line(Vector3 start, Vector3 end, Color color, float width) {
 	this->lines.push_back({
 		start,
 		end,
 		color,
+		width,
 		});
 }
 
 void Debug::earlyUpdate() {
 	this->lines.clear();
 }
+
 void Debug::render() {
 	ImDrawList* drawList = ImGui::GetForegroundDrawList();
 
@@ -33,7 +35,7 @@ void Debug::render() {
 		Vector2 start = (worldToScreen * line.start.toVector4(1)).xy();
 		Vector2 end = (worldToScreen * line.end.toVector4(1)).xy();
 		ImU32 color = IM_COL32(line.color.r(), line.color.g(), line.color.b(), 255);
-		drawList->AddLine(ImVec2(start.x(), start.y()), ImVec2(end.x(), end.y()), color, 1);
+		drawList->AddLine(ImVec2(start.x(), start.y()), ImVec2(end.x(), end.y()), color, line.width);
 	}
 
 	char str[120];

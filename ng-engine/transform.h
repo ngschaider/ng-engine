@@ -39,6 +39,26 @@ public:
 	Matrix4x4 getLocalToWorldMatrix();
 
 	/**
+	* Returns the transformation matrix to transform coordinates from world space to local space
+	* This already respects the transform hierarchy.
+	*/
+	Matrix4x4 getWorldToLocalMatrix();
+
+	/**
+	* Transforms the given coordinates from local space to world space
+	*/
+	Vector3 localToWorld(Vector3 local);
+	Vector2 localToWorld(Vector2 local);
+	float localToWorld(float local);
+
+	/**
+	* Transforms the given coordinates from world space to local space
+	*/
+	Vector3 worldToLocal(Vector3 world);
+	Vector2 worldToLocal(Vector2 world);
+	float worldToLocal(float world);
+
+	/**
 	* Moves the transform by the specified amount
 	*/
 	void move(Vector3 vector);

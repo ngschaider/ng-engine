@@ -59,13 +59,13 @@ public:
 	*/
 	Matrix4x4 getClipToScreenMatrix();
 
-	///**
-	//* Transforms the given coordinates from screen space to clip space
-	//*/
-	//Vector2 screenToClip(Vector2 screen);
+	/**
+	* Transforms the given coordinates from screen space to clip space
+	*/
+	Vector2 screenToClip(Vector2 screen);
 
-	///**
-	//* Transforms the given coordinates from clip space to screen space
-	//*/
-	//Vector2 clipToScreen(Vector2 clip);
+	/**
+	* Transforms the given coordinates from clip space to screen space
+	*/
+	Vector2 clipToScreen(Vector2 clip);
 };

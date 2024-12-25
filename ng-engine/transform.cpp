@@ -21,6 +21,34 @@ Matrix4x4 Transform::getLocalToWorldMatrix() {
 	return this->parent->getLocalToWorldMatrix() * myMatrix;
 }
 
+Matrix4x4 Transform::getWorldToLocalMatrix() {
+	return this->getLocalToWorldMatrix().invert();
+}
+
+Vector3 Transform::localToWorld(Vector3 local) {
+	return (this->getLocalToWorldMatrix() * local.toVector4(1)).xyz();
+}
+
+Vector2 Transform::localToWorld(Vector2 local) {
+	return this->localToWorld(Vector3(local.x(), local.y(), 1)).xy();
+}
+
+float Transform::localToWorld(float local) {
+	return this->localToWorld(Vector2(local, 1)).x();
+}
+
+Vector3 Transform::worldToLocal(Vector3 world) {
+	return (this->getWorldToLocalMatrix() * world.toVector4(1)).xyz();
+}
+
+Vector2 Transform::worldToLocal(Vector2 world) {
+	return this->worldToLocal(Vector3(world.x(), world.y(), 1)).xy();
+}
+
+float Transform::worldToLocal(float world) {
+	return this->worldToLocal(Vector3(world, 1, 1)).x();
+}
+
 void Transform::move(Vector3 vector) {
 	this->position = this->position + vector;
 }
