@@ -1,7 +1,7 @@
 #include "collision_checker_2d.h"
 #include "collision_2d.h"
-#include "rectangle_collider_2d.h"
-#include "circle_collider_2d.h"
+#include "rectangle_collider.h"
+#include "circle_collider.h"
 #include "polygon_collider_2d.h"
 #include <algorithm>
 #include "debug.h"
@@ -49,15 +49,10 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 		normals.push_back(edge.normal().normalized());
 	}
 
-	Debug::instance->circle(polygonA.getArithmeticMean().toVector3(0), 3);
-	Debug::instance->circle(polygonB.getArithmeticMean().toVector3(0), 3);
-
 	// use the normal vectors as an axis, project all vertices and see if there is a gap
 	Vector2 resolutionNormal = Vector2(0, 0);
 	float minDepth = INFINITY;
 	for (Vector2 axis : normals) {
-		Debug::instance->line(polygonA.getArithmeticMean(), polygonA.getArithmeticMean() + axis * 2, Color::blue(), 2);
-
 		std::vector<float> projectionA = polygonA.project(axis);
 		std::pair<std::vector<float>::iterator, std::vector<float>::iterator> boundsA = std::minmax_element(projectionA.begin(), projectionA.end());
 		float minA = *boundsA.first;
@@ -89,7 +84,7 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 
 	Vector2 dir = centerB - centerA;
 
-	if (dir.dot(resolutionNormal) >= 0) {
+	if (dir.dot(resolutionNormal) < 0) {
 		resolutionNormal = resolutionNormal * -1;
 	}
 
@@ -171,8 +166,8 @@ Collision2D* CollisionChecker2D::checkCollision(Collider2D* colliderA, Collider2
 		return nullptr;
 	}
 
-	CircleCollider2D* circleColliderA = dynamic_cast<CircleCollider2D*>(colliderA);
-	CircleCollider2D* circleColliderB = dynamic_cast<CircleCollider2D*>(colliderB);
+	CircleCollider* circleColliderA = dynamic_cast<CircleCollider*>(colliderA);
+	CircleCollider* circleColliderB = dynamic_cast<CircleCollider*>(colliderB);
 	PolygonCollider2D* polygonColliderA = dynamic_cast<PolygonCollider2D*>(colliderA);
 	PolygonCollider2D* polygonColliderB = dynamic_cast<PolygonCollider2D*>(colliderB);
 

@@ -1,7 +1,7 @@
-#include "rectangle_collider_2d.h"
+#include "rectangle_collider.h"
 #include "polygon_2d.h"
 
-Polygon2D RectangleCollider2D::getLocalPolygon() {
+Polygon2D RectangleCollider::getLocalPolygon() {
 	return Polygon2D({
 		this->rect.bottomLeft(),
 		this->rect.bottomRight(),
@@ -10,6 +10,6 @@ Polygon2D RectangleCollider2D::getLocalPolygon() {
 		});
 }
 
-RectangleCollider2D::RectangleCollider2D() {
+RectangleCollider::RectangleCollider() {
 
 }

@@ -39,15 +39,12 @@ public:
 	* During an update cycle, returns the time that has passed since the last update.
 	* This method should only be called from within the update cycle.
 	*/
-	inline double elapsed() {
-		assert(this->_elapsed != 0);
-		return this->_elapsed;
-	}
+	double elapsed();
 
 	/**
 	* Defines how often the fixed update method should be called.
 	*/
-	constexpr static double FIXED_UPDATE_INTERVAL = 1.0 / 60.0;
+	constexpr static double FIXED_UPDATE_INTERVAL = 0.02;
 
 	/**
 	* Starts the engine and the game loop. 

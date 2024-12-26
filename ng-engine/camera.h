@@ -10,6 +10,11 @@ public:
 	Camera();
 
 	/**
+	* Returns the aspect ratio of the camera's view
+	*/
+	float ratio();
+
+	/**
 	* Returns the transformation matrix that transforms coordinates from world space to camera space
 	*/
 	Matrix4x4 getWorldToCameraMatrix();

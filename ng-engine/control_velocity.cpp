@@ -3,6 +3,7 @@
 #include "rigid_body.h"
 #include "scene.h"
 #include "vector3.h"
+#include <iostream>
 
 ControlVelocity::ControlVelocity() {
 
@@ -40,5 +41,5 @@ void ControlVelocity::fixedUpdate() {
 		velocity = velocity + Vector3(0, 0, -1);
 	}
 
-	rb->linearVelocity = velocity * 0.01f;
+	rb->linearVelocity = velocity * 0.05f;
 }

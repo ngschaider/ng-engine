@@ -1,7 +1,7 @@
 #include "engine.h"
 #include <exception>
 #include "game_object.h"
-#include <cassert>
+#include <assert.h>
 #include <string>
 #include <iostream>
 #include "debug.h"
@@ -34,6 +34,10 @@ Scene* Engine::setScene(Scene* scene) {
 	return oldScene; // return the reference to the old scene so it can be used again (we are transferring the object ownership to the caller)
 }
 
+double Engine::elapsed() {
+	assert(this->_elapsed != 0);
+	return this->_elapsed;
+}
 
 void Engine::earlyUpdate() {
 	if (this->scene == nullptr) return;
@@ -62,7 +66,7 @@ void Engine::stop() {
 
 double Engine::getTimestamp() {
 	const auto p1 = std::chrono::system_clock::now();
-	return (double)p1.time_since_epoch().count() / 1e9;
+	return std::chrono::duration_cast<std::chrono::nanoseconds>(p1.time_since_epoch()).count() / 1e9;
 }
 
 void Engine::start() {
@@ -73,15 +77,16 @@ void Engine::start() {
 	this->shouldStop = false;
 
 	double previous = this->getTimestamp();
-	double simulationTime = this->getTimestamp();
+	double lag = 0;
 	while (!this->shouldStop) {
 		try {
 			double current = this->getTimestamp();
 			this->_elapsed = current - previous;
 
-			while (current - simulationTime > Engine::FIXED_UPDATE_INTERVAL) {
+			lag += this->_elapsed;
+			while (lag > Engine::FIXED_UPDATE_INTERVAL) {
 				this->fixedUpdate();
-				simulationTime += Engine::FIXED_UPDATE_INTERVAL;
+				lag -= Engine::FIXED_UPDATE_INTERVAL;
 			}
 
 			this->earlyUpdate();

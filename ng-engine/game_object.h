@@ -34,6 +34,7 @@ public:
 	Scene* scene;
 
 	GameObject();
+	GameObject(std::string);
 	GameObject(const char*);
 	virtual ~GameObject();
 

@@ -133,3 +133,5 @@ public:
 	*/
 	Vector4 toVector4(float w) const;
 };
+
+Vector3 operator/(float scalar, Vector3 vec);

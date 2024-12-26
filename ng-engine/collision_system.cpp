@@ -59,6 +59,10 @@ void CollisionSystem::detectCollisions() {
 				// invoke collision start event on both colliders
 				colliderA->onCollisionStart.emit(colliderB);
 				colliderB->onCollisionStart.emit(colliderA);
+			} else {
+				// and we were already colliding -> update existing collision
+				existingCollision->normal = collision->normal;
+				existingCollision->depth = collision->depth;
 			}
 
 			// invoke "currently colliding" event on both colliders
@@ -92,9 +96,9 @@ void CollisionSystem::resolveCollision(Collision2D* collision) {
 
 	Vector2 relativeVelocity = bodyB->linearVelocity.xy() - bodyA->linearVelocity.xy();
 
-	if (relativeVelocity.dot(collision->normal) > 0) {
+	/*if (relativeVelocity.dot(collision->normal) > 0) {
 		return;
-	}
+	}*/
 
 	float e = std::min(bodyA->restitution, bodyB->restitution);
 
@@ -105,18 +109,14 @@ void CollisionSystem::resolveCollision(Collision2D* collision) {
 	//bodyA->transform()->move(-collision->normal * collision->depth / 2);
 	//bodyB->transform()->move(collision->normal * collision->depth / 2);
 
-	//if (bodyA->mass != INFINITY) {
-	//	float factor = bodyB->mass == INFINITY ? 1.0f : 2.0f;
-	//	bodyA->transform()->move(-1 * collision->normal * collision->depth / factor);
-	//	Vector2 diff = bodyA->linearVelocity.xy() - collision->normal;
-	//	Vector2 d = diff * j;
-	//	Vector2 e = d / bodyA->mass;
-	//	Vector3 linVel = e.toVector3(0);
-	//	bodyA->linearVelocity = Vector3(0, 0, 0);
-	//}
-	//if (bodyB->mass != INFINITY) {
-	//	float factor = bodyA->mass == INFINITY ? 1.0f : 2.0f;
-	//	bodyB->transform()->move(collision->normal * collision->depth / factor);
-	//	bodyB->linearVelocity = (bodyB->linearVelocity.xy() + collision->normal * j / bodyB->mass).toVector3(0);
-	//}
+	if (bodyA->mass != INFINITY) {
+		float factor = bodyB->mass == INFINITY ? 1.0f : 2.0f;
+		bodyA->transform()->move(-1 * collision->normal * collision->depth / factor);
+		bodyA->linearVelocity = (bodyA->linearVelocity.xy() - collision->normal * j / bodyA->mass).toVector3(0);
+	}
+	if (bodyB->mass != INFINITY) {
+		float factor = bodyA->mass == INFINITY ? 1.0f : 2.0f;
+		bodyB->transform()->move(collision->normal * collision->depth / factor);
+		bodyB->linearVelocity = (bodyB->linearVelocity.xy() + collision->normal * j / bodyB->mass).toVector3(0);
+	}
 }

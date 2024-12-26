@@ -8,15 +8,14 @@
 #include "camera.h"
 #include <typeinfo>
 #include "menu_bar.h"
-#include "rectangle_collider_2d.h"
-#include "circle_collider_2d.h"
+#include "rectangle_collider.h"
+#include "circle_collider.h"
 #include "rectangle_renderer.h"
 #include "render_system.h"
 #include "text_renderer.h"
 #include "collision_system.h"
 #include "imgui_renderer.h"
 #include "polygon_collider_2d.h"
-#include "circle_collider_2d.h"
 #include "misc/cpp/imgui_stdlib.h"
 #include <map>
 
@@ -49,8 +48,8 @@ void InspectorWindow::render() {
 				if (ImGui::CollapsingHeader(name.substr(6).c_str())) {
 					Transform* transform = dynamic_cast<Transform*>(component);
 					RigidBody* rigidBody = dynamic_cast<RigidBody*>(component);
-					RectangleCollider2D* rectangleCollider = dynamic_cast<RectangleCollider2D*>(component);
-					CircleCollider2D* circleCollider = dynamic_cast<CircleCollider2D*>(component);
+					RectangleCollider* rectangleCollider = dynamic_cast<RectangleCollider*>(component);
+					CircleCollider* circleCollider = dynamic_cast<CircleCollider*>(component);
 					if (transform != nullptr) {
 						ImGui::LabelText("##position_lbl", "Position");
 						float posValues[3] = { transform->position.x(), transform->position.y(),  transform->position.z() };
@@ -186,10 +185,10 @@ void InspectorWindow::render() {
 			}
 			if (ImGui::BeginMenu("Collision")) {
 				if (ImGui::MenuItem("RectangleCollider2D")) {
-					this->inspectedGameObject->addComponent(new RectangleCollider2D());
+					this->inspectedGameObject->addComponent(new RectangleCollider());
 				}
 				if (ImGui::MenuItem("CircleCollider2D")) {
-					this->inspectedGameObject->addComponent(new CircleCollider2D());
+					this->inspectedGameObject->addComponent(new CircleCollider());
 				}
 				if (ImGui::MenuItem("CollisionSystem")) {
 					this->inspectedGameObject->addComponent(new CollisionSystem());

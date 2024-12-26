@@ -12,6 +12,11 @@ GameObject::GameObject() {
 	this->addComponent(this->_transform);
 }
 
+
+GameObject::GameObject(std::string name) : GameObject() {
+	this->name = name.c_str();
+}
+
 GameObject::GameObject(const char* name) : GameObject() {
 	this->name = name;
 }

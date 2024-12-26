@@ -201,20 +201,17 @@
     <ClCompile Include="polygon_collider_2d.h">
       <Filter>Headerdateien\collision</Filter>
     </ClCompile>
-    <ClCompile Include="circle_collider_2d.cpp">
+    <ClCompile Include="circle_collider.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
     <ClCompile Include="polygon_collider_2d.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
-    <ClCompile Include="rectangle_collider_2d.cpp">
+    <ClCompile Include="rectangle_collider.cpp">
       <Filter>Quelldateien\collision</Filter>
     </ClCompile>
     <ClCompile Include="event_handler.cpp">
       <Filter>Quelldateien\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="collision_visualizer.cpp">
-      <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="line_renderer.cpp">
       <Filter>Quelldateien\graphics</Filter>
@@ -224,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="menu_bar.cpp">
       <Filter>Quelldateien\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="console_window.cpp">
+      <Filter>Quelldateien\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="circle_renderer.cpp">
+      <Filter>Quelldateien\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,10 +347,10 @@
     <ClInclude Include="polygon_2d.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
-    <ClInclude Include="circle_collider_2d.h">
+    <ClInclude Include="circle_collider.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle_collider_2d.h">
+    <ClInclude Include="rectangle_collider.h">
       <Filter>Headerdateien\collision</Filter>
     </ClInclude>
     <ClInclude Include="collision_test_result.h">
@@ -356,14 +359,17 @@
     <ClInclude Include="event_handler.h">
       <Filter>Headerdateien\utils</Filter>
     </ClInclude>
-    <ClInclude Include="collision_visualizer.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="line_renderer.h">
       <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
     <ClInclude Include="debug.h">
       <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="console_window.h">
+      <Filter>Headerdateien\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_renderer.h">
+      <Filter>Headerdateien\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +394,12 @@
     </None>
     <None Include="menu_bar.h">
       <Filter>Headerdateien\ui</Filter>
+    </None>
+    <None Include="circle_vertex.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="circle_fragment.glsl">
+      <Filter>Ressourcendateien</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

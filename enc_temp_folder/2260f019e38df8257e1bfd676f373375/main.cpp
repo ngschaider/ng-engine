@@ -33,7 +33,7 @@ int main() {
 		systems->transform()->position = Vector3(0, 0, 0);
 		systems->addComponent(new RenderSystem());
 		Camera* camera = new Camera();
-		//camera->size = Vector2(40, 20);
+		camera->size = Vector2(40, 20);
 		systems->addComponent(camera);
 		systems->addComponent(new InputSystem());
 		systems->addComponent(new ImGuiRenderer());

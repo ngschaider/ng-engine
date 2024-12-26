@@ -75,6 +75,8 @@ void Collider2D::render() {
 		return;
 	}
 
+	this->shader->use();
+
 	// Rect bounds = this->getLocalBounds();
 	// Matrix4x4 m = Matrix4x4::TRS(bounds.bottomLeft().toVector3(0), Quaternion::identity(), bounds.size().toVector3(1));
 	// this->shader->setMatrix4x4("transformationMatrix", this->getTransformationMatrix() * m);

@@ -93,3 +93,7 @@ Vector2 Vector3::zz() const {
 Vector4 Vector3::toVector4(float w) const {
 	return Vector4(this->x(), this->y(), this->z(), w);
 }
+
+Vector3 operator/(float scalar, Vector3 vec) {
+	return Vector3(scalar / vec.x(), scalar / vec.y(), scalar / vec.z());
+}

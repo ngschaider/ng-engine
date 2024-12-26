@@ -32,7 +32,7 @@ public:
 	/**
 	* The background color of the window.
 	*/
-	Color backgroundColor = Color::green();
+	Color backgroundColor = Color::black();
 
 	/**
 	* Overwritten method from Component. This is where the rendering takes place

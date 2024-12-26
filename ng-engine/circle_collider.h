@@ -4,7 +4,7 @@
 #include "rect.h"
 #include "vector2.h"
 
-class CircleCollider2D : public Collider2D {
+class CircleCollider : public Collider2D {
 public:
 	/**
 	* An additional positional offset of the collider

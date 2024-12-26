@@ -130,5 +130,6 @@ void Shader::setMatrix4x4(const char* name, Matrix4x4 m) const {
 		m.c(), m.g(), m.k(), m.o(),
 		m.d(), m.h(), m.l(), m.p(),
 	};
+	auto location = glGetUniformLocation(this->id, name);
 	glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, false, values);
 }
