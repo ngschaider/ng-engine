@@ -18,8 +18,8 @@ void CollisionVisualizer::update() {
 	if (collisionSystem == nullptr) throw new std::exception();
 
 	for (Collision2D* collision : collisionSystem->currentCollisions) {
-		Vector3 start = collision->colliderA->transform()->position;
-		Vector3 end = start + collision->normal.normalized().toVector3(0) * 1;
-		debug->line(start, end, Color::black());
+		Vector3 start = collision->colliderA->transform()->getGlobalPosition();
+		Vector3 end = start + collision->normal.toVector3(0);
+		debug->line(start, end);
 	}
 }

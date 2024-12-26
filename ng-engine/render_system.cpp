@@ -187,8 +187,8 @@ Matrix4x4 RenderSystem::getScreenToClipMatrix() {
 Matrix4x4 RenderSystem::getClipToScreenMatrix() {
 	Vector2i size = this->size();
 
-	Vector3 translate = Vector3((float)size.x() / 2, (float)size.y() / 2, 0);
-	Vector3 scale = Vector3((float)size.x(), (float)size.y(), 1);
+	Vector3 translate = Vector3((float) size.x() / 2, (float) size.y() / 2, 0);
+	Vector3 scale = Vector3((float)size.x() / 2, (float)size.y() / 2, 1);
 	return Matrix4x4::TRS(translate, Quaternion::identity(), scale);
 }
 

@@ -47,15 +47,25 @@ public:
 	/**
 	* Transforms the given coordinates from local space to world space
 	*/
+	Vector4 localToWorld(Vector4 local);
 	Vector3 localToWorld(Vector3 local);
 	Vector2 localToWorld(Vector2 local);
+
+	/**
+	* Transforms the given value from local space to world space by only applying the scale (no rotation or translation)
+	*/
 	float localToWorld(float local);
 
 	/**
 	* Transforms the given coordinates from world space to local space
 	*/
+	Vector4 worldToLocal(Vector4 world);
 	Vector3 worldToLocal(Vector3 world);
 	Vector2 worldToLocal(Vector2 world);
+
+	/**
+	* Transforms the given value from world space to local space by only applying the scale (no rotation or translation)
+	*/
 	float worldToLocal(float world);
 
 	/**
@@ -72,4 +82,9 @@ public:
 	* Returns a list of references to all transforms in the scene which have this transform as their parent.
 	*/
 	std::vector<Transform*> getChildren();
+
+	/**
+	* Returns the global position of this transform
+	*/
+	Vector3 getGlobalPosition();
 };

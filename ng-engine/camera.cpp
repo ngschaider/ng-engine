@@ -48,3 +48,7 @@ Vector3 Camera::cameraToWorld(Vector3 camera) {
 Vector2 Camera::cameraToClip(Vector3 camera) {
 	return (this->getCameraToClipMatrix() * camera.toVector4(1)).xy();
 }
+
+Vector2 Camera::worldToClip(Vector3 world) {
+	return this->cameraToClip(this->worldToCamera(world));
+}

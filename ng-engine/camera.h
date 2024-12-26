@@ -44,4 +44,10 @@ public:
 	* This is a lossy operation as the camera applies an orthographic projection
 	*/
 	Vector2 cameraToClip(Vector3 camera);
+
+	/**
+	* Transforms the given coordinates from world space to clip space
+	* This is a lossy operation as the camera applies an orthographic projection
+	*/
+	Vector2 worldToClip(Vector3 camera);
 };

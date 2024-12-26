@@ -21,12 +21,12 @@ Matrix4x4 Transform::getLocalToWorldMatrix() {
 	return this->parent->getLocalToWorldMatrix() * myMatrix;
 }
 
-Matrix4x4 Transform::getWorldToLocalMatrix() {
-	return this->getLocalToWorldMatrix().invert();
+Vector4 Transform::localToWorld(Vector4 local) {
+	return this->getLocalToWorldMatrix() * local;
 }
 
 Vector3 Transform::localToWorld(Vector3 local) {
-	return (this->getLocalToWorldMatrix() * local.toVector4(1)).xyz();
+	return this->localToWorld(local.toVector4(1)).xyz();
 }
 
 Vector2 Transform::localToWorld(Vector2 local) {
@@ -34,11 +34,20 @@ Vector2 Transform::localToWorld(Vector2 local) {
 }
 
 float Transform::localToWorld(float local) {
-	return this->localToWorld(Vector2(local, 1)).x();
+	return local * this->getLocalToWorldMatrix().a();
+}
+
+
+Matrix4x4 Transform::getWorldToLocalMatrix() {
+	return this->getLocalToWorldMatrix().invert();
+}
+
+Vector4 Transform::worldToLocal(Vector4 world) {
+	return this->getWorldToLocalMatrix() * world;
 }
 
 Vector3 Transform::worldToLocal(Vector3 world) {
-	return (this->getWorldToLocalMatrix() * world.toVector4(1)).xyz();
+	return this->worldToLocal(world.toVector4(1)).xyz();
 }
 
 Vector2 Transform::worldToLocal(Vector2 world) {
@@ -46,7 +55,7 @@ Vector2 Transform::worldToLocal(Vector2 world) {
 }
 
 float Transform::worldToLocal(float world) {
-	return this->worldToLocal(Vector3(world, 1, 1)).x();
+	return this->getWorldToLocalMatrix().a() * world;
 }
 
 void Transform::move(Vector3 vector) {
@@ -68,4 +77,8 @@ std::vector<Transform*> Transform::getChildren() {
 	}
 
 	return children;
+}
+
+Vector3 Transform::getGlobalPosition() {
+	return this->localToWorld(this->position);
 }

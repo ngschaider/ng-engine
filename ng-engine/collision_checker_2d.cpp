@@ -19,13 +19,14 @@ CollisionTestResult CollisionChecker2D::circleCircle(Vector2 center1, float radi
 	float distance = center1.distance(center2);
 	float radii = radius1 + radius2;
 
+	// Calculate vector pointing from circle 2 to circle 1.
 	Vector2 normal = distance == 0 ? Vector2(0, -1) : center2 - center1;
 
 	if (distance < radii) {
 		return {
 			true, // success
 			radii - distance, // depth
-			normal, // normal
+			normal.normalized(), // normal
 		};
 	}
 	else {
