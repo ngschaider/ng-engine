@@ -10,7 +10,7 @@ private:
 	GLFWwindow* getWindow();
 public:
 	InputSystem();
-	void update();
+	void update() override;
 	bool isButtonPressed(int);
 	bool isMousePressed(int);
 	Vector2 getCursorPosition();

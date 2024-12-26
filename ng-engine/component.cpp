@@ -23,6 +23,10 @@ void Component::lateUpdate() {
 
 }
 
+void Component::fixedUpdate() {
+
+}
+
 // Quick access methods
 Scene* Component::scene() const {
 	if (this->gameObject == nullptr) return nullptr;

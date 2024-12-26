@@ -14,5 +14,5 @@ public:
 	Color strokeColor = Color::black();
 
 	TriangleRenderer();
-	void render();
+	void render() override;
 };

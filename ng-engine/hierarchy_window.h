@@ -7,5 +7,5 @@ private:
 	void renderGameObject(GameObject*);
 public:
 	HierarchyWindow();
-	void render();
+	void render() override;
 };

@@ -9,5 +9,5 @@ class CollisionVisualizer : public Component {
 	std::map<Collision2D*, LineRenderer*> normals;
 public:
 	CollisionVisualizer();
-	void update();
+	void update() override;
 };

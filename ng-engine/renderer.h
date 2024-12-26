@@ -21,7 +21,18 @@ public:
 
 	// int renderingOrder = 0; // Renderer instances with higher order are rendered later
 
+	/**
+	* Called before the render cycle.
+	*/
 	virtual void beforeRender();
+
+	/**
+	* Called during the render cycle.
+	*/
 	virtual void render();
+
+	/**
+	* Called after the render cycle.
+	*/
 	virtual void afterRender();
 };

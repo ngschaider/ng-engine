@@ -7,5 +7,5 @@
 class ControlVelocity : public Component {
 public:
 	ControlVelocity();
-	void update();
+	void fixedUpdate() override;
 };

@@ -9,6 +9,6 @@ private:
 public:
 	SpriteRenderer();
 	virtual ~SpriteRenderer();
-	void render();
+	void render() override;
 	Texture2D* texture;
 };

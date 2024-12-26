@@ -126,9 +126,6 @@
     <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Quelldateien\vendor</Filter>
     </ClCompile>
-    <ClCompile Include="menu_bar.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
     <ClCompile Include="component.cpp">
       <Filter>Quelldateien\core</Filter>
     </ClCompile>
@@ -224,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="debug.cpp">
       <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_bar.cpp">
+      <Filter>Quelldateien\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,7 +387,7 @@
       <Filter>Ressourcendateien</Filter>
     </None>
     <None Include="menu_bar.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\ui</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

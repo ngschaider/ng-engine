@@ -17,9 +17,22 @@ private:
 	std::vector<Component*> toRemoveLater;
 public:
 	std::vector<Component*> components; // The components attached to this game object, this should only be written to by the game object
+
+	/**
+	* The transform component attached to this game object.
+	*/
 	Transform* transform() const { return this->_transform; }
-	std::string name = "Unnamed GameObject"; // Name of the game object
-	Scene* scene; // the scene this game object is attached to, this should only be written to by the scene
+
+	/**
+	* The name of the game object
+	*/
+	std::string name = "Unnamed GameObject"; 
+
+	/**
+	* The scene this game object is attached to, this should only be written to by the scene
+	*/
+	Scene* scene;
+
 	GameObject();
 	GameObject(const char*);
 	virtual ~GameObject();
@@ -79,4 +92,5 @@ public:
 	void earlyUpdate();
 	void update();
 	void lateUpdate();
+	void fixedUpdate();
 };

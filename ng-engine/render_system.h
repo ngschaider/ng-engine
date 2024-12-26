@@ -37,7 +37,7 @@ public:
 	/**
 	* Overwritten method from Component. This is where the rendering takes place
 	*/
-	void lateUpdate();
+	void lateUpdate() override;
 
 	/**
 	* Returns the size of the window in pixels

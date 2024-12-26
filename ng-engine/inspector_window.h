@@ -9,5 +9,5 @@ private:
 public:
 	InspectorWindow();
 	void setInspectedGameObject(GameObject*);
-	void render();
+	void render() override;
 };

@@ -24,5 +24,5 @@ public:
 	*/
 	std::vector<Collision2D*> currentCollisions;
 
-	void update();
+	void update() override;
 };

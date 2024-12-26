@@ -46,17 +46,17 @@ int main() {
 		RigidBody* rb1 = new RigidBody();
 		rb1->linearVelocity = Vector3(0, 0, 0);
 		square1->addComponent(rb1);
-		square1->addComponent(new CircleCollider2D());
+		square1->addComponent(new RectangleCollider2D());
 		square1->addComponent(new RectangleRenderer());
 		square1->addComponent(new ControlVelocity());
 		scene->addGameObject(square1);
 
 		GameObject* square2 = new GameObject("Square 2");
-		square2->transform()->position = Vector3(0, 0, 0);
+		square2->transform()->position = Vector3(-3, 0, 0);
 		RigidBody* rb2 = new RigidBody();
 		rb2->linearVelocity = Vector3(0, 0, 0);
 		square2->addComponent(rb2);
-		square2->addComponent(new CircleCollider2D());
+		square2->addComponent(new RectangleCollider2D());
 		square2->addComponent(new RectangleRenderer());
 		scene->addGameObject(square2);
 

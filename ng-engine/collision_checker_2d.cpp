@@ -4,6 +4,7 @@
 #include "circle_collider_2d.h"
 #include "polygon_collider_2d.h"
 #include <algorithm>
+#include "debug.h"
 
 
 bool CollisionChecker2D::areRectsIntersecting(Rect rectA, Rect rectB) {
@@ -48,10 +49,15 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 		normals.push_back(edge.normal().normalized());
 	}
 
+	Debug::instance->circle(polygonA.getArithmeticMean().toVector3(0), 3);
+	Debug::instance->circle(polygonB.getArithmeticMean().toVector3(0), 3);
+
 	// use the normal vectors as an axis, project all vertices and see if there is a gap
 	Vector2 resolutionNormal = Vector2(0, 0);
 	float minDepth = INFINITY;
 	for (Vector2 axis : normals) {
+		Debug::instance->line(polygonA.getArithmeticMean(), polygonA.getArithmeticMean() + axis * 2, Color::blue(), 2);
+
 		std::vector<float> projectionA = polygonA.project(axis);
 		std::pair<std::vector<float>::iterator, std::vector<float>::iterator> boundsA = std::minmax_element(projectionA.begin(), projectionA.end());
 		float minA = *boundsA.first;
@@ -90,7 +96,7 @@ CollisionTestResult CollisionChecker2D::polygonPolygon(Polygon2D polygonA, Polyg
 	return {
 		true, // success
 		minDepth, // depth
-		resolutionNormal, // normal
+		resolutionNormal.normalized(), // normal
 	};
 }
 
@@ -108,7 +114,6 @@ CollisionTestResult CollisionChecker2D::circlePolygon(Vector2 circleCenter, floa
 		std::pair<float, float> boundsA = CollisionChecker2D::projectCircle(circleCenter, circleRadius, axis);
 		float minA = boundsA.first;
 		float maxA = boundsA.second;
-
 
 		std::vector<float> projection = polygon.project(axis);
 		std::pair<std::vector<float>::iterator, std::vector<float>::iterator> boundsB = std::minmax_element(projection.begin(), projection.end());

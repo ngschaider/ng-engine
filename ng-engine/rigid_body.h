@@ -13,5 +13,5 @@ public:
 	Quaternion angularAcceleration = Quaternion::identity();
 	Vector3 linearVelocity = Vector3(0, 0, 0);
 	Quaternion angularVelocity = Quaternion::identity();
-	void update();
+	void fixedUpdate() override;
 };

@@ -49,6 +49,7 @@ public:
 	virtual void earlyUpdate();
 	virtual void update();
 	virtual void lateUpdate();
+	virtual void fixedUpdate();
 
 	/**
 	* called when the component gets attached to a game object, this should only be called by the game object

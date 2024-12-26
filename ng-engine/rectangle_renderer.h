@@ -13,5 +13,5 @@ public:
 	Color fillColor = Color::white();
 	RectangleRenderer();
 	~RectangleRenderer();
-	void render();
+	void render() override;
 };

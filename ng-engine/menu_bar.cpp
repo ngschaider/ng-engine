@@ -12,6 +12,10 @@ void MenuBar::render() {
 			this->engine()->stop();
 		}
 
+		char buffer[120];
+		sprintf_s(buffer, "FPS: %f", 1.0f / this->engine()->elapsed());
+		ImGui::Text(buffer);
+
 		ImGui::EndMainMenuBar();
 	}
 }

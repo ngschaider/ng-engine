@@ -69,14 +69,22 @@ void Scene::earlyUpdate() {
 		gameObject->earlyUpdate();
 	}
 }
+
 void Scene::update() {
 	for (GameObject* gameObject : this->gameObjects) {
 		gameObject->update();
 	}
 }
+
 void Scene::lateUpdate() {
 	for (GameObject* gameObject : this->gameObjects) {
 		gameObject->lateUpdate();
+	}
+}
+
+void Scene::fixedUpdate() {
+	for (GameObject* gameObject : this->gameObjects) {
+		gameObject->fixedUpdate();
 	}
 }
 

@@ -8,7 +8,7 @@ ControlVelocity::ControlVelocity() {
 
 }
 
-void ControlVelocity::update() {
+void ControlVelocity::fixedUpdate() {
 	RigidBody* rb = this->gameObject->getComponent<RigidBody>();
 	if (rb == nullptr) {
 		throw new std::exception("ControlVelocity requires a RigidBody component on the same GameObject.");

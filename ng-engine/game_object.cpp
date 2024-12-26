@@ -92,6 +92,12 @@ void GameObject::lateUpdate() {
 	}
 }
 
+void GameObject::fixedUpdate() {
+	for (Component* component : this->components) {
+		component->fixedUpdate();
+	}
+}
+
 void GameObject::addedToEngine() {
 	for (Component* component : this->components) {
 		component->addedToEngine();

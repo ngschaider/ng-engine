@@ -53,4 +53,5 @@ public:
 	void earlyUpdate();
 	void update();
 	void lateUpdate();
+	void fixedUpdate();
 };

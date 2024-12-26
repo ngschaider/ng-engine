@@ -14,9 +14,8 @@ Polygon2D PolygonCollider2D::getLocalPolygon() {
 Polygon2D PolygonCollider2D::getWorldPolygon() {
 	std::vector<Vector2> worldVertices;
 
-	Matrix4x4 m = this->transform()->getLocalToWorldMatrix();
 	for (Vector2 localVertex : this->getLocalPolygon().vertices) {
-		Vector2 worldVertex = (m * localVertex.toVector4(0, 0)).xy();
+		Vector2 worldVertex = this->transform()->localToWorld(localVertex);
 		worldVertices.push_back(worldVertex);
 	}
 

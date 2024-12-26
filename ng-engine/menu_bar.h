@@ -4,5 +4,5 @@
 
 class MenuBar : public Renderer {
 public:
-	void render();
+	void render() override;
 };
