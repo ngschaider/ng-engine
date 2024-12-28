@@ -3,6 +3,14 @@
 #include "engine.h"
 #include "game_object.h"
 
+void Component::setEnabled(bool enabled) {
+	this->isEnabledSelf = enabled;
+}
+
+bool Component::getEnabled() {
+	return this->isEnabledSelf && this->gameObject->getEnabled();
+}
+
 Component::Component() {
 	this->gameObject = nullptr;
 }

@@ -30,7 +30,7 @@ Matrix4x4 Camera::getCameraToClipMatrix() {
 	float camMin = std::min(this->size.x(), this->size.y());
 	float camMax = std::max(this->size.x(), this->size.y());
 	float camRatio = this->ratio();
-	Matrix4x4 scaleDown = Matrix4x4::scale(Vector3(2 / this->size.x(), 2 / this->size.y(), 1.0f));
+	Matrix4x4 scaleDown = Matrix4x4::scale(Vector3(2 / camMin, 2 / camMin, 1.0f));
 
 
 
@@ -47,8 +47,8 @@ Matrix4x4 Camera::getCameraToClipMatrix() {
 	// this creates black bars but ensures, that we exactly see the region captured by the camera
 	//float ratio = renderSystem->ratio();
 
-	float screenMin = std::min(renderSystem->size().x(), renderSystem->size().y());
-	float screenMax = std::max(renderSystem->size().x(), renderSystem->size().y());
+	float screenMin = (float) std::min(renderSystem->size().x(), renderSystem->size().y());
+	float screenMax = (float) std::max(renderSystem->size().x(), renderSystem->size().y());
 	float screenRatio = renderSystem->ratio();
 	Matrix4x4 distort = Matrix4x4::scale(Vector3(1.0f / renderSystem->size().x() * screenMin, 1.0f / renderSystem->size().y() * screenMin, 1.0f));
 

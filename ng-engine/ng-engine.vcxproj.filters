@@ -13,363 +13,390 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\components">
-      <UniqueIdentifier>{4e383310-44a1-4232-914f-61de0dae5ad5}</UniqueIdentifier>
+    <Filter Include="Quelldateien\game">
+      <UniqueIdentifier>{f1d3d556-32b8-4fa3-a178-8c66e4fb8259}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\components">
-      <UniqueIdentifier>{cb59d553-ce2d-45bf-a6bb-59a335f8670e}</UniqueIdentifier>
+    <Filter Include="Quelldateien\engine">
+      <UniqueIdentifier>{978badbd-4f1c-40d5-b0ed-1f7694ba3da0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\utils">
-      <UniqueIdentifier>{c1239aa2-563e-4c3d-ba35-6d51e7aa5e2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\utils">
-      <UniqueIdentifier>{1c6e5633-5d62-417e-9478-2ca31e65dec7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\core">
-      <UniqueIdentifier>{a74c67de-70ce-4203-870d-84da12705a54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\core">
-      <UniqueIdentifier>{590a103c-ac25-4d02-9ab0-258cf86b4e4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\vendor">
-      <UniqueIdentifier>{246b0dce-9aba-47b1-8288-f571b4168b83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\collision">
-      <UniqueIdentifier>{6b240b44-4c8f-4f6b-a20c-5280c33cbb98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\graphics">
-      <UniqueIdentifier>{ab715cf0-4779-415d-ab34-6dbfdeb3248a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\graphics">
+    <Filter Include="Quelldateien\engine\graphics">
       <UniqueIdentifier>{408e3b76-cbb8-4cf9-bc7a-7e1dedf787c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\collision">
+    <Filter Include="Quelldateien\engine\core">
+      <UniqueIdentifier>{590a103c-ac25-4d02-9ab0-258cf86b4e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\engine\components">
+      <UniqueIdentifier>{4e383310-44a1-4232-914f-61de0dae5ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\engine\collision">
       <UniqueIdentifier>{f05fc0d0-3df7-456c-8301-446f6ef00320}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\ui">
+    <Filter Include="Quelldateien\engine\ui">
       <UniqueIdentifier>{80121a09-fb2d-4a56-91dc-604d5b67c2b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\ui">
+    <Filter Include="Quelldateien\engine\vendor">
+      <UniqueIdentifier>{246b0dce-9aba-47b1-8288-f571b4168b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\engine\utils">
+      <UniqueIdentifier>{c1239aa2-563e-4c3d-ba35-6d51e7aa5e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\game">
+      <UniqueIdentifier>{119ecdda-d58c-464a-91a9-7ca60e97f086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine">
+      <UniqueIdentifier>{fa6b34a3-4806-4657-ae65-4eb7b75df6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\utils">
+      <UniqueIdentifier>{1c6e5633-5d62-417e-9478-2ca31e65dec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\ui">
       <UniqueIdentifier>{12d02390-733c-4ace-8452-70dd7bbc4203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\graphics">
+      <UniqueIdentifier>{ab715cf0-4779-415d-ab34-6dbfdeb3248a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\core">
+      <UniqueIdentifier>{a74c67de-70ce-4203-870d-84da12705a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\components">
+      <UniqueIdentifier>{cb59d553-ce2d-45bf-a6bb-59a335f8670e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\engine\collision">
+      <UniqueIdentifier>{6b240b44-4c8f-4f6b-a20c-5280c33cbb98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="rigid_body.cpp">
-      <Filter>Quelldateien\components</Filter>
+      <Filter>Quelldateien\engine\components</Filter>
     </ClCompile>
     <ClCompile Include="transform.cpp">
-      <Filter>Quelldateien\components</Filter>
+      <Filter>Quelldateien\engine\components</Filter>
     </ClCompile>
     <ClCompile Include="vector3.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="vector2.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="matrix4x4.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="matrix3x3.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="color.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="engine.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="game_object.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>Quelldateien\components</Filter>
+      <Filter>Quelldateien\engine\components</Filter>
     </ClCompile>
     <ClCompile Include="input_system.cpp">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="control_velocity.cpp">
-      <Filter>Quelldateien\components</Filter>
+      <Filter>Quelldateien\engine\components</Filter>
     </ClCompile>
     <ClCompile Include="texture_2d.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="vector2i.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\glad\glad.c">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\imgui.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\imgui_demo.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\imgui_draw.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\imgui_tables.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp">
-      <Filter>Quelldateien\vendor</Filter>
+      <Filter>Quelldateien\engine\vendor</Filter>
     </ClCompile>
     <ClCompile Include="component.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="stb_image.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="render_system.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="triangle_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="text_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="sprite_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="shader.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="opengl.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="collision_checker_2d.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="cube_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="imgui_renderer.cpp">
-      <Filter>Quelldateien\ui</Filter>
+      <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="hierarchy_window.cpp">
-      <Filter>Quelldateien\ui</Filter>
+      <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="inspector_window.cpp">
-      <Filter>Quelldateien\ui</Filter>
+      <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="resource_manager.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="rectangle_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="collision_system.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="collider_2d.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="rect.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="vector4.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="quaternion.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="event.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="polygon_2d.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="polygon_collider_2d.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="circle_collider.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="polygon_collider_2d.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="rectangle_collider.cpp">
-      <Filter>Quelldateien\collision</Filter>
+      <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="event_handler.cpp">
-      <Filter>Quelldateien\utils</Filter>
+      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="line_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="debug.cpp">
-      <Filter>Quelldateien\core</Filter>
+      <Filter>Quelldateien\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="menu_bar.cpp">
-      <Filter>Quelldateien\ui</Filter>
+      <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="console_window.cpp">
-      <Filter>Quelldateien\ui</Filter>
+      <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
     <ClCompile Include="circle_renderer.cpp">
-      <Filter>Quelldateien\graphics</Filter>
+      <Filter>Quelldateien\engine\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="control_velocity.cpp">
+      <Filter>Quelldateien\game</Filter>
+    </ClCompile>
+    <ClCompile Include="game_manager.cpp">
+      <Filter>Quelldateien\game</Filter>
+    </ClCompile>
+    <ClCompile Include="numbers.cpp">
+      <Filter>Quelldateien\engine\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Quelldateien\engine\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rigid_body.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\engine\components</Filter>
     </ClInclude>
     <ClInclude Include="transform.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\engine\components</Filter>
     </ClInclude>
     <ClInclude Include="vector3.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="vector2.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="matrix4x4.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="matrix3x3.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="engine.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="game_object.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="quaternion.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\engine\components</Filter>
     </ClInclude>
     <ClInclude Include="input_system.h">
-      <Filter>Headerdateien\components</Filter>
-    </ClInclude>
-    <ClInclude Include="control_velocity.h">
-      <Filter>Headerdateien\components</Filter>
+      <Filter>Headerdateien\engine\components</Filter>
     </ClInclude>
     <ClInclude Include="texture_2d.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="vector2i.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="vector4.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="event.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="component.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="resource_manager.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="collision_system.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="collider_2d.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="text_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="sprite_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="render_system.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="triangle_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="rectangle_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="cube_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="collision_checker_2d.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="shader.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="hierarchy_window.h">
-      <Filter>Headerdateien\ui</Filter>
+      <Filter>Headerdateien\engine\ui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_renderer.h">
-      <Filter>Headerdateien\ui</Filter>
+      <Filter>Headerdateien\engine\ui</Filter>
     </ClInclude>
     <ClInclude Include="inspector_window.h">
-      <Filter>Headerdateien\ui</Filter>
+      <Filter>Headerdateien\engine\ui</Filter>
     </ClInclude>
     <ClInclude Include="rect.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="numbers.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="collision_2d.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="polygon_2d.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="circle_collider.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="rectangle_collider.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="collision_test_result.h">
-      <Filter>Headerdateien\collision</Filter>
+      <Filter>Headerdateien\engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="event_handler.h">
-      <Filter>Headerdateien\utils</Filter>
+      <Filter>Headerdateien\engine\utils</Filter>
     </ClInclude>
     <ClInclude Include="line_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="debug.h">
-      <Filter>Headerdateien\core</Filter>
+      <Filter>Headerdateien\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="console_window.h">
-      <Filter>Headerdateien\ui</Filter>
+      <Filter>Headerdateien\engine\ui</Filter>
     </ClInclude>
     <ClInclude Include="circle_renderer.h">
-      <Filter>Headerdateien\graphics</Filter>
+      <Filter>Headerdateien\engine\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="control_velocity.h">
+      <Filter>Headerdateien\game</Filter>
+    </ClInclude>
+    <ClInclude Include="game_manager.h">
+      <Filter>Headerdateien\game</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +420,7 @@
       <Filter>Ressourcendateien</Filter>
     </None>
     <None Include="menu_bar.h">
-      <Filter>Headerdateien\ui</Filter>
+      <Filter>Headerdateien\engine\ui</Filter>
     </None>
     <None Include="circle_vertex.glsl">
       <Filter>Ressourcendateien</Filter>

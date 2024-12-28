@@ -6,10 +6,7 @@
 
 std::vector<LoadedShader> ResourceManager::loadedShaders;
 std::map<std::string, Texture2D*> ResourceManager::loadedTextures;
-
-ResourceManager::ResourceManager() {
-
-}
+std::map<std::string, Font*> ResourceManager::loadedFonts;
 
 /**
 * Deallocates and cleans up all the memory used by resources loaded by the ResourceManager
@@ -47,4 +44,17 @@ Texture2D* ResourceManager::loadTexture(const std::string file, bool alpha) {
 	}
 	
 	return ResourceManager::loadedTextures[file];
+}
+
+Font* ResourceManager::loadFont(const std::string file) {
+	if (ResourceManager::loadedFonts.count(file) == 0) {
+		Font* font = new Font(file);
+		ResourceManager::loadedFonts.insert(std::pair(file, font));
+	}
+
+	return ResourceManager::loadedFonts[file];
+}
+
+Font* ResourceManager::arial() {
+	return ResourceManager::loadFont("C:/Windows/Fonts/arial.ttf");
 }

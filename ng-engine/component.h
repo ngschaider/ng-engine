@@ -20,6 +20,18 @@ class Engine;
 */
 class Component {
 public:
+	bool isEnabledSelf = true;
+
+	/**
+	* Returns wether this component should be updated
+	*/
+	bool getEnabled();
+
+	/**
+	* Setter for "isEnabled".
+	*/
+	void setEnabled(bool enabled);
+
 	/**
 	* The game object this component is attached to, this should only be written to by the game object
 	*/

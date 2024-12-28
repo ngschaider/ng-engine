@@ -1,5 +1,6 @@
 #include "vector3.h"
 #include "vector4.h"
+#include "numbers.h"
 
 Vector3::Vector3(float x, float y, float z) : _x(x), _y(y), _z(z) {
 }

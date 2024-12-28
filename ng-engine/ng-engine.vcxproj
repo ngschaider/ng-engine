@@ -169,6 +169,8 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="event.cpp" />
     <ClCompile Include="event_handler.cpp" />
+    <ClCompile Include="font.cpp" />
+    <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="imgui_renderer.cpp" />
     <ClCompile Include="input_system.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="matrix3x3.cpp" />
     <ClCompile Include="matrix4x4.cpp" />
     <ClCompile Include="menu_bar.cpp" />
+    <ClCompile Include="numbers.cpp" />
     <ClCompile Include="opengl.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
@@ -224,6 +227,8 @@
     <ClInclude Include="engine.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="event_handler.h" />
+    <ClInclude Include="font.h" />
+    <ClInclude Include="game_manager.h" />
     <ClInclude Include="game_object.h" />
     <ClInclude Include="hierarchy_window.h" />
     <ClInclude Include="imgui_renderer.h" />

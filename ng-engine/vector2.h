@@ -16,6 +16,8 @@ private:
 	float _x;
 	float _y;
 public:
+	static Vector2 fromPolar(float magnitude, float angle);
+
 	/**
 	* Returns the x-component of the vector [x y]
 	*/

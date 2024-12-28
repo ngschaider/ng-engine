@@ -12,13 +12,7 @@ Transform::Transform() {
 }
 
 Matrix4x4 Transform::getLocalToWorldMatrix() {
-	Matrix4x4 myMatrix = Matrix4x4::TRS(this->position, this->rotation, this->scale);
-
-	if (this->parent == nullptr) {
-		return myMatrix;
-	}
-
-	return this->parent->getLocalToWorldMatrix() * myMatrix;
+	return Matrix4x4::TRS(this->getGlobalPosition(), this->getGlobalRotation(), this->getGlobalScale());
 }
 
 Vector4 Transform::localToWorld(Vector4 local) {
@@ -80,5 +74,26 @@ std::vector<Transform*> Transform::getChildren() {
 }
 
 Vector3 Transform::getGlobalPosition() {
-	return this->localToWorld(this->position);
+	if (this->transform()->parent == nullptr) {
+		return this->position;
+	}
+
+	return this->transform()->parent->getGlobalPosition() + this->position;
+}
+
+Quaternion Transform::getGlobalRotation() {
+	if (this->transform()->parent == nullptr) {
+		return this->rotation;
+	}
+
+	return this->transform()->parent->getGlobalRotation() * this->rotation;
+}
+
+Vector3 Transform::getGlobalScale() {
+	if (this->transform()->parent == nullptr) {
+		return this->scale;
+	}
+
+	Vector3 parentScale = this->transform()->parent->getGlobalScale();
+	return Vector3(parentScale.x() * this->scale.x(), parentScale.y() * this->scale.y(), parentScale.z() * this->scale.z());
 }

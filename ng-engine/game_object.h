@@ -16,12 +16,30 @@ private:
 	Transform* _transform;
 	std::vector<Component*> toRemoveLater;
 public:
-	std::vector<Component*> components; // The components attached to this game object, this should only be written to by the game object
+	/**
+	* getEnabled() returns true when the "isEnabled" property of this instance and all of it's parents' "isEnabled" properties are true.
+	*/
+	bool isEnabledSelf = true;
+
+	/**
+	* Setter for isEnabled
+	*/
+	void setEnabled(bool enabled);
+
+	/**
+	* Returns wether this game object should be updated.
+	*/
+	bool getEnabled();
+
+	/**
+	* The components attached to this game object, this should only be written to by the game object
+	*/
+	std::vector<Component*> components;
 
 	/**
 	* The transform component attached to this game object.
 	*/
-	Transform* transform() const { return this->_transform; }
+	inline Transform* transform() const { return this->_transform; }
 
 	/**
 	* The name of the game object
@@ -33,11 +51,25 @@ public:
 	*/
 	Scene* scene;
 
+	/**
+	* Constructs a new game object
+	*/
 	GameObject();
-	GameObject(std::string);
-	GameObject(const char*);
-	virtual ~GameObject();
 
+	/**
+	* Construct a new game object with the given name
+	*/
+	GameObject(std::string name);
+
+	/**
+	* Construct a new game object with the given name
+	*/
+	GameObject(const char* name);
+
+	/**
+	* Destructs the game object
+	*/
+	virtual ~GameObject();
 
 	/**
 	* Adds the specified Component to the GameEngine.
@@ -61,14 +93,40 @@ public:
 	Engine* engine() const;
 
 	// events
-	void addedToScene(); // called when the game objects gets attached to a scene, this should only be called by the scene
-	void removedFromScene(); // called when the game objects gets removed from a scene, this should only be called by the scene
-	void addedToEngine(); // called when this->engine() changes from NULL to an engine instance, this should only be called by the scene
-	void removedFromEngine(); // called when this->engine() changes from an engine instance to NULL, this should only be called by the scene
-	void started(); // Called when this->engine() gets started, this should only be called by the scene
-	void stopped(); // Called when this->engine() gets stopped, this should only be called by the scene
+	/**
+	* Called when the game objects gets attached to a scene, this should only be called by the scene
+	*/
+	void addedToScene();
 
-	// because of some weird c++ shit we have to implement the function in the header
+	/**
+	* Called when the game objects gets removed from a scene, this should only be called by the scene
+	*/
+	void removedFromScene();
+
+	/**
+	* Called when this->engine() changes from NULL to an engine instance, this should only be called by the scene
+	*/
+	void addedToEngine();
+
+	/**
+	* Called when this->engine() changes from an engine instance to NULL, this should only be called by the scene
+	*/
+	void removedFromEngine();
+
+	/**
+	* Called when this->engine() gets started, this should only be called by the scene
+	*/
+	void started();
+
+	/**
+	* Called when this->engine() gets stopped, this should only be called by the scene
+	*/
+	void stopped();
+
+	/**
+	* Returns a list containing references to all components of the specified type that are attached to this game object.
+	* Because of some weird c++ shit we have to implement the function in the header.
+	*/
 	template<class T>
 	std::vector<T*> getComponents() {
 		std::vector<T*> ret;
@@ -82,7 +140,10 @@ public:
 		return ret;
 	}
 
-	// because of some weird c++ shit we have to implement the function in the header
+	/**
+	* Returns a reference to the first component of the specified type attached to this game object.
+	* Because of some weird c++ shit we have to implement the function in the header.
+	*/
 	template<class T>
 	T* getComponent() {
 		std::vector<T*> components = this->getComponents<T>();

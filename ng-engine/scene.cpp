@@ -66,25 +66,33 @@ Camera* Scene::getActiveCamera() {
 
 void Scene::earlyUpdate() {
 	for (GameObject* gameObject : this->gameObjects) {
-		gameObject->earlyUpdate();
+		if (gameObject->getEnabled()) {
+			gameObject->earlyUpdate();
+		}
 	}
 }
 
 void Scene::update() {
 	for (GameObject* gameObject : this->gameObjects) {
-		gameObject->update();
+		if (gameObject->getEnabled()) {
+			gameObject->update();
+		}
 	}
 }
 
 void Scene::lateUpdate() {
 	for (GameObject* gameObject : this->gameObjects) {
-		gameObject->lateUpdate();
+		if (gameObject->getEnabled()) {
+			gameObject->lateUpdate();
+		}
 	}
 }
 
 void Scene::fixedUpdate() {
 	for (GameObject* gameObject : this->gameObjects) {
-		gameObject->fixedUpdate();
+		if (gameObject->getEnabled()) {
+			gameObject->fixedUpdate();
+		}
 	}
 }
 

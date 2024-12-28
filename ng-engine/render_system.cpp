@@ -21,7 +21,7 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 void debugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam) {
 	// ignore non-significant error/warning codes
-	if (id == 131185 || id == 131218) return;
+	if (id == 131185 || id == 131204 || id == 131218) return;
 
 	std::cout << "---------------" << std::endl;
 	std::cout << "Debug message (" << id << "): " << message << std::endl;
@@ -168,13 +168,19 @@ void RenderSystem::lateUpdate() {
 		return r1->renderingOrder < r2->renderingOrder;
 	});*/
 	for (Renderer* renderer : renderers) {
-		renderer->beforeRender();
+		if (renderer->getEnabled()) {
+			renderer->beforeRender();
+		}
 	}
 	for (Renderer* renderer : renderers) {
-		renderer->render();
+		if (renderer->getEnabled()) {
+			renderer->render();
+		}
 	}
 	for (Renderer* renderer : renderers) {
-		renderer->afterRender();
+		if (renderer->getEnabled()) {
+			renderer->afterRender();
+		}
 	}
 
 	glfwSwapBuffers(this->window);

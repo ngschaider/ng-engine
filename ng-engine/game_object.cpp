@@ -12,7 +12,6 @@ GameObject::GameObject() {
 	this->addComponent(this->_transform);
 }
 
-
 GameObject::GameObject(std::string name) : GameObject() {
 	this->name = name.c_str();
 }
@@ -24,6 +23,18 @@ GameObject::GameObject(const char* name) : GameObject() {
 GameObject::~GameObject() {
 	for (Component* component : this->components) {
 		delete component;
+	}
+}
+
+void GameObject::setEnabled(bool enabled) {
+	this->isEnabledSelf = enabled;
+}
+
+bool GameObject::getEnabled() {
+	if (this->transform()->parent) {
+		return this->transform()->parent->gameObject->isEnabledSelf && this->isEnabledSelf;
+	} else {
+		return this->isEnabledSelf;
 	}
 }
 
@@ -69,19 +80,25 @@ void GameObject::deleteComponentLater(Component* component) {
 
 void GameObject::earlyUpdate() {
 	for (Component* component : this->components) {
-		component->earlyUpdate();
+		if (component->getEnabled()) {
+			component->earlyUpdate();
+		}
 	}
 }
 
 void GameObject::update() {
 	for (Component* component : this->components) {
-		component->update();
+		if (component->getEnabled()) {
+			component->update();
+		}
 	}
 }
 
 void GameObject::lateUpdate() {
 	for (Component* component : this->components) {
-		component->lateUpdate();
+		if (component->getEnabled()) {
+			component->lateUpdate();
+		}
 	}
 
 	for (Component* component : this->toRemoveLater) {

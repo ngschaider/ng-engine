@@ -87,4 +87,14 @@ public:
 	* Returns the global position of this transform
 	*/
 	Vector3 getGlobalPosition();
+
+	/**
+	* Returns the global rotation of this transform
+	*/
+	Quaternion getGlobalRotation();
+
+	/**
+	* Returns the global scale of this transform
+	*/
+	Vector3 getGlobalScale();
 };

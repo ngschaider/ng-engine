@@ -1,6 +1,11 @@
 #include "vector2.h"
 #include "vector3.h"
 #include "vector4.h"
+#include "numbers.h"
+
+Vector2 Vector2::fromPolar(float magnitude, float angle) {
+	return Vector2(magnitude * cosf(angle * DEG2RAD), magnitude * sinf(angle * DEG2RAD));
+}
 
 float Vector2::x() const {
 	return this->_x; 

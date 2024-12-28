@@ -35,6 +35,10 @@ void InspectorWindow::render() {
 		ImGui::Text("Select a game object in the Hierarchy to show details here.");
 	}
 	else {
+		ImGui::Checkbox("##is_enabled", &this->inspectedGameObject->isEnabledSelf);
+		ImGui::SameLine();
+		ImGui::Text("Name: ");
+		ImGui::SameLine();
 		ImGui::InputText("##name", &this->inspectedGameObject->name);
 
 		if (this->inspectedGameObject->components.empty()) {
@@ -46,6 +50,9 @@ void InspectorWindow::render() {
 
 				std::string name = std::string(typeid(*component).name());
 				if (ImGui::CollapsingHeader(name.substr(6).c_str())) {
+
+					ImGui::Checkbox("Is Enabled", &component->isEnabledSelf);
+
 					Transform* transform = dynamic_cast<Transform*>(component);
 					RigidBody* rigidBody = dynamic_cast<RigidBody*>(component);
 					RectangleCollider* rectangleCollider = dynamic_cast<RectangleCollider*>(component);
