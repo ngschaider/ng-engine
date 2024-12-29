@@ -5,6 +5,9 @@
 #include "component.h"
 #include "quaternion.h"
 
+/**
+* The transform is the only component needed on EVERY game object. It specifies how objects are located in the scene.
+*/
 class Transform : public Component {
 public:
 	/**
@@ -23,14 +26,10 @@ public:
 	Vector3 scale = Vector3(1, 1, 1);
 
 	/**
-	* The parent transform of this transform.
+	* The parent transform of this transform. 
+	* This essentially allows transforms to build a linked list data structure.
 	*/
 	Transform* parent = nullptr;
-
-	/**
-	* Constructs a new Transform instance
-	*/
-	Transform();
 
 	/**
 	* Returns the transformation matrix to transform coordinates from local space to world space
@@ -57,10 +56,18 @@ public:
 	float localToWorld(float local);
 
 	/**
-	* Transforms the given coordinates from world space to local space
+	* Transforms the given coordinates from world space to local space.
 	*/
 	Vector4 worldToLocal(Vector4 world);
+
+	/**
+	* Transforms the given coordinates from world space to local space.
+	*/
 	Vector3 worldToLocal(Vector3 world);
+
+	/**
+	* Transforms the given coordinates from world space to local space.
+	*/
 	Vector2 worldToLocal(Vector2 world);
 
 	/**

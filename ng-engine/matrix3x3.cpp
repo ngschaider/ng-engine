@@ -1,56 +1,66 @@
 #include "matrix3x3.h"
-
 #include "vector3.h"
+#include <cassert>
 
-/**
-* returns a 3x3 identity matrix
-*/
 Matrix3x3 Matrix3x3::identity() {
 	return Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 }
 
-/**
-* returns a transformation matrix for translating by the given vector
-*/
 Matrix3x3 Matrix3x3::translate(Vector2 pos) {
 	return Matrix3x3(1, 0, pos.x(), 0, 0, pos.y(), 0, 0, 1);
 }
 
-/**
-* returns a transformation matrix for rotating by the given angle
-*/
 Matrix3x3 Matrix3x3::rotate(float rotation) {
-	// https://de.wikipedia.org/wiki/Drehmatrix
 	float c = cosf(rotation);
 	float s = sinf(rotation);
 	return Matrix3x3(c, -s, 0, s, c, 0, 0, 0, 1);
 }
 
-/**
-* returns a transformation matrix for scaling by the given vector
-*/
 Matrix3x3 Matrix3x3::scale(Vector2 scale) {
 	return Matrix3x3(scale.x(), 0, 0, 0, scale.y(), 0, 0, 0, 1);
 }
 
-/**
-* returns a transformation matrix for translating, rotating and scaling by the given
-*/
 Matrix3x3 Matrix3x3::TRS(Vector2 pos, float rotation, Vector2 scale) {
 	return Matrix3x3::translate(pos)
 		* Matrix3x3::rotate(rotation)
 		* Matrix3x3::scale(scale);
 }
 
-float Matrix3x3::a() { return this->getValue(0, 0); }
-float Matrix3x3::b() { return this->getValue(0, 1); }
-float Matrix3x3::c() { return this->getValue(0, 2); }
-float Matrix3x3::d() { return this->getValue(1, 0); }
-float Matrix3x3::e() { return this->getValue(1, 1); }
-float Matrix3x3::f() { return this->getValue(1, 2); }
-float Matrix3x3::g() { return this->getValue(2, 0); }
-float Matrix3x3::h() { return this->getValue(2, 1); }
-float Matrix3x3::i() { return this->getValue(2, 2); }
+float Matrix3x3::a() { 
+	return this->getValue(0, 0); 
+}
+
+float Matrix3x3::b() { 
+	return this->getValue(0, 1); 
+}
+
+float Matrix3x3::c() { 
+	return this->getValue(0, 2); 
+}
+
+float Matrix3x3::d() { 
+	return this->getValue(1, 0); 
+}
+
+float Matrix3x3::e() { 
+	return this->getValue(1, 1); 
+}
+
+float Matrix3x3::f() { 
+	return this->getValue(1, 2); 
+}
+
+float Matrix3x3::g() { 
+	return this->getValue(2, 0); 
+}
+
+float Matrix3x3::h() { 
+	return this->getValue(2, 1); 
+}
+
+float Matrix3x3::i() { 
+	return this->getValue(2, 2); 
+}
 
 Matrix3x3::Matrix3x3(float a, float b, float c, float d, float e, float f, float g, float h, float i) {
 	this->values = {
@@ -65,7 +75,7 @@ Matrix3x3::Matrix3x3(std::array<float, 9> values) {
 }
 
 Matrix3x3::Matrix3x3(std::vector<float> values) {
-	if (values.size() != 9) throw std::exception("Invalid size.");
+	assert(values.size() == 9);
 	std::copy_n(values.begin(), 9, this->values.begin());
 }
 
@@ -73,10 +83,11 @@ std::array<float, 9> Matrix3x3::getValues() {
 	return this->values;
 }
 
-float Matrix3x3::getValue(unsigned int x, unsigned int y) {
-	if (x > 2 || y > 2) throw new std::exception();
+float Matrix3x3::getValue(unsigned int column, unsigned int row) {
+	assert(column <= 2);
+	assert(row <= 2);
 
-	unsigned int index = y * 3 + x;
+	unsigned int index = row * 3 + column;
 	float value = this->values[index];
 
 	return value;

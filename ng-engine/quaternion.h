@@ -3,6 +3,11 @@
 #include "math.h"
 #include "vector3.h"
 
+/**
+* Quaternions are used to represent rotations in three-dimensional space.
+* Compared to traditional euler angles (rotations around x, y, z), quaternions do not suffer limitations such as gimbal locking.
+* Additionally, combining rotation using quaternion is really easy (just multiply them).
+*/
 class Quaternion {
 private:
 	float _x;
@@ -39,7 +44,7 @@ public:
 
 	/**
 	* Creates a new quaternion from the provided values
-	* These values do NOT represent rotations in degrees or something similar. 
+	* These values do NOT represent rotations in degrees or anything comparable. 
 	* Only use this constructor if you really know quaternions and how they represent rotations.
 	*/
 	Quaternion(float x, float y, float z, float w);

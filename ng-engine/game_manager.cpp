@@ -7,8 +7,6 @@
 #include "event_handler.h"
 #include <functional>
 
-GameManager::GameManager() {}
-
 void GameManager::setScore(unsigned int newScore) {
 	this->score = newScore;
 	this->scoreText->getComponent<TextRenderer>()->text = "Score: " + std::to_string(newScore);
@@ -27,6 +25,7 @@ void GameManager::started() {
 
 	leftBounds->getComponent<Collider2D>()->onCollisionStart.on([this](Collider2D* other) {
 		if (other == this->ball->getComponent<Collider2D>()) {
+			// Running -> GameOver
 			this->gameState = GameState::GameOver;
 			this->gameOver->setEnabled(true);
 			this->scoreText->setEnabled(true);
@@ -37,12 +36,13 @@ void GameManager::started() {
 }
 
 void GameManager::update() {
-	if (this->gameOver == nullptr || this->ball == nullptr || this->start == nullptr) {
-		throw new std::exception("GameManager requires gameOver, ball and start to be assigned.");
-	}
+	assert(this->gameOver != nullptr);
+	assert(this->ball != nullptr);
+	assert(this->start != nullptr);
+	assert(this->scoreText != nullptr);
 
 	InputSystem* inputSystem = this->scene()->getComponent<InputSystem>();
-	if (!inputSystem) throw new std::exception("GameManager requires an InputSystem component to be present inside the scene.");
+	assert(inputSystem != nullptr);
 
 	if (this->gameState == GameState::GameOver) {
 		if (inputSystem->isButtonJustPressed(GLFW_KEY_SPACE)) {
@@ -58,6 +58,7 @@ void GameManager::update() {
 	} else if (this->gameState == GameState::Start) {
 		if (inputSystem->isButtonJustPressed(GLFW_KEY_SPACE)) {
 			this->gameState = GameState::Running;
+			// Start -> Running
 
 			Vector3 startVelocity = Vector2::fromPolar(0.3f, Random::rand(0, 360)).toVector3(0);
 			this->ball->getComponent<RigidBody>()->linearVelocity = startVelocity;

@@ -4,6 +4,9 @@
 #include "rect.h"
 #include "vector2.h"
 
+/**
+* A collider with a circular shape
+*/
 class CircleCollider : public Collider2D {
 public:
 	/**

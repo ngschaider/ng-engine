@@ -7,10 +7,6 @@
 #include <exception>
 #include "vector2.h"
 
-InputSystem::InputSystem() {
-
-}
-
 std::map<unsigned int, bool> InputSystem::getKeyStates() {
 	std::map<unsigned int, bool> states;
 	GLFWwindow* window = this->getWindow();

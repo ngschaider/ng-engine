@@ -12,6 +12,10 @@
 */
 class Engine {
 private:
+	/**
+	* A reference to the currently active scene.
+	* This can be NULL.
+	*/
 	Scene* scene;
 
 	/**
@@ -19,10 +23,30 @@ private:
 	*/
 	double getTimestamp();
 
-	void earlyUpdate();
-	void lateUpdate();
-	void update();
+	/**
+	* The fixed update signal. Useful for physical simulations. This method is not called every game loop iteration but 
+	* instead only when needed not reach an invocation interval of approximately Engine::FIXED_UPDATE_INTERVAL.
+	* If this method is called it is called at the beginning of the main game loop, before earlyUpdate.
+	*/
 	void fixedUpdate();
+
+	/**
+	* The early update signal. This is called after fixedUpdate may have been called.
+	* This signal is propagated to the scene (and therefore all game objects and components) if they are enabled.
+	*/
+	void earlyUpdate();
+
+	/**
+	* The update signal. This is called after earlyUpdate.
+	* This signal is propagated to the scene (and therefore all game objects and components) if they are enabled.
+	*/
+	void update();
+
+	/**
+	* The late update signal. This is called after update.
+	* This signal is propagated to the scene (and therefore all game objects and components) if they are enabled.
+	*/
+	void lateUpdate();
 
 	/**
 	* Wether or not the main game loop should be stopped.

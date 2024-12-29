@@ -4,13 +4,6 @@
 #include "vector3.h"
 #include "scene.h"
 
-Transform::Transform() {
-	this->position = Vector3(0, 0, 0);
-	this->rotation = Quaternion::identity();
-	this->scale = Vector3(1, 1, 1);
-	this->parent = nullptr;
-}
-
 Matrix4x4 Transform::getLocalToWorldMatrix() {
 	return Matrix4x4::TRS(this->getGlobalPosition(), this->getGlobalRotation(), this->getGlobalScale());
 }

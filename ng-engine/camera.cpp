@@ -3,10 +3,7 @@
 #include "render_system.h"
 #include "scene.h"
 #include <exception>
-
-Camera::Camera() {
-
-}
+#include <cassert>
 
 float Camera::ratio() {
 	return this->size.x() / this->size.y();
@@ -22,7 +19,7 @@ Matrix4x4 Camera::getCameraToWorldMatrix() {
 
 Matrix4x4 Camera::getCameraToClipMatrix() {
 	RenderSystem* renderSystem = this->scene()->getComponent<RenderSystem>();
-	if (renderSystem == nullptr) throw std::exception("Missing RenderSystem.");
+	assert(renderSystem != nullptr);
 
 	// scales from camera (e.g. -10, 10) to clip space (-1, 1)
 	// clip space has width=2, height=2 !!!

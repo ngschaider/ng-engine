@@ -5,9 +5,6 @@
 #include <cassert>
 #include <exception>
 
-Scene::Scene() {
-	this->engine = nullptr;
-}
 
 Scene::~Scene() {
 	for (GameObject* gameObject : this->gameObjects) {
@@ -16,10 +13,6 @@ Scene::~Scene() {
 }
 
 
-/**
-* Adds the specified GameObject to the scene.
-* The scene takes ownership of the game object.
-*/
 void Scene::addGameObject(GameObject* gameObject) {
 	assert(gameObject->scene == nullptr); // assert that the game object is not attached to any scene
 
@@ -32,10 +25,6 @@ void Scene::addGameObject(GameObject* gameObject) {
 	gameObject->addedToScene(); // call the game object's event to notify it about this event
 }
 
-/**
-* Removes the specified game object from the scene.
-* The ownership of the game object is returned to the caller.
-*/
 void Scene::removeGameObject(GameObject* gameObject) {
 	assert(gameObject->scene == this); // assert that the game object is attached to this scene
 
@@ -48,9 +37,6 @@ void Scene::removeGameObject(GameObject* gameObject) {
 	gameObject->removedFromScene(); // call the game object's event to notify it about this event
 }
 
-/**
-* returns the first active camera component in the scene
-*/
 Camera* Scene::getActiveCamera() {
 	std::vector<Camera*> cameras = this->getComponents<Camera>();
 	for (Camera* camera : cameras) {

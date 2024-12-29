@@ -2,11 +2,13 @@
 #include <exception>
 #include "numbers.h"
 #include "vector4.h"
+#include <cassert>
 
-void Matrix4x4::setValue(unsigned int x, unsigned int y, float value) {
-	if (x > 3 || y > 3) throw new std::exception();
+void Matrix4x4::setValue(unsigned int column, unsigned int row, float value) {
+	assert(column <= 3);
+	assert(row <= 3);
 
-	unsigned int index = y * 4 + x;
+	unsigned int index = row * 4 + column;
 	values[index] = value;
 }
 

@@ -7,6 +7,10 @@
 #include "renderer.h"
 #include "line_renderer.h"
 
+/**
+* Collider base class. Colliders used have to inherit this and implement "getLocalBounds".
+* Note that the default collision system only supports CircleCollider and PolygonCollider2D.
+*/
 class Collider2D : public Renderer {
 private:
 	unsigned int VAO;
@@ -38,7 +42,17 @@ public:
 	* Emitted by the collision system on each update cycle for each collision this collider is part of.
 	*/
 	Event<Collider2D*> onColliding;
+
+	/**
+	* Returns the axis-aligned bounding box of the collider in local space.
+	* This has to be overwritten in child classes.
+	*/
 	virtual Rect getLocalBounds();
+
+	/**
+	* Returns the axis-aligned bounding box of the collider in world space.
+	*/
 	Rect getWorldBounds();
-	void render();
+
+	void render() override;
 };

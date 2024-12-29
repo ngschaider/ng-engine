@@ -148,12 +148,11 @@ std::pair<float, float> CollisionChecker2D::projectCircle(Vector2 circleCenter, 
 	Vector2 p1 = circleCenter - axis * circleRadius;
 	Vector2 p2 = circleCenter + axis * circleRadius;
 
+	// Should min and max be swapped???
 	float min = p1.dot(axis);
 	float max = p2.dot(axis);
 
-	if (min >= max) {
-		throw new std::exception("Should this be swapped?");
-	}
+	assert(min < max); 
 
 	return std::make_pair(min, max);
 }

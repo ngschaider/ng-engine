@@ -168,9 +168,6 @@
     <ClCompile Include="collision_checker_2d.cpp">
       <Filter>Quelldateien\engine\collision</Filter>
     </ClCompile>
-    <ClCompile Include="cube_renderer.cpp">
-      <Filter>Quelldateien\engine\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="imgui_renderer.cpp">
       <Filter>Quelldateien\engine\ui</Filter>
     </ClCompile>
@@ -201,9 +198,6 @@
     <ClCompile Include="quaternion.cpp">
       <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
-    <ClCompile Include="event.cpp">
-      <Filter>Quelldateien\engine\utils</Filter>
-    </ClCompile>
     <ClCompile Include="polygon_2d.cpp">
       <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
@@ -218,9 +212,6 @@
     </ClCompile>
     <ClCompile Include="rectangle_collider.cpp">
       <Filter>Quelldateien\engine\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="event_handler.cpp">
-      <Filter>Quelldateien\engine\utils</Filter>
     </ClCompile>
     <ClCompile Include="line_renderer.cpp">
       <Filter>Quelldateien\engine\graphics</Filter>
@@ -330,9 +321,6 @@
       <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="rectangle_renderer.h">
-      <Filter>Headerdateien\engine\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="cube_renderer.h">
       <Filter>Headerdateien\engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="collision_checker_2d.h">

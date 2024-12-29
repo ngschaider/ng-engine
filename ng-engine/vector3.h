@@ -6,12 +6,25 @@
 // forward declare Vector4 to avoid circular references (Vector4 is importing Vector3)
 class Vector4;
 
+/**
+* A vector of length 3
+*/
 class Vector3 {
 private:
+	/**
+	* The x-value of the vector
+	*/
 	float _x;
-	float _y;
-	float _z;
 
+	/**
+	* The y-value of the vector
+	*/
+	float _y;
+
+	/**
+	* The z-value of the vector
+	*/
+	float _z;
 public:
 	/**
 	* Construct a new Vector3 from the given values
@@ -134,4 +147,7 @@ public:
 	Vector4 toVector4(float w) const;
 };
 
+/**
+* Divides a scalar through a Vector3 (element-wise).
+*/
 Vector3 operator/(float scalar, Vector3 vec);

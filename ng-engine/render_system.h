@@ -26,8 +26,15 @@ public:
 	*/
 	GLFWwindow* window;
 
+	/**
+	* Sets up a window using GLFW and creates an OpenGL rendering context.
+	*/
 	RenderSystem();
-	virtual ~RenderSystem(); // always define destructors as virtual
+
+	/**
+	* Destructs the rendering context, the window and the object itself.
+	*/
+	virtual ~RenderSystem();
 
 	/**
 	* The background color of the window.
@@ -38,6 +45,21 @@ public:
 	* Overwritten method from Component. This is where the rendering takes place
 	*/
 	void lateUpdate() override;
+
+	/**
+	* The beforeRender signal invoked by the render system.
+	*/
+	void beforeRender();
+
+	/**
+	* The render signal invoked by the render system.
+	*/
+	void render();
+
+	/**
+	* The afterRender signal invoked by the render system.
+	*/
+	void afterRender();
 
 	/**
 	* Returns the size of the window in pixels

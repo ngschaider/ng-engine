@@ -30,6 +30,11 @@ void GameObject::setEnabled(bool enabled) {
 	this->isEnabledSelf = enabled;
 }
 
+Transform* GameObject::transform() const {
+	assert(this->_transform != nullptr);
+	return this->_transform;
+}
+
 bool GameObject::getEnabled() {
 	if (this->transform()->parent) {
 		return this->transform()->parent->gameObject->isEnabledSelf && this->isEnabledSelf;

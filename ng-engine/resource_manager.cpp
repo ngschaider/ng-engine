@@ -8,16 +8,21 @@ std::vector<LoadedShader> ResourceManager::loadedShaders;
 std::map<std::string, Texture2D*> ResourceManager::loadedTextures;
 std::map<std::string, Font*> ResourceManager::loadedFonts;
 
-/**
-* Deallocates and cleans up all the memory used by resources loaded by the ResourceManager
-*/
 void ResourceManager::clear() {
 	for (LoadedShader l : ResourceManager::loadedShaders) {
 		delete l.shader;
 	}
+	ResourceManager::loadedShaders.clear();
+
 	for (std::pair<std::string, Texture2D*> tex : ResourceManager::loadedTextures) {
 		delete tex.second;
 	}
+	ResourceManager::loadedTextures.clear();
+
+	for (std::pair<std::string, Font*> font : ResourceManager::loadedFonts) {
+		delete font.second;
+	}
+	ResourceManager::loadedFonts.clear();
 }
 
 Shader* ResourceManager::loadShader(const std::string vertexShaderFile, const std::string fragmentShaderFile) {
@@ -32,7 +37,7 @@ Shader* ResourceManager::loadShader(const std::string vertexShaderFile, const st
 	return shader;
 }
 
-Texture2D* ResourceManager::loadTexture(const std::string file, bool alpha) {
+Texture2D* ResourceManager::loadTexture(const std::string file) {
 	if (ResourceManager::loadedTextures.count(file) == 0) {
 		int width, height, numChannels;
 		unsigned char* data = stbi_load(file.c_str(), &width, &height, &numChannels, 0);

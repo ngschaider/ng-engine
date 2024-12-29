@@ -155,7 +155,6 @@
     <ClCompile Include="component.cpp" />
     <ClCompile Include="console_window.cpp" />
     <ClCompile Include="control_velocity.cpp" />
-    <ClCompile Include="cube_renderer.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="Dependencies\glad\glad.c" />
     <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp" />
@@ -167,8 +166,6 @@
     <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Dependencies\imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="engine.cpp" />
-    <ClCompile Include="event.cpp" />
-    <ClCompile Include="event_handler.cpp" />
     <ClCompile Include="font.cpp" />
     <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="game_object.cpp" />
@@ -222,7 +219,6 @@
     <ClInclude Include="component.h" />
     <ClInclude Include="console_window.h" />
     <ClInclude Include="control_velocity.h" />
-    <ClInclude Include="cube_renderer.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="event.h" />

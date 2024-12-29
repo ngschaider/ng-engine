@@ -13,12 +13,14 @@
 template<typename... Args>
 class Event {
 private:
+	/**
+	* Holds all event handlers associated to the event.
+	*/
 	std::vector<EventHandler<Args...>> handlers;
 public:
-	Event() {
-
-	}
-
+	/**
+	* Attached (registers) a new event handler to the event.
+	*/
 	void on(EventHandler<Args...> handler) {
 		// assert that the handler is not already in the list
 		typename std::vector<EventHandler<Args...>>::iterator it = std::find(this->handlers.begin(), this->handlers.end(), handler);
@@ -27,6 +29,10 @@ public:
 		this->handlers.push_back(handler);
 	}
 
+	/**
+	* Creates a new event handler using the given function and attaches it to the event.
+	* Returns the newly created event handler.
+	*/
 	EventHandler<Args...> on(std::function<void(Args...)> func) {
 		EventHandler handler = EventHandler(func);
 		this->handlers.push_back(handler);
@@ -34,26 +40,23 @@ public:
 		return handler;
 	}
 
+	/**
+	* Detaches (unregisters) the given handler from the event.
+	*/
 	void off(EventHandler<Args...> handler) {
+		// assert that the handler is in the list
 		typename std::vector<EventHandler<Args...>>::iterator it = std::find(this->handlers.begin(), this->handlers.end(), handler);
-		assert(it != this->handlers.end()); // assert that the handler is in the list
+		assert(it != this->handlers.end());
 
 		this->handlers.erase(it);
 	}
 
-	void off(unsigned int handlerId) {
-		typename std::vector<EventHandler<Args...>>::iterator it = std::find_if(this->handlers.begin(), this->handlers.end(), [handlerId](const EventHandler<Args...> handler) {
-			return handler.id() == handlerId;
-			});
-		assert(it != this->handlers.end()); // assert that the handler is in the list
-
-		this->handlers.erase(it);
-	}
+	/**
+	* Emits the event using the given arguments. All attached (registered) event handler's functions will be invoked.
+	*/
 	void emit(Args... args) {
 		for (EventHandler<Args...> handler : this->handlers) {
 			handler.emit(args...);
 		}
 	}
 };
-
-// template class Event<Collider2D*>;

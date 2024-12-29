@@ -157,31 +157,42 @@ float RenderSystem::ratio() {
 	return (float) size.x() / size.y();
 }
 
+void RenderSystem::beforeRender() {
+	std::vector<Renderer*> renderers = this->gameObject->scene->getComponents<Renderer>();
+	for (Renderer* renderer : renderers) {
+		if (renderer->getEnabled()) {
+			renderer->beforeRender();
+		}
+	}
+}
+
+void RenderSystem::render() {
+	std::vector<Renderer*> renderers = this->gameObject->scene->getComponents<Renderer>();
+	for (Renderer* renderer : renderers) {
+		if (renderer->getEnabled()) {
+			renderer->render();
+		}
+	}
+}
+
+void RenderSystem::afterRender() {
+	std::vector<Renderer*> renderers = this->gameObject->scene->getComponents<Renderer>();
+	for (Renderer* renderer : renderers) {
+		if (renderer->getEnabled()) {
+			renderer->afterRender();
+		}
+	}
+}
+
 void RenderSystem::lateUpdate() {
 	glfwPollEvents();
 
 	glClearColor(this->backgroundColor.r() / 255.0f, this->backgroundColor.g() / 255.0f, this->backgroundColor.b() / 255.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	std::vector<Renderer*> renderers = this->gameObject->scene->getComponents<Renderer>();
-	/*std::sort(renderers.begin(), renderers.end(), [](Renderer* const& r1, Renderer* const& r2) {
-		return r1->renderingOrder < r2->renderingOrder;
-	});*/
-	for (Renderer* renderer : renderers) {
-		if (renderer->getEnabled()) {
-			renderer->beforeRender();
-		}
-	}
-	for (Renderer* renderer : renderers) {
-		if (renderer->getEnabled()) {
-			renderer->render();
-		}
-	}
-	for (Renderer* renderer : renderers) {
-		if (renderer->getEnabled()) {
-			renderer->afterRender();
-		}
-	}
+	this->beforeRender();
+	this->render();
+	this->afterRender();
 
 	glfwSwapBuffers(this->window);
 }

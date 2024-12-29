@@ -3,16 +3,33 @@
 #include "renderer.h"
 #include "color.h"
 
+/**
+* Renders a triangle.
+*/
 class TriangleRenderer : public Renderer {
 private:
-	unsigned int VAO_fill;
-	unsigned int VAO_stroke;
+	/**
+	* Vertex array object
+	*/
+	unsigned int VAO;
 public:
+	/**
+	* Wether the triangle should be filled
+	*/
 	bool doFill = true;
-	bool doStroke = false;
-	Color fillColor = Color::white();
-	Color strokeColor = Color::black();
 
+	/**
+	* The color to use for filling the triangle
+	*/
+	Color fillColor = Color::white();
+
+	/**
+	* Constructs a new triangle and sets up the needed graphics memory
+	*/
 	TriangleRenderer();
+
+	/**
+	* The render system of the render system. Renders the triangle.
+	*/
 	void render() override;
 };

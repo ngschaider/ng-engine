@@ -22,12 +22,6 @@ CircleRenderer::CircleRenderer() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	//float indices_fill[] = { 0, 1, 2, 3 };
-	//unsigned int EBO_fill;
-	//glGenBuffers(1, &EBO_fill);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_fill);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_fill), indices_fill, GL_STATIC_DRAW);
-
 	glEnableVertexAttribArray(glGetAttribLocation(this->shader->id, "vertex"));
 	glVertexAttribPointer(glGetAttribLocation(this->shader->id, "vertex"), 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
 
@@ -36,6 +30,10 @@ CircleRenderer::CircleRenderer() {
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+CircleRenderer::~CircleRenderer() {
+	glDeleteVertexArrays(1, &this->VAO);
 }
 
 void CircleRenderer::render() {

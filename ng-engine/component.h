@@ -20,28 +20,26 @@ class Engine;
 */
 class Component {
 public:
+	/**
+	* Wether this component for itself is enabled
+	*/
 	bool isEnabledSelf = true;
 
 	/**
-	* Returns wether this component should be updated
+	* Returns wether this component should be updated.
+	* This value is composed by the "isEnabledSelf" property of both this instance and it's parents.
 	*/
 	bool getEnabled();
 
 	/**
-	* Setter for "isEnabled".
+	* Setter for "isEnabledSelf".
 	*/
 	void setEnabled(bool enabled);
 
 	/**
 	* The game object this component is attached to, this should only be written to by the game object
 	*/
-	GameObject* gameObject;
-
-	/**
-	* Constructs a new empty component
-	*/
-	Component();
-	virtual ~Component();
+	GameObject* gameObject = nullptr;
 
 	/**
 	* Quick access for this->gameObject->scene including null-checks
@@ -58,9 +56,28 @@ public:
 	*/
 	Transform* transform() const; 
 
+	/**
+	* The early update signal of the engine.
+	* This gets relayed here by the game object.
+	*/
 	virtual void earlyUpdate();
+
+	/**
+	* The update signal of the engine.
+	* This gets relayed here by the game object.
+	*/
 	virtual void update();
+
+	/**
+	* The late update signal of the engine.
+	* This gets relayed here by the game object.
+	*/
 	virtual void lateUpdate();
+
+	/**
+	* The fixed update signal of the engine.
+	* This gets relayed here by the game object
+	*/
 	virtual void fixedUpdate();
 
 	/**

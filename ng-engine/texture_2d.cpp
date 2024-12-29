@@ -4,16 +4,6 @@
 #include <GLFW/glfw3.h>
 
 Texture2D::Texture2D() {
-	this->width = 0;
-	this->height = 0;
-
-	this->wrapS = 0;
-	this->wrapT = 0;
-	this->filterMax = 0;
-	this->filterMin = 0;
-	this->imageFormat = 0;
-	this->internalFormat = 0;
-
 	glGenTextures(1, &this->id);
 }
 

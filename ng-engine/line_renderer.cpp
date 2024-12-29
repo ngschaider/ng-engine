@@ -33,6 +33,10 @@ LineRenderer::LineRenderer() {
 	glBindVertexArray(0);
 }
 
+LineRenderer::~LineRenderer() {
+	glDeleteVertexArrays(1, &this->VAO);
+}
+
 void LineRenderer::render() {
 	this->shader->use();
 

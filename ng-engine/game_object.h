@@ -11,8 +11,15 @@ class Engine;
 // forward declare Scene to avoid circular references (Scene is importing GameObject)
 class Scene;
 
+/**
+* Game objects can be added to scenes and can hold multiple components.
+* Each game object MUST contain a transform component.
+*/
 class GameObject {
 private:
+	/**
+	* A reference to the mandatory transform component.
+	*/
 	Transform* _transform;
 	std::vector<Component*> toRemoveLater;
 public:
@@ -32,17 +39,17 @@ public:
 	bool getEnabled();
 
 	/**
-	* The components attached to this game object, this should only be written to by the game object
+	* The components attached to this game object, this should only be written to by the game object.
 	*/
 	std::vector<Component*> components;
 
 	/**
-	* The transform component attached to this game object.
+	* Returns a reference to the transform component of the game object.
 	*/
-	inline Transform* transform() const { return this->_transform; }
+	Transform* transform() const;
 
 	/**
-	* The name of the game object
+	* The name of the game object. Mainly used for identifying the game object during debuggging.
 	*/
 	std::string name = "Unnamed GameObject"; 
 
@@ -67,7 +74,7 @@ public:
 	GameObject(const char* name);
 
 	/**
-	* Destructs the game object
+	* Destructs the game object and it's components
 	*/
 	virtual ~GameObject();
 
@@ -89,10 +96,11 @@ public:
 	*/
 	void deleteComponentLater(Component*);
 
-	// quick access including null-checks
+	/**
+	* Quick access to the scene's engine
+	*/
 	Engine* engine() const;
 
-	// events
 	/**
 	* Called when the game objects gets attached to a scene, this should only be called by the scene
 	*/
@@ -151,8 +159,23 @@ public:
 		return components.front();
 	}
 
+	/**
+	* The earlyUpdate signal of the engine.
+	*/
 	void earlyUpdate();
+
+	/**
+	* The update signal of the engine.
+	*/
 	void update();
+
+	/**
+	* The late update signal of the engine.
+	*/
 	void lateUpdate();
+
+	/**
+	* The fixed update signal of the engine.
+	*/
 	void fixedUpdate();
 };

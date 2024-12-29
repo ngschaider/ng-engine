@@ -19,14 +19,6 @@
 #include "misc/cpp/imgui_stdlib.h"
 #include <map>
 
-InspectorWindow::InspectorWindow() {
-	this->inspectedGameObject = nullptr;
-}
-
-void InspectorWindow::setInspectedGameObject(GameObject* gameObject) {
-	this->inspectedGameObject = gameObject;
-}
-
 void InspectorWindow::render() {
 	ImGui::Begin("Inspector");
 

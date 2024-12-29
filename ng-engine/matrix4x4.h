@@ -9,11 +9,17 @@
 
 class Matrix4x4 {
 private:
+	/**
+	* The values of the matrix in row-major format
+	*/
 	std::array<float, 16> values;
 
-	// keep this private as we do not want to modify the matrix after instantiation and
-	// this is the only way we can make sure nobody modifies it from the outside!
-	void setValue(unsigned int x, unsigned int y, float value);
+	/**
+	* Sets the matrix' cell at the specified column and row to the specified value 
+	* This is private as we do not want to modify the matrix after instantiation and this is the only way we can make sure nobody modifies it from the outside!
+	* We still have to be careful to only modify the matrix using this immediately after instantiation. Once we return the matrix to the user we cannot modify it safely anymore!
+	*/
+	void setValue(unsigned int column, unsigned int row, float value);
 public:
 	/**
 	* Returns a 4x4 identity matrix
@@ -90,146 +96,82 @@ public:
 	float getValue(unsigned int x, unsigned int y);
 
 	/**
-	* Returns the 1st value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 0, row 0
 	*/
 	float a();
 
 	/**
-	* Returns the 2nd value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 1, row 0
 	*/
 	float b();
 
 	/**
-	* Returns the 3th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 2, row 0
 	*/
 	float c();
 
 	/**
-	* Returns the 4th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 3, row 0
 	*/
 	float d();
 
 	/**
-	* Returns the 5th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 0, row 1
 	*/
 	float e();
 
 	/**
-	* Returns the 6th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 1, row 1
 	*/
 	float f();
 
 	/**
-	* Returns the 7th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 2, row 1
 	*/
 	float g();
 
 	/**
-	* Returns the 8th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 3, row 1
 	*/
 	float h();
 
 	/**
-	* Returns the 9th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 0, row 2
 	*/
 	float i();
 
 	/**
-	* Returns the 10th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 1, row 2
 	*/
 	float j();
 
 	/**
-	* Returns the 11th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 2, row 2
 	*/
 	float k();
 
 	/**
-	* Returns the 12th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 3, row 2
 	*/
 	float l();
 
 	/**
-	* Returns the 13th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 0, row 3
 	*/
 	float m();
 
 	/**
-	* Returns the 14th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 1, row 3
 	*/
 	float n();
 
 	/**
-	* Returns the 15th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 2, row 3
 	*/
 	float o();
 
 	/**
-	* Returns the 16th value of the matrix:
-	* a b c d
-	* e f g h
-	* i j k l
-	* m n o p
+	* Returns the matrix' value at column 3, row 3
 	*/
 	float p();
 

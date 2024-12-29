@@ -3,11 +3,23 @@
 #include "component.h"
 #include "matrix4x4.h"
 
+/**
+* The camera is part of the rendering system and specifies properties regarding the point-of-view.
+* It features an orthographic projection, and establishes what we call "camera space". Camera space is located between world space and clip space.
+* Therefore the camera also provides transformation matrices for world<->camera and camera<->clip.
+*/
 class Camera : public Component {
 public:
+	/**
+	* The size (width/height) of the camera's view frustum
+	*/
 	Vector2 size = Vector2(20, 20);
+
+	/**
+	* Wether this camera is active.
+	* Only the first active camera in the scene gets rendered.
+	*/
 	bool isActive = true;
-	Camera();
 
 	/**
 	* Returns the aspect ratio of the camera's view

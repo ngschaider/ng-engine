@@ -11,14 +11,6 @@ bool Component::getEnabled() {
 	return this->isEnabledSelf && this->gameObject->getEnabled();
 }
 
-Component::Component() {
-	this->gameObject = nullptr;
-}
-
-Component::~Component() {
-
-}
-
 void Component::earlyUpdate() {
 
 }

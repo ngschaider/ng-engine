@@ -4,10 +4,6 @@
 #include "inspector_window.h"
 #include <vector>
 
-HierarchyWindow::HierarchyWindow() {
-
-}
-
 void HierarchyWindow::renderGameObject(GameObject* gameObject) {
 	static GameObject* selectedGameObject = nullptr;
 
@@ -20,7 +16,7 @@ void HierarchyWindow::renderGameObject(GameObject* gameObject) {
 		if (ImGui::Selectable(gameObject->name.c_str(), gameObject == selectedGameObject)) {
 			InspectorWindow* inspectorWindow = this->scene()->getComponent<InspectorWindow>();
 			if (inspectorWindow != nullptr) {
-				inspectorWindow->setInspectedGameObject(gameObject);
+				inspectorWindow->inspectedGameObject = gameObject;
 			}
 			selectedGameObject = gameObject;
 		}
@@ -37,7 +33,7 @@ void HierarchyWindow::renderGameObject(GameObject* gameObject) {
 		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
 			InspectorWindow* inspectorWindow = this->scene()->getComponent<InspectorWindow>();
 			if (inspectorWindow != nullptr) {
-				inspectorWindow->setInspectedGameObject(gameObject);
+				inspectorWindow->inspectedGameObject = gameObject;
 			}
 			selectedGameObject = gameObject;
 		}

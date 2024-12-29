@@ -13,9 +13,19 @@ class Vector4;
 */
 class Vector2 {
 private:
+	/**
+	* The x-value of the vector
+	*/
 	float _x;
+
+	/**
+	* The y-value of the vector
+	*/
 	float _y;
 public:
+	/**
+	* Constructs a new vector from a given magnitude and angle (in degrees).
+	*/
 	static Vector2 fromPolar(float magnitude, float angle);
 
 	/**
@@ -113,5 +123,12 @@ public:
 	Vector2 normalized();
 };
 
+/**
+* Multiplies a scalar with a Vector2 (element-wise)
+*/
 Vector2 operator*(float scalar, Vector2 vector);
+
+/**
+* Divides a scalar through a Vector2 (element-wise)
+*/
 Vector2 operator/(float scalar, Vector2 vector);

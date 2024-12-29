@@ -4,32 +4,45 @@
 #include "text_renderer.h"
 #include "rigid_body.h"
 
+/**
+* The states of the GameManager
+*/
 enum class GameState {
-	Start,
-	Running,
-	GameOver
+	Start, // After "GameOver" (or at startup)
+	Running, // After "Start"
+	GameOver // After "Running"
 };
 
+/**
+* The game manager is the central component of the "Pong" game.
+* It is built like a finite state machine.
+*/
 class GameManager : public Component {
 private:
+	/**
+	* Keep track of the player's score.
+	*/
 	unsigned int score = 0;
+
+	/**
+	* Sets the score and the score text.
+	*/
 	void setScore(unsigned int newScore);
 
 public:
 	/**
-	* Reference to the game object representing the text displayed during game over state.
-	* This game object MUST hold at least one TextRenderer component
+	* Reference to the game object shown on the game over screen.
 	*/
 	GameObject* gameOver = nullptr;
 
 	/**
-	* Reference to the game object representing the text displayed during start state.
-	* This game object MUST hold at least one TextRenderer component
+	* Reference to the game object shown on the start screen.
 	*/
 	GameObject* start = nullptr;
 
 	/**
-	* Reference to the game object representing the score text.
+	* Reference to the ball game object.
+	* This MUST contain a RigidBody component
 	*/
 	GameObject* ball = nullptr;
 
@@ -51,8 +64,11 @@ public:
 	*/
 	GameObject* leftBar = nullptr;
 
+	/**
+	* The game manager's (and therefore the game's) state.
+	*/
 	GameState gameState = GameState::Start;
-	GameManager();
+
 	void update() override;
 	void started() override;
 };

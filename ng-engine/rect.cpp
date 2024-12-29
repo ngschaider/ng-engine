@@ -7,10 +7,12 @@ Rect::Rect(Vector2 position, Vector2 size, AnchorPoint anchorPoint) : _position(
 
 AnchorPoint Rect::anchorPoint() const {
 	return this->_anchorPoint;
-};
+}
+
 Vector2 Rect::position() const {
 	return this->_position;
 }
+
 Vector2 Rect::size() const {
 	return this->_size;
 }

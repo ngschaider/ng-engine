@@ -8,19 +8,76 @@
 #include "matrix3x3.h"
 #include "matrix4x4.h"
 
+/**
+* A compiled and linked OpenGL shader program.
+*/
 class Shader {
 public:
+    /**
+    * The ID assigned by OpenGL. This should only be modified by the Shader.
+    */
     unsigned int id;
-    Shader(const char*, const char*);
-    ~Shader();
+
+    /**
+    * Load, compile and link a new shader program from the given paths
+    */
+    Shader(const char* vertexFile, const char* fragmentFile);
+
+    /**
+    * De-allocates the allocated graphics memory and destructs the object.
+    */
+    virtual ~Shader();
+
+    /**
+    * Activates the shader program.
+    */
     void use();
 
-    void setFloat(const char*, float) const;
-    void setInteger(const char*, int) const;
-    void setVector2(const char*, Vector2) const;
-    void setVector2i(const char*, Vector2i) const;
-    void setVector3(const char*, Vector3) const;
-    void setVector4(const char*, Vector4) const;
-    void setMatrix3x3(const char*, Matrix3x3) const;
-    void setMatrix4x4(const char*, Matrix4x4) const;
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform1f.
+    */
+    void setFloat(const char* name, float value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform1i.
+    */
+    void setInteger(const char* name, int value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform2f.
+    */
+    void setVector2(const char* name, Vector2 value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform2i.
+    */
+    void setVector2i(const char* name, Vector2i value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform3f.
+    */
+    void setVector3(const char* name, Vector3 value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniform4f.
+    */
+    void setVector4(const char* name, Vector4 value) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniformMatrix3fv.
+    */
+    void setMatrix3x3(const char* name, Matrix3x3 m) const;
+
+    /**
+    * Sets a uniform variable with the given name to the given value.
+    * This method uses glUniformMatrix4fv.
+    */
+    void setMatrix4x4(const char* name, Matrix4x4 m) const;
 };

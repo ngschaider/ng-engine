@@ -3,11 +3,29 @@
 #include "vector3.h"
 #include "vector2.h"
 
+/**
+* A vector of length 4.
+*/
 class Vector4 {
 private:
+	/**
+	* The x-value of the vector.
+	*/
 	float _x;
+
+	/**
+	* The y-value of the vector.
+	*/
 	float _y;
+
+	/**
+	* The z-value of the vector.
+	*/
 	float _z;
+
+	/**
+	* The w-value of the vector.
+	*/
 	float _w;
 public:
 	/**
