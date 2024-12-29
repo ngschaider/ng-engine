@@ -1,11 +1,16 @@
-#include "game_manager.h"
-#include "scene.h"
-#include "input_system.h"
-#include "GLFW/glfw3.h"
-#include "numbers.h"
+#include <cassert>
+#include <string>
 #include "collider_2d.h"
-#include "event_handler.h"
-#include <functional>
+#include "game_manager.h"
+#include "game_object.h"
+#include "GLFW/glfw3.h"
+#include "input_system.h"
+#include "numbers.h"
+#include "rigid_body.h"
+#include "scene.h"
+#include "text_renderer.h"
+#include "vector2.h"
+#include "vector3.h"
 
 void GameManager::setScore(unsigned int newScore) {
 	this->score = newScore;
@@ -60,7 +65,7 @@ void GameManager::update() {
 			this->gameState = GameState::Running;
 			// Start -> Running
 
-			Vector3 startVelocity = Vector2::fromPolar(0.3f, Random::rand(0, 360)).toVector3(0);
+			Vector3 startVelocity = Vector2::fromPolar(0.3f, Random::rand(-30, 30)).toVector3(0);
 			this->ball->getComponent<RigidBody>()->linearVelocity = startVelocity;
 			this->start->setEnabled(false);
 			this->gameOver->setEnabled(false);

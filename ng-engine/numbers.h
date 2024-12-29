@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 
 /**
 * Mathematical constant PI.
@@ -20,11 +21,13 @@ constexpr inline float RAD2DEG = 180 / PI;
 */
 class Random {
 private:
-	/**
-	* Wether the PRNG has already been seeded or not.
-	*/
-	static bool seeded;
+	static std::mt19937 gen;
 public:
+	/**
+	* Seeds the PRNG
+	*/
+	static void seed();
+
 	/**
 	* Returns a pseudo-random number between zero and one.
 	*/

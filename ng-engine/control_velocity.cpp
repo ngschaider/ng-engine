@@ -1,10 +1,11 @@
+#include <cassert>
 #include "control_velocity.h"
 #include "game_object.h"
+#include "GLFW/glfw3.h"
+#include "input_system.h"
 #include "rigid_body.h"
 #include "scene.h"
 #include "vector3.h"
-#include <iostream>
-#include <cassert>
 
 void ControlVelocity::fixedUpdate() {
 	RigidBody* rb = this->gameObject->getComponent<RigidBody>();

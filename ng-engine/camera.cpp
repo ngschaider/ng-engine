@@ -1,23 +1,25 @@
+#include <cassert>
+#include <utility>
 #include "camera.h"
-#include "transform.h"
+#include "matrix4x4.h"
 #include "render_system.h"
 #include "scene.h"
-#include <exception>
-#include <cassert>
+#include "vector2.h"
+#include "vector3.h"
 
-float Camera::ratio() {
+float Camera::ratio() const {
 	return this->size.x() / this->size.y();
 }
 
-Matrix4x4 Camera::getWorldToCameraMatrix() {
+Matrix4x4 Camera::getWorldToCameraMatrix() const {
 	return Matrix4x4::TRS(this->transform()->position, this->transform()->rotation, Vector3(1, 1, 1)).invert();
 }
 
-Matrix4x4 Camera::getCameraToWorldMatrix() {
+Matrix4x4 Camera::getCameraToWorldMatrix() const {
 	return this->getWorldToCameraMatrix().invert();
 }
 
-Matrix4x4 Camera::getCameraToClipMatrix() {
+Matrix4x4 Camera::getCameraToClipMatrix() const {
 	RenderSystem* renderSystem = this->scene()->getComponent<RenderSystem>();
 	assert(renderSystem != nullptr);
 
@@ -65,22 +67,22 @@ Matrix4x4 Camera::getCameraToClipMatrix() {
 	return scaleDown * distort;
 }
 
-Matrix4x4 Camera::getClipToCameraMatrix() {
+Matrix4x4 Camera::getClipToCameraMatrix() const {
 	return this->getCameraToClipMatrix().invert();
 }
 
-Vector3 Camera::worldToCamera(Vector3 world) {
+Vector3 Camera::worldToCamera(Vector3 world) const {
 	return (this->getWorldToCameraMatrix() * world.toVector4(1)).xyz();
 }
 
-Vector3 Camera::cameraToWorld(Vector3 camera) {
+Vector3 Camera::cameraToWorld(Vector3 camera) const {
 	return (this->getCameraToWorldMatrix() * camera.toVector4(1)).xyz();
 }
 
-Vector2 Camera::cameraToClip(Vector3 camera) {
+Vector2 Camera::cameraToClip(Vector3 camera) const {
 	return (this->getCameraToClipMatrix() * camera.toVector4(1)).xy();
 }
 
-Vector2 Camera::worldToClip(Vector3 world) {
+Vector2 Camera::worldToClip(Vector3 world) const {
 	return this->cameraToClip(this->worldToCamera(world));
 }

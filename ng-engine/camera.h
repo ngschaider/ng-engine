@@ -2,6 +2,8 @@
 
 #include "component.h"
 #include "matrix4x4.h"
+#include "vector3.h"
+#include "vector2.h"
 
 /**
 * The camera is part of the rendering system and specifies properties regarding the point-of-view.
@@ -24,47 +26,47 @@ public:
 	/**
 	* Returns the aspect ratio of the camera's view
 	*/
-	float ratio();
+	float ratio() const;
 
 	/**
 	* Returns the transformation matrix that transforms coordinates from world space to camera space
 	*/
-	Matrix4x4 getWorldToCameraMatrix();
+	Matrix4x4 getWorldToCameraMatrix() const;
 
 	/**
 	* Returns the transformation matrix that transforms coordinates from camera space to world space
 	*/
-	Matrix4x4 getCameraToWorldMatrix();
+	Matrix4x4 getCameraToWorldMatrix() const;
 
 	/**
 	* Returns the transformation matrix that transforms coordinates from camera space to clip space
 	*/
-	Matrix4x4 getCameraToClipMatrix();
+	Matrix4x4 getCameraToClipMatrix() const;
 
 	/**
 	* Returns the transformation matrix that transforms coordinates from clip space to camera space
 	*/
-	Matrix4x4 getClipToCameraMatrix();
+	Matrix4x4 getClipToCameraMatrix() const;
 
 	/**
 	* Transforms the given coordinates from world space to camera space
 	*/
-	Vector3 worldToCamera(Vector3 world);
+	Vector3 worldToCamera(Vector3 world) const;
 
 	/**
 	* Transforms the given coordinates from camera space to world space
 	*/
-	Vector3 cameraToWorld(Vector3 camera);
+	Vector3 cameraToWorld(Vector3 camera) const;
 
 	/**
 	* Transforms the given coordinates from camera space to clip space
 	* This is a lossy operation as the camera applies an orthographic projection
 	*/
-	Vector2 cameraToClip(Vector3 camera);
+	Vector2 cameraToClip(Vector3 camera) const;
 
 	/**
 	* Transforms the given coordinates from world space to clip space
 	* This is a lossy operation as the camera applies an orthographic projection
 	*/
-	Vector2 worldToClip(Vector3 camera);
+	Vector2 worldToClip(Vector3 camera) const;
 };

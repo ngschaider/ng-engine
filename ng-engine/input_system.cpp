@@ -1,10 +1,9 @@
-#include "input_system.h"
-
+#include <exception>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "scene.h"
+#include "input_system.h"
 #include "render_system.h"
-#include <exception>
+#include "scene.h"
 #include "vector2.h"
 
 std::map<unsigned int, bool> InputSystem::getKeyStates() {

@@ -1,10 +1,17 @@
-#include "collision_checker_2d.h"
-#include "collision_2d.h"
-#include "rectangle_collider.h"
-#include "circle_collider.h"
-#include "polygon_collider_2d.h"
 #include <algorithm>
-#include "debug.h"
+#include <cassert>
+#include <cmath>
+#include <utility>
+#include <vector>
+#include "circle_collider.h"
+#include "collider_2d.h"
+#include "collision_2d.h"
+#include "collision_checker_2d.h"
+#include "collision_test_result.h"
+#include "polygon_2d.h"
+#include "polygon_collider_2d.h"
+#include "rect.h"
+#include "vector2.h"
 
 
 bool CollisionChecker2D::areRectsIntersecting(Rect rectA, Rect rectB) {

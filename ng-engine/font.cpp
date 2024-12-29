@@ -1,7 +1,10 @@
-#include "font.h"
-#include "ft2build.h"
-#include "freetype/freetype.h"
+#include <exception>
 #include <glad/glad.h>
+#include <string>
+#include <utility>
+#include "font.h"
+#include "freetype/freetype.h"
+#include "vector2.h"
 
 Font::Font(std::string path) {
 	FT_Library ft;

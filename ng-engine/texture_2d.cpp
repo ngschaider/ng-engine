@@ -1,7 +1,6 @@
+#include <glad/glad.h>
 #include "texture_2d.h"
 #include "vector2i.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 Texture2D::Texture2D() {
 	glGenTextures(1, &this->id);

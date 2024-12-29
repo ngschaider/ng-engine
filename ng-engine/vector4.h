@@ -1,7 +1,7 @@
 #pragma once
 
-#include "vector3.h"
 #include "vector2.h"
+#include "vector3.h"
 
 /**
 * A vector of length 4.

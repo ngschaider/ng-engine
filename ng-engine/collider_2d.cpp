@@ -1,20 +1,20 @@
-#include "collider_2d.h"
-#include "rect.h"
-#include "matrix4x4.h"
-#include "transform.h"
-#include "vector4.h"
-#include "imgui.h"
-#include "resource_manager.h"
-#include "event.h"
-#include <vector>
-#include <functional>
-#include <assert.h>
+#include <cassert>
 #include <exception>
+#include <vector>
+#include "collider_2d.h"
+#include "glad/glad.h"
+#include "matrix4x4.h"
+#include "quaternion.h"
+#include "rect.h"
+#include "renderer.h"
+#include "resource_manager.h"
+#include "transform.h"
+#include "vector2.h"
+#include "vector4.h"
 
 Collider2D::Collider2D() {
 	this->shader = ResourceManager::loadShader("solid_vertex.glsl", "solid_fragment.glsl");
 	this->space = RendererSpace::World;
-
 
 	// setting up stroke
 	glGenVertexArrays(1, &this->VAO);
@@ -62,7 +62,8 @@ Rect Collider2D::getLocalBounds() {
 
 Rect Collider2D::getWorldBounds() {
 	Rect local = this->getLocalBounds();
-	Matrix4x4 m = this->transform()->getLocalToWorldMatrix();
+	Transform* transform = this->transform();
+	Matrix4x4 m = transform->getLocalToWorldMatrix();
 
 	Vector2 min = (m * local.bottomLeft().toVector4(1, 1)).xy();
 	Vector2 max = (m * local.topRight().toVector4(1, 1)).xy();

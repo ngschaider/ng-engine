@@ -1,11 +1,9 @@
-#include "engine.h"
-#include <exception>
-#include "game_object.h"
-#include <assert.h>
-#include <string>
-#include <iostream>
-#include "debug.h"
+#include <cassert>
 #include <chrono>
+#include <exception>
+#include <iostream>
+#include "engine.h"
+#include "scene.h"
 
 Engine::Engine() {
 	this->scene = nullptr;
@@ -34,7 +32,7 @@ Scene* Engine::setScene(Scene* scene) {
 	return oldScene; // return the reference to the old scene so it can be used again (we are transferring the object ownership to the caller)
 }
 
-double Engine::elapsed() {
+double Engine::elapsed() const {
 	assert(this->_elapsed != 0);
 	return this->_elapsed;
 }

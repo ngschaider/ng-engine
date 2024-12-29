@@ -1,8 +1,8 @@
 #pragma once
 
 #include "component.h"
-#include "vector3.h"
 #include "quaternion.h"
+#include "vector3.h"
 
 /**
 * Adds physical properties to game objects. This is primarily used for the collision system to resolve collisions realistically.
@@ -19,7 +19,7 @@ public:
 	* The restitution specifies the "bounciness" of the object. Lower values mean that more energy is losed during collisions. Higher values mean more energy is conserved.
 	* This value should always be between zero and one. Set this to one for 100% elastic bounces (no energy loss).
 	*/
-	float restitution = 0.8f;
+	float restitution = 1.0f;
 
 	/**
 	* The linear acceleration of the rigid body.

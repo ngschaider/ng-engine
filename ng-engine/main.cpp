@@ -1,29 +1,35 @@
-#include <exception>
-#include <iostream>
 #include <string>
 
-#include "engine.h"
-#include "debug.h"
-#include "render_system.h"
-#include "triangle_renderer.h"
-#include "rectangle_renderer.h"
-#include "text_renderer.h"
+#include <cmath>
+#include <cstdlib>
+#include "camera.h"
+#include "circle_renderer.h"
+#include "collision_system.h"
+#include "console_window.h"
 #include "control_velocity.h"
-#include "input_system.h"
-#include "imgui_renderer.h"
-#include "rigid_body.h"
-#include "quaternion.h"
+#include "debug.h"
+#include "engine.h"
+#include "game_manager.h"
+#include "game_object.h"
 #include "hierarchy_window.h"
+#include "imgui_renderer.h"
+#include "input_system.h"
 #include "inspector_window.h"
 #include "menu_bar.h"
-#include "collision_system.h"
-#include "circle_collider.h"
+#include "numbers.h"
 #include "rectangle_collider.h"
-#include "console_window.h"
-#include "circle_renderer.h"
-#include "game_manager.h"
+#include "rectangle_renderer.h"
+#include "render_system.h"
+#include "rigid_body.h"
+#include "scene.h"
+#include "text_renderer.h"
+#include "vector2.h"
+#include "vector3.h"
 
 int main() {
+	// Seed the PRNG
+	Random::seed();
+
 	// Set up an engine
 	Engine* engine = new Engine();
 

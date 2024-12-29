@@ -1,9 +1,5 @@
 #pragma once
-
-#include "game_object.h"
 #include "scene.h"
-#include <assert.h>
-
 
 /**
 * The main class for the engine.
@@ -63,7 +59,7 @@ public:
 	* During an update cycle, returns the time that has passed since the last update.
 	* This method should only be called from within the update cycle.
 	*/
-	double elapsed();
+	double elapsed() const;
 
 	/**
 	* Defines how often the fixed update method should be called.
